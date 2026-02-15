@@ -110,30 +110,63 @@ export default function VangoghRoom() {
     >
 
 {/* ================= HERO ================= */}
-<section className="vg-section relative min-h-screen flex items-center justify-center text-center px-8">
+<section className="vg-section relative min-h-screen flex items-center justify-center text-center px-8 overflow-hidden">
 
+  {/* Background */}
   <img
     src="/images/vg-selfportrait.png"
-    className="vg-bg absolute inset-0 w-full h-full object-cover object-[50%_35%] opacity-40"
-    alt=""
+    className="vg-bg absolute inset-0 w-full h-full object-cover object-[50%_35%] opacity-35"
+    alt="Vincent van Gogh self portrait"
   />
 
-  <div className="vg-vignette absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/40 to-black/75" />
+  {/* Vignette */}
+  <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/65 via-black/45 to-black/80" />
 
-  <div className="relative z-30 max-w-[680px] fade-up">
+  <div className="relative z-30 max-w-[760px] fade-up">
 
-    <h1 className="text-[clamp(44px,6vw,92px)] tracking-[0.18em] font-light">
+    {/* THEME (冠) */}
+    <p className="
+      text-[11px]
+      tracking-[0.5em]
+      text-white/55
+      font-light
+      mb-8
+    ">
+      感性の衝動
+    </p>
+
+    {/* MAIN NAME */}
+    <h1 className="
+      text-[clamp(48px,6vw,96px)]
+      tracking-[0.18em]
+      font-light
+      leading-[1.1]
+    ">
       Van&nbsp;Gogh
     </h1>
 
-    <h2 className="mt-6 text-[12px] tracking-[0.55em] text-white/50 font-light">
+    {/* JAPANESE */}
+    <p className="
+      mt-8
+      text-[12px]
+      tracking-[0.6em]
+      text-white/40
+      font-light
+    ">
       ヴィンセント・ヴァン・ゴッホ
-    </h2>
+    </p>
 
-    <div className="mt-14 mb-16 w-[80px] h-px bg-white/20 mx-auto" />
+    {/* Divider */}
+    <div className="mt-16 mb-16 w-[80px] h-px bg-white/25 mx-auto" />
 
-    <p className="leading-[3.0] text-white/85 text-[17px] md:text-[19px] font-light">
-
+    {/* Body */}
+    <p className="
+      leading-[2.8]
+      text-white/85
+      text-[17px]
+      md:text-[19px]
+      font-light
+    ">
       1853年、オランダに生まれる。<br /><br />
 
       画家になる前、<br />
@@ -142,12 +175,11 @@ export default function VangoghRoom() {
 
       絵を描き始めたのは27歳。<br /><br />
 
-      遅すぎると言われた出発だった。<br /><br />
+      遅すぎると言われた出発。<br /><br />
 
       だが――<br /><br />
 
       色は、すでに内側で燃えていた。
-
     </p>
 
   </div>
@@ -480,45 +512,51 @@ opacity: 0.22,
 </section>
 
 {/* ================= 最期 ================= */}
-<section className="vg-section relative min-h-screen flex items-center justify-center text-center px-8">
+<section className="vg-section relative min-h-screen flex items-center justify-center text-center px-8 overflow-hidden">
 
-<img src="/images/vg-last.png"
-className="vg-bg absolute inset-0 w-full h-full object-cover object-[50%_50%] opacity-42"
-alt=""
-/>
+  <img
+    src="/images/vg-last.png"
+    className="vg-bg absolute inset-0 w-full h-full object-cover object-[50%_50%] opacity-40"
+    alt="Wheatfield with Crows"
+  />
 
-<div className="vg-vignette absolute inset-0 z-10 bg-gradient-to-b from-black/75 via-black/55 to-black/85" />
+  <div className="vg-vignette absolute inset-0 z-10 bg-gradient-to-b from-black/75 via-black/55 to-black/85" />
 
-<div className="relative z-30 max-w-[760px] fade-up py-28">
+  <div className="relative z-30 max-w-[780px] fade-up py-28">
 
-<h2 className="text-[clamp(34px,3.8vw,48px)] tracking-[0.26em] font-light">
-最期
-</h2>
+    <h2 className="text-[clamp(36px,3.8vw,52px)] tracking-[0.26em] font-light">
+      最期
+    </h2>
 
-<div className="mt-12 mb-16 w-[72px] h-px bg-white/15 mx-auto" />
+    <div className="mt-14 mb-16 w-[72px] h-px bg-white/20 mx-auto" />
 
-<p className="leading-[3.2] text-white/92 text-[19px] md:text-[23px] font-light">
+    <p className="leading-[3.0] text-white/92 text-[19px] md:text-[23px] font-light">
 
-1890年7月27日。<br /><br />
+      1890年7月27日。<br /><br />
 
-麦畑の中で銃声が響く。<br /><br />
+      フランス、オーヴェル＝シュル＝オワーズ。<br />
+      麦畑の中で銃声が響く。<br /><br />
 
-二日後、<br />
-弟テオに見守られながら息を引き取る。<br /><br />
+      自ら腹部を撃ったとされる。<br />
+      その弾丸は、心臓を外れた。<br /><br />
 
-37歳。<br /><br />
+      二日後、<br />
+      弟テオに見守られながら息を引き取る。<br /><br />
 
-生前に売れた絵は、一枚。<br /><br />
+      37歳。<br /><br />
 
-だが――<br /><br />
+      生前に売れた絵は、ほとんどなかった。<br /><br />
 
-色は死ななかった。<br /><br />
+      だが――<br /><br />
 
-青は、いまも燃えている。
+      色は死ななかった。<br /><br />
 
-</p>
+      彼の青は、<br />
+      いまも世界を揺らしている。
 
-</div>
+    </p>
+
+  </div>
 </section>
 
 {/* ================= テオ ================= */}
