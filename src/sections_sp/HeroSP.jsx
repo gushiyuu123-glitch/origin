@@ -8,6 +8,7 @@ export default function HeroSP() {
   const containerRef = useRef(null);
   const axisRef = useRef(null);
   const canvasRef = useRef(null);
+  const titleRef = useRef(null);
   const navigate = useNavigate();
 
   /* ==================================================
@@ -16,9 +17,10 @@ export default function HeroSP() {
   useEffect(() => {
     const ctx = gsap.context(() => {
 
+      /* ---------- 人物出現 ---------- */
       gsap.fromTo(
         ".sp-item",
-        { opacity: 0, y: 32 },
+        { opacity: 0, y: 28 },
         {
           opacity: 1,
           y: 0,
@@ -36,13 +38,50 @@ export default function HeroSP() {
         ease: "sine.inOut",
       });
 
+      /* ---------- タイトル再構築（SP最適化） ---------- */
+
+      const chars = titleRef.current.querySelectorAll(".char");
+
+      gsap.set(chars, {
+        opacity: 0,
+        scale: 0.85,
+        y: 30,
+      });
+
+      const tl = gsap.timeline({ delay: 0.8 });
+
+      tl.to(axisRef.current, {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+
+      tl.to(chars, {
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 1.8,
+        stagger: 0.06,
+        ease: "power4.out",
+      }, "-=0.3");
+
+      // 時間停止（超短）
+      tl.to({}, { duration: 0.08 });
+
+      // 微細な確定
+      tl.to(chars, {
+        scale: 1.01,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   /* ==================================================
-     粒子（超静音）
+     粒子（静かに中央へ寄る）
   ================================================== */
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -57,6 +96,9 @@ export default function HeroSP() {
     resize();
     window.addEventListener("resize", resize);
 
+    const centerX = () => canvas.width / 2;
+    const centerY = () => canvas.height / 2;
+
     const particles = Array.from({ length: 18 }).map(() => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -70,6 +112,10 @@ export default function HeroSP() {
 
       particles.forEach((p) => {
         p.y -= p.speed;
+
+        // わずかに中央へ吸引
+        p.x += (centerX() - p.x) * 0.0008;
+
         if (p.y < 0) p.y = canvas.height;
 
         ctx.beginPath();
@@ -104,10 +150,10 @@ export default function HeroSP() {
       stagger: 0.05,
       ease: "power2.in",
     })
-    .to(containerRef.current, {
-      opacity: 0,
-      duration: 0.4,
-    }, 0);
+      .to(containerRef.current, {
+        opacity: 0,
+        duration: 0.4,
+      }, 0);
   };
 
   const names = [
@@ -122,30 +168,15 @@ export default function HeroSP() {
       ref={containerRef}
       className="relative w-full min-h-screen bg-[#060606] text-white overflow-hidden flex flex-col items-center justify-center px-[8vw]"
     >
-
-      {/* ================= 背景 ================= */}
       <img
         src="/origin-bg.png"
         alt=""
         className="absolute inset-0 w-full h-full object-cover opacity-70"
-        style={{
-          filter: "brightness(0.85) contrast(1.05)",
-        }}
+        style={{ filter: "brightness(0.85) contrast(1.05)" }}
       />
 
-      {/* 光膜 */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(600px 400px at 50% 40%, rgba(255,255,255,0.06), transparent 75%)",
-        }}
-      />
-
-      {/* 暗幕（SP最適化） */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/80" />
 
-      {/* 中央軸 */}
       <div
         ref={axisRef}
         className="absolute left-1/2 top-0 h-full w-[1px]"
@@ -156,22 +187,23 @@ export default function HeroSP() {
         }}
       />
 
-      {/* 粒子 */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-      />
+      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
 
-      {/* ================= タイトル ================= */}
+      {/* タイトル */}
       <div className="relative z-10 text-center mb-20">
         <h1
+          ref={titleRef}
           className="text-[38px] tracking-[0.45em] font-light mb-4"
           style={{
             textShadow:
               "0 0 50px rgba(255,255,255,0.35), 0 0 140px rgba(255,255,255,0.08)",
           }}
         >
-          創造の源
+          {"創造の源".split("").map((char, i) => (
+            <span key={i} className="char inline-block">
+              {char}
+            </span>
+          ))}
         </h1>
 
         <p className="text-[10px] tracking-[0.8em] opacity-75">
@@ -179,9 +211,8 @@ export default function HeroSP() {
         </p>
       </div>
 
-      {/* ================= 人物 ================= */}
+      {/* 人物 */}
       <div className="relative z-10 flex flex-col gap-14 w-full max-w-[320px]">
-
         {names.map((item, i) => (
           <div
             key={i}
@@ -208,7 +239,6 @@ export default function HeroSP() {
             <div className="mt-6 w-[70px] h-px bg-white/35" />
           </div>
         ))}
-
       </div>
     </section>
   );
