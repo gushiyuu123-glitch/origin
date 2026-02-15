@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* リセット */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 画面全体を完全支配 */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  background: #050505;
+  overflow-x: hidden;
+}
+
+/* Vite初期設定を完全無効化 */
+#root {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}

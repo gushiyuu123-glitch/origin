@@ -1,0 +1,47 @@
+/* ============================
+   Van Gogh — Stable Cinematic
+============================ */
+
+.vangogh-room {
+  background: #111118;
+}
+
+/* セクション */
+.vg-section {
+  position: relative;
+  transition:
+    transform 1.8s cubic-bezier(.22,.61,.36,1),
+    opacity 1.2s ease;
+}
+
+/* 背景スケール */
+.vg-bg {
+  transition:
+    transform 10s cubic-bezier(.22,.61,.36,1),
+    opacity 2s ease;
+  transform: scale(1.015);
+  will-change: transform;
+}
+
+/* ビネット（filter使わない） */
+.vg-vignette {
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(0,0,0,0.15) 0%,
+      rgba(0,0,0,0.3) 60%,
+      rgba(0,0,0,0.7) 100%
+    );
+}
+
+/* 粒子（blend削除） */
+.vg-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
