@@ -134,7 +134,8 @@ export default function VangoghRoomSP() {
             絵を描き始めたのは27歳。<br /><br />
             遅すぎると言われた出発だった。<br /><br />
             だが――<br /><br />
-            色は、すでに内側で燃えていた。
+            色は、すでに内側で燃えていた。<br /><br />
+衝動は、まだ名を持っていなかった。
           </p>
         </div>
       </section>
@@ -168,8 +169,9 @@ export default function VangoghRoomSP() {
             墓石に刻まれた同じ名があった。<br /><br />
             世界は加速し始めていた。<br />
             鉄道、都市、産業。<br /><br />
-            しかし彼は、<br />
-            森と雲のほうを見ていた。
+           しかし彼は、
+森と雲のほうを見ていた。<br /><br />
+世界よりも、震えのほうを選んでいた。
           </p>
         </div>
       </section>
@@ -342,7 +344,7 @@ export default function VangoghRoomSP() {
             夜は、青く燃えていた。<br /><br />
             彼は、閉ざされた場所で描き続けた。<br />
             苦しみの只中で、<br />
-            世界の震えを、そのままキャンバスに刻んだ。
+            世界の震えを、そのまま、描いた。
           </p>
         </div>
       </section>
@@ -423,6 +425,8 @@ export default function VangoghRoomSP() {
       生前、評価はほとんどなかった。<br /><br />
 
       だが――<br /><br />
+彼は評価されなかった。<br /><br />
+だが、美を濁さなかった。<br /><br />
 
       色は死ななかった。<br /><br />
 

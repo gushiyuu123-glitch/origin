@@ -130,7 +130,7 @@ export default function VangoghRoom() {
       tracking-[0.5em]
       text-white/55
       font-light
-      mb-8
+      mb-6
     ">
       感性の衝動
     </p>
@@ -180,6 +180,7 @@ export default function VangoghRoom() {
       だが――<br /><br />
 
       色は、すでに内側で燃えていた。
+それが、衝動だった。
     </p>
 
   </div>
@@ -453,7 +454,7 @@ alt=""
       夜は、青く燃えていた。<br /><br />
       彼は、閉ざされた場所で描き続けた。<br />
       苦しみの只中で、<br />
-      世界の震えを、そのままキャンバスに刻んだ。
+      世界の震えを、そのまま、描いた。
     </p>
 
   </div>
@@ -544,7 +545,8 @@ opacity: 0.22,
       弟テオに見守られながら息を引き取る。<br /><br />
 
       37歳。<br /><br />
-
+評価はなかった。<br /><br />
+だが、美は濁らなかった。
       生前に売れた絵は、ほとんどなかった。<br /><br />
 
       だが――<br /><br />
