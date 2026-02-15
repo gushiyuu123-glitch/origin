@@ -389,34 +389,51 @@ export default function VangoghRoomSP() {
         </div>
       </section>
 
-      {/* ================= 最期 ================= */}
-      <section className="vg-section relative min-h-[100svh] flex items-center justify-center text-center px-6">
-        <img
-          src="/images/vg-last.png"
-          className="vg-bg absolute inset-0 w-full h-full object-cover object-[50%_50%] opacity-42"
-          alt=""
-        />
+{/* ================= 最期 ================= */}
+<section className="vg-section relative min-h-[100svh] flex items-center justify-center text-center px-6 overflow-hidden">
 
-        <div className="vg-vignette absolute inset-0 z-10 bg-gradient-to-b from-black/78 via-black/55 to-black/88" />
+  <img
+    src="/images/vg-last.png"
+    className="vg-bg absolute inset-0 w-full h-full object-cover object-[50%_50%] opacity-40"
+    alt="Wheatfield with Crows"
+  />
 
-        <div className="relative z-30 max-w-[92vw] fade-up py-24">
-          <h2 className="text-[28px] tracking-[0.22em] font-light">最期</h2>
+  <div className="vg-vignette absolute inset-0 z-10 bg-gradient-to-b from-black/78 via-black/55 to-black/90" />
 
-          <div className="mt-10 mb-12 w-[60px] h-px bg-white/15 mx-auto" />
+  <div className="relative z-30 max-w-[92vw] fade-up py-24">
 
-          <p className="leading-[2.85] text-white/92 text-[15px] font-light">
-            1890年7月27日。<br /><br />
-            麦畑の中で銃声が響く。<br /><br />
-            二日後、<br />
-            弟テオに見守られながら息を引き取る。<br /><br />
-            37歳。<br /><br />
-            生前に売れた絵は、一枚。<br /><br />
-            だが――<br /><br />
-            色は死ななかった。<br /><br />
-            青は、いまも燃えている。
-          </p>
-        </div>
-      </section>
+    <h2 className="text-[28px] tracking-[0.22em] font-light">
+      最期
+    </h2>
+
+    <div className="mt-10 mb-12 w-[56px] h-px bg-white/20 mx-auto" />
+
+    <p className="leading-[2.7] text-white/92 text-[15px] font-light">
+
+      1890年7月27日。<br /><br />
+
+      フランス、オーヴェル。<br />
+      麦畑の中で銃声が響く。<br /><br />
+
+      二日後、<br />
+      弟テオに見守られながら息を引き取る。<br /><br />
+
+      37歳。<br /><br />
+
+      生前、評価はほとんどなかった。<br /><br />
+
+      だが――<br /><br />
+
+      色は死ななかった。<br /><br />
+
+      彼の青は、<br />
+      いまも世界に残っている。
+
+    </p>
+
+  </div>
+</section>
+
 
       {/* ================= テオ ================= */}
       <section className="vg-section relative min-h-[100svh] flex items-center justify-center text-center px-6">
