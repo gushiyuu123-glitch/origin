@@ -1,13 +1,85 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- 基本 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- Google翻訳無効化 -->
     <meta name="google" content="notranslate" />
-    <title>origin</title>
+    <meta name="robots" content="index, follow" />
+
+    <!-- タイトル -->
+    <title>
+      ORIGIN｜思想の核を、体験できる空間へ｜GUSHIKEN DESIGN
+    </title>
+
+    <!-- ディスクリプション -->
+    <meta
+      name="description"
+      content="偉人の思想の核を、Web空間として再構築するプロジェクト。ゴッホをはじめとする創造者の精神を、体験できる空間として展示しています。"
+    />
+
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ORIGIN｜思想の核を、体験できる空間へ" />
+    <meta
+      property="og:description"
+      content="偉人の思想の核を、Web空間として再構築するプロジェクト。"
+    />
+    <meta property="og:url" content="https://origin-gray.vercel.app/" />
+    <meta property="og:image" content="https://origin-gray.vercel.app/ogp-origin.png" />
+    <meta property="og:site_name" content="GUSHIKEN DESIGN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ORIGIN｜思想の核を、体験できる空間へ" />
+    <meta
+      name="twitter:description"
+      content="偉人の思想の核を、Web空間として再構築するプロジェクト。"
+    />
+    <meta name="twitter:image" content="https://origin-gray.vercel.app/ogp-origin.png" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://origin-gray.vercel.app/" />
+<!-- Favicon (Modern Browsers) -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- PNG Fallback -->
+<link rel="icon" type="image/png" sizes="32x32" href="/origin_32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/origin_16x16.png" />
+
+<!-- ICO Fallback (Old Browsers) -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/origin_256x256.png" />
+
+<!-- Android / PWA -->
+<link rel="icon" sizes="192x192" href="/origin_256x256.png" />
+<link rel="icon" sizes="512x512" href="/origin_512x512.png" />
+
+    <!-- フォント最適化 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "ORIGIN",
+      "headline": "思想の核を、体験できる空間へ",
+      "description": "偉人の思想の核をWeb空間として再構築するプロジェクト。",
+      "creator": {
+        "@type": "Person",
+        "name": "裕人（GUSHIKEN DESIGN）"
+      },
+      "url": "https://origin-gray.vercel.app/"
+    }
+    </script>
+
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
