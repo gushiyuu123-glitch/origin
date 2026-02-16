@@ -18,7 +18,7 @@ import GlobalRoomNav from "./components/GlobalRoomNav";
 
 /* ================= SITE CONFIG ================= */
 
-const SITE_URL = "https://yourdomain.com"; // ←本番ドメインに変更
+const SITE_URL = "https://origin-gray.vercel.app";
 
 /* ================= ROOMS CONFIG ================= */
 
@@ -70,7 +70,6 @@ export default function App() {
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 1023px)");
-
     const update = () => setIsSP(media.matches);
 
     update();
@@ -100,14 +99,10 @@ export default function App() {
 
     const url = SITE_URL + location.pathname;
 
-    /* ===== title ===== */
     document.title = title;
 
-    /* ===== helper ===== */
     const setMetaName = (name, content) => {
-      let tag = document.querySelector(
-        `meta[name='${name}']`
-      );
+      let tag = document.querySelector(`meta[name='${name}']`);
       if (!tag) {
         tag = document.createElement("meta");
         tag.setAttribute("name", name);
@@ -117,9 +112,7 @@ export default function App() {
     };
 
     const setMetaProp = (property, content) => {
-      let tag = document.querySelector(
-        `meta[property='${property}']`
-      );
+      let tag = document.querySelector(`meta[property='${property}']`);
       if (!tag) {
         tag = document.createElement("meta");
         tag.setAttribute("property", property);
@@ -128,7 +121,7 @@ export default function App() {
       tag.setAttribute("content", content);
     };
 
-    /* ===== basic meta ===== */
+    /* ===== BASIC ===== */
     setMetaName("description", description);
 
     /* ===== OGP ===== */
@@ -145,16 +138,12 @@ export default function App() {
     setMetaName("twitter:image", image);
 
     /* ===== canonical ===== */
-    let canonical = document.querySelector(
-      "link[rel='canonical']"
-    );
-
+    let canonical = document.querySelector("link[rel='canonical']");
     if (!canonical) {
       canonical = document.createElement("link");
       canonical.setAttribute("rel", "canonical");
       document.head.appendChild(canonical);
     }
-
     canonical.setAttribute("href", url);
 
   }, [location.pathname]);
