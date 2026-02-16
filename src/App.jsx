@@ -10,6 +10,9 @@ import HeroSP from "./sections_sp/HeroSP";
 import VangoghRoom from "./pages/VangoghRoom";
 import VangoghRoomSP from "./pages_sp/VangoghRoomSP";
 
+import LeonardoRoom from "./pages/LeonardoRoom";
+import LeonardoRoomSP from "./pages_sp/LeonardoRoomSP";
+
 import ComingSoon from "./pages/ComingSoon";
 import GlobalRoomNav from "./components/GlobalRoomNav";
 
@@ -27,6 +30,8 @@ const rooms = [
     path: "/leonardo",
     title: "LEONARDO",
     concept: "構造",
+    pc: LeonardoRoom,
+    sp: LeonardoRoomSP,
   },
   {
     path: "/jobs",
@@ -52,18 +57,21 @@ export default function App() {
 
     const update = () => setIsSP(media.matches);
 
-    update(); // 初期判定
+    update();
     media.addEventListener("change", update);
 
     return () => media.removeEventListener("change", update);
   }, []);
 
-  const isTop = location.pathname === "/";
+  /* ================= NAV CONTROL ================= */
+
+  // Hero系だけ除外
+  const hideNavOn = ["/"];
+  const showGlobalNav = !hideNavOn.includes(location.pathname);
 
   return (
     <>
-      {/* TOP以外はGlobalNav表示 */}
-      {!isTop && <GlobalRoomNav />}
+      {showGlobalNav && <GlobalRoomNav />}
 
       <Routes>
 

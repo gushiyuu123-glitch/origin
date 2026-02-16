@@ -7,12 +7,12 @@ export default function GlobalRoomNav() {
   const location = useLocation();
 
   const [isSP, setIsSP] = useState(window.innerWidth < 1024);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       setIsSP(window.innerWidth < 1024);
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -26,40 +26,43 @@ export default function GlobalRoomNav() {
 
   return (
     <>
-      {/* ===== 上部フェード ===== */}
+      {/* ================= TOP LIGHT FADE ================= */}
       <div
-        className="fixed top-0 left-0 w-full h-[90px] z-[9000] pointer-events-none"
+        className="fixed top-0 left-0 w-full h-[100px] z-[9000] pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.0))",
+            "linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.0))",
         }}
       />
 
-      {/* ===== ORIGIN（常時左上） ===== */}
+      {/* ================= ORIGIN ================= */}
       <div
         onClick={() => navigate("/")}
         className="
           fixed top-6 left-6 z-[9999]
           cursor-pointer select-none
-          text-[11px] tracking-[0.6em]
+          text-[11px]
+          tracking-[0.65em]
           text-white
-          opacity-60
-          hover:opacity-95
-          transition-opacity duration-500
+          transition-all duration-700
         "
         style={{
-          textShadow: "0 0 18px rgba(255,255,255,0.15)",
+          opacity: location.pathname === "/" ? 0.95 : 0.45,
+          textShadow:
+            location.pathname === "/"
+              ? "0 0 22px rgba(255,255,255,0.35)"
+              : "0 0 12px rgba(255,255,255,0.12)",
         }}
       >
         ORIGIN
       </div>
 
-      {/* ===== PCナビ ===== */}
+      {/* ================= PC NAV ================= */}
       {!isSP && (
         <div
           className="
             fixed top-6 right-6 z-[9999]
-            flex gap-8
+            flex gap-10
             select-none
           "
         >
@@ -72,15 +75,15 @@ export default function GlobalRoomNav() {
                 onClick={() => navigate(room.path)}
                 className="
                   text-[11px]
-                  tracking-[0.45em]
+                  tracking-[0.5em]
                   text-white
                   cursor-pointer
-                  transition-all duration-500
+                  transition-all duration-700
                 "
                 style={{
-                  opacity: isActive ? 0.95 : 0.35,
+                  opacity: isActive ? 0.9 : 0.22,
                   textShadow: isActive
-                    ? "0 0 22px rgba(255,255,255,0.35)"
+                    ? "0 0 24px rgba(255,255,255,0.35)"
                     : "none",
                 }}
               >
@@ -91,48 +94,72 @@ export default function GlobalRoomNav() {
         </div>
       )}
 
-      {/* ===== SPナビ（下部中央） ===== */}
+      {/* ================= SP NAV ================= */}
       {isSP && (
-        <div
-          className="
-            fixed bottom-6 left-1/2 -translate-x-1/2
-            z-[9999]
-            flex gap-6
-            px-6 py-3
-            rounded-full
-            backdrop-blur-[2px]
-          "
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.35))",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}
-        >
-          {rooms.map((room) => {
-            const isActive = location.pathname === room.path;
+        <div className="fixed bottom-6 right-6 z-[9999] select-none">
+          
+          {/* ROOM BUTTON */}
+          <div
+            onClick={() => setOpen(!open)}
+            className="
+              text-[10px]
+              tracking-[0.55em]
+              text-white
+              cursor-pointer
+              transition-all duration-700
+            "
+            style={{
+              opacity: 0.55,
+              textShadow: "0 0 18px rgba(255,255,255,0.25)",
+            }}
+          >
+            ROOM
+          </div>
 
-            return (
-              <div
-                key={room.path}
-                onClick={() => navigate(room.path)}
-                className="
-                  text-[10px]
-                  tracking-[0.4em]
-                  text-white
-                  cursor-pointer
-                  transition-all duration-500
-                "
-                style={{
-                  opacity: isActive ? 0.95 : 0.45,
-                  textShadow: isActive
-                    ? "0 0 18px rgba(255,255,255,0.35)"
-                    : "none",
-                }}
-              >
-                {room.name}
-              </div>
-            );
-          })}
+          {/* EXPANDED LIST */}
+          <div
+            className={`
+              absolute bottom-8 right-0
+              flex flex-col items-end gap-4
+              transition-all duration-700
+            `}
+            style={{
+              opacity: open ? 1 : 0,
+              transform: open
+                ? "translateY(0px)"
+                : "translateY(10px)",
+              pointerEvents: open ? "auto" : "none",
+            }}
+          >
+            {rooms.map((room) => {
+              const isActive = location.pathname === room.path;
+
+              return (
+                <div
+                  key={room.path}
+                  onClick={() => {
+                    navigate(room.path);
+                    setOpen(false);
+                  }}
+                  className="
+                    text-[10px]
+                    tracking-[0.45em]
+                    text-white
+                    cursor-pointer
+                    transition-all duration-700
+                  "
+                  style={{
+                    opacity: isActive ? 0.9 : 0.35,
+                    textShadow: isActive
+                      ? "0 0 18px rgba(255,255,255,0.35)"
+                      : "none",
+                  }}
+                >
+                  {room.name}
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </>

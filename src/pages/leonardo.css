@@ -1,0 +1,108 @@
+.ld-root {
+  background: #0c0b08;
+  color: #f3ede4;
+  overflow: hidden;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ld-sec {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.ld-inner {
+  position: relative;
+  z-index: 5;
+  max-width: 900px;
+}
+
+.ld-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ld-bg-soft { opacity: 0.16; }
+.ld-bg-deep { opacity: 0.12; }
+
+.ld-overlay-dark {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.95));
+  z-index: 2;
+}
+
+.ld-title {
+  font-size: clamp(52px, 6vw, 106px);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+}
+
+.ld-heading {
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300;
+  letter-spacing: 0.34em;
+}
+
+.ld-text {
+  margin-top: 2.5rem;
+  line-height: 3;
+  font-size: 18px;
+  color: #f3ede4;
+}
+
+.ld-strong {
+  color: #ffffff;
+}
+
+.ld-meta {
+  font-size: 11px;
+  letter-spacing: 0.45em;
+  opacity: 0.6;
+}
+
+.ld-sub {
+  font-size: 12px;
+  letter-spacing: 0.6em;
+  color: rgba(201,169,74,0.7);
+}
+
+.ld-line {
+  width: 120px;
+  height: 1px;
+  margin: 2.5rem auto;
+  background: rgba(201,169,74,0.28);
+}
+
+.ld-line-strong {
+  background: rgba(201,169,74,0.45);
+}
+
+.ld-film {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("/images/leonardo/grain.png");
+  background-size: 360px 360px;
+  mix-blend-mode: overlay;
+}
+
+.ld-why {
+  margin-top: 3rem;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  opacity: 0.5;
+}
+
+.ld-hero-shadow {
+  text-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
