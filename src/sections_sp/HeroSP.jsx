@@ -9,15 +9,17 @@ export default function HeroSP() {
   const axisRef = useRef(null);
   const canvasRef = useRef(null);
   const titleRef = useRef(null);
+  const logoRef = useRef(null);
+  const glowRef = useRef(null);
+  const silhouetteRef = useRef(null);
   const navigate = useNavigate();
 
   /* ==================================================
-     GSAP
+     GSAP 起動
   ================================================== */
   useEffect(() => {
     const ctx = gsap.context(() => {
 
-      /* ---------- 人物出現 ---------- */
       gsap.fromTo(
         ".sp-item",
         { opacity: 0, y: 28 },
@@ -38,23 +40,12 @@ export default function HeroSP() {
         ease: "sine.inOut",
       });
 
-      /* ---------- タイトル再構築（SP最適化） ---------- */
-
       const chars = titleRef.current.querySelectorAll(".char");
 
-      gsap.set(chars, {
-        opacity: 0,
-        scale: 0.85,
-        y: 30,
-      });
+      gsap.set(chars, { opacity: 0, scale: 0.85, y: 30 });
+      gsap.set(logoRef.current, { opacity: 0, scale: 0.96 });
 
       const tl = gsap.timeline({ delay: 0.8 });
-
-      tl.to(axisRef.current, {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.out",
-      });
 
       tl.to(chars, {
         y: 0,
@@ -63,16 +54,29 @@ export default function HeroSP() {
         duration: 1.8,
         stagger: 0.06,
         ease: "power4.out",
-      }, "-=0.3");
+      });
 
-      // 時間停止（超短）
-      tl.to({}, { duration: 0.08 });
-
-      // 微細な確定
-      tl.to(chars, {
-        scale: 1.01,
-        duration: 0.4,
+      tl.to(logoRef.current, {
+        opacity: 0.72,
+        scale: 1,
+        duration: 1.4,
         ease: "power2.out",
+      }, "-=1.2");
+
+      gsap.to(logoRef.current, {
+        scale: 1.015,
+        duration: 2.8,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
+      gsap.to(glowRef.current, {
+        opacity: 0.7,
+        duration: 3.2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
       });
 
     }, containerRef);
@@ -81,63 +85,45 @@ export default function HeroSP() {
   }, []);
 
   /* ==================================================
-     粒子（静かに中央へ寄る）
+     シルエット制御（SP弱演出）
   ================================================== */
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let animationId;
 
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
+  const showSilhouette = (image) => {
+    silhouetteRef.current.src = image;
 
-    resize();
-    window.addEventListener("resize", resize);
+    gsap.fromTo(
+      silhouetteRef.current,
+      { opacity: 0, scale: 0.96 },
+      {
+        opacity: 0.1,   // ← SPはかなり薄く
+        scale: 1,
+        duration: 0.8,
+        ease: "power2.out",
+      }
+    );
 
-    const centerX = () => canvas.width / 2;
-    const centerY = () => canvas.height / 2;
+    gsap.to(axisRef.current, {
+      opacity: 1,
+      duration: 0.5,
+    });
+  };
 
-    const particles = Array.from({ length: 18 }).map(() => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 0.6 + 0.2,
-      speed: Math.random() * 0.04 + 0.01,
-      baseOpacity: Math.random() * 0.15 + 0.05,
-    }));
+  const hideSilhouette = () => {
+    gsap.to(silhouetteRef.current, {
+      opacity: 0,
+      duration: 0.5,
+    });
 
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((p) => {
-        p.y -= p.speed;
-
-        // わずかに中央へ吸引
-        p.x += (centerX() - p.x) * 0.0008;
-
-        if (p.y < 0) p.y = canvas.height;
-
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(255,255,255,${p.baseOpacity})`;
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      animationId = requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
+    gsap.to(axisRef.current, {
+      opacity: 0.7,
+      duration: 0.5,
+    });
+  };
 
   /* ==================================================
      遷移
   ================================================== */
+
   const handleEnter = (route) => {
     const tl = gsap.timeline({
       onComplete: () => navigate(route),
@@ -149,24 +135,19 @@ export default function HeroSP() {
       duration: 0.3,
       stagger: 0.05,
       ease: "power2.in",
-    })
-      .to(containerRef.current, {
-        opacity: 0,
-        duration: 0.4,
-      }, 0);
+    }).to(containerRef.current, {
+      opacity: 0,
+      duration: 0.4,
+    }, 0);
   };
 
-const names = [
-  { text: "VAN GOGH", sub: "感性", route: "/vangogh" },
-  { text: "LEONARDO", sub: "構造", route: "/leonardo" },
-
-  // 🔥 追加
-  { text: "EINSTEIN", sub: "直感", route: "/einstein" },
-
-  { text: "JOBS", sub: "本質", route: "/jobs" },
-  { text: "MUSK", sub: "革命", route: "/musk" },
-];
-
+  const names = [
+    { text: "VAN GOGH", sub: "感性", route: "/vangogh", image: "/silhouettes/vangogh.png" },
+    { text: "LEONARDO", sub: "構造", route: "/leonardo", image: "/silhouettes/leonardo.png" },
+    { text: "EINSTEIN", sub: "直感", route: "/einstein", image: "/silhouettes/einstein.png" },
+    { text: "JOBS", sub: "本質", route: "/jobs", image: "/silhouettes/jobs.png" },
+    { text: "MUSK", sub: "革命", route: "/musk", image: "/silhouettes/musk.png" },
+  ];
 
   return (
     <section
@@ -182,6 +163,19 @@ const names = [
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/80" />
 
+      {/* シルエット */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <img
+          ref={silhouetteRef}
+          src=""
+          alt=""
+          className="w-[120vw] opacity-0"
+          style={{
+            filter: "blur(6px) brightness(1.15)",
+          }}
+        />
+      </div>
+
       <div
         ref={axisRef}
         className="absolute left-1/2 top-0 h-full w-[1px]"
@@ -192,58 +186,61 @@ const names = [
         }}
       />
 
- <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
 
-{/* タイトルブロック */}
-<div className="relative z-10 text-center mt-12 mb-20">
-  <h1
-    ref={titleRef}
-    className="text-[42px] tracking-[0.38em] font-light mb-6"
-    style={{
-      textShadow:
-        "0 0 40px rgba(255,255,255,0.45), 0 0 120px rgba(255,230,200,0.12)",
-      letterSpacing: "0.32em",
-    }}
-  >
-    {"創造の源".split("").map((char, i) => (
-      <span key={i} className="char inline-block">
-        {char}
-      </span>
-    ))}
-  </h1>
+      {/* タイトル */}
+      <div className="relative z-10 text-center mt-14 mb-20">
+        <h1
+          ref={titleRef}
+          className="text-[42px] tracking-[0.32em] font-light mb-6"
+          style={{
+            textShadow:
+              "0 0 35px rgba(255,255,255,0.45), 0 0 110px rgba(255,230,200,0.10)",
+          }}
+        >
+          {"創造の源".split("").map((char, i) => (
+            <span key={i} className="char inline-block">
+              {char}
+            </span>
+          ))}
+        </h1>
 
-  {/* ロゴ */}
-  <div className="relative flex justify-center items-center pointer-events-none select-none mt-4">
-    {/* 光膜 */}
-    <div
-      className="absolute w-[240px] h-[240px] rounded-full"
-      style={{
-        background:
-          "radial-gradient(circle, rgba(255,215,170,0.08) 0%, rgba(0,0,0,0) 65%)",
-        filter: "blur(40px)",
-        opacity: 0.6,
-      }}
-    />
+        <div className="relative flex justify-center items-center mt-4 select-none">
+          <div
+            ref={glowRef}
+            className="absolute w-[240px] h-[240px] rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(255,215,170,0.06) 0%, rgba(0,0,0,0) 65%)",
+              filter: "blur(45px)",
+              opacity: 0.5,
+            }}
+          />
 
-    <img
-      src="/images/origin-logo.png"
-      alt="ORIGIN"
-      className="relative w-[140px] opacity-85"
-      style={{
-        filter: `
-          drop-shadow(0 0 10px rgba(255,215,170,0.12))
-        `,
-      }}
-    />
-  </div>
-</div>
-
+          <img
+            ref={logoRef}
+            src="/images/origin-logo.png"
+            alt="ORIGIN"
+            className="relative w-[140px]"
+            style={{
+              opacity: 0.75,
+              filter: `
+                saturate(0.85)
+                brightness(0.92)
+                drop-shadow(0 0 8px rgba(255,215,170,0.10))
+              `,
+            }}
+          />
+        </div>
+      </div>
 
       {/* 人物 */}
       <div className="relative z-10 flex flex-col gap-14 w-full max-w-[320px]">
         {names.map((item, i) => (
           <div
             key={i}
+            onTouchStart={() => showSilhouette(item.image)}
+            onTouchEnd={hideSilhouette}
             onClick={() => handleEnter(item.route)}
             className="sp-item flex flex-col items-center cursor-pointer select-none transition-all duration-300 active:scale-[0.96]"
           >

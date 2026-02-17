@@ -5,100 +5,85 @@ import gsap from "gsap";
 export default function HeroPC() {
   const namesRef = useRef([]);
   const containerRef = useRef(null);
-  const canvasRef = useRef(null);
-  const axisCoreRef = useRef(null);
   const axisGlowRef = useRef(null);
+  const axisCoreRef = useRef(null);
   const titleRef = useRef(null);
+  const logoRef = useRef(null);
+  const silhouetteRef = useRef(null);
   const navigate = useNavigate();
 
   /* =========================
-     GSAP 神殿起動
+     神殿起動
   ========================== */
   useEffect(() => {
     const ctx = gsap.context(() => {
 
-      /* ---------- 名前出現 ---------- */
-      gsap.fromTo(
-        namesRef.current,
-        { y: 30, scale: 0.96 },
-        {
-          y: 0,
-          scale: 1,
-          duration: 3,
-          stagger: 0.6,
-          ease: "power3.out",
-        }
-      );
-
-      namesRef.current.forEach((el) => {
-        gsap.to(el, {
-          y: "+=8",
-          duration: 20 + Math.random() * 6,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      });
-
+      /* 軸呼吸 */
       gsap.to(axisGlowRef.current, {
-        opacity: 0.65,
+        opacity: 0.7,
         duration: 6,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
       });
 
-      /* ---------- タイトル再構築 ---------- */
+      /* 名前出現 */
+      gsap.fromTo(
+        namesRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 0.6,
+          y: 0,
+          duration: 2.5,
+          stagger: 0.4,
+          ease: "power3.out",
+        }
+      );
 
+      namesRef.current.forEach((el) => {
+        gsap.to(el, {
+          y: "+=10",
+          duration: 18 + Math.random() * 6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      });
+
+      /* タイトル */
       const chars = titleRef.current.querySelectorAll(".char");
 
-      gsap.set(chars, {
-        opacity: 0,
-        scale: 0.7,
-        rotation: () => gsap.utils.random(-30, 30),
-        x: (i) => {
-          const dir = i % 4;
-          if (dir === 0) return -window.innerWidth * 0.3;
-          if (dir === 1) return window.innerWidth * 0.3;
-          return 0;
-        },
-        y: (i) => {
-          const dir = i % 4;
-          if (dir === 2) return -window.innerHeight * 0.3;
-          if (dir === 3) return window.innerHeight * 0.3;
-          return 0;
-        },
-      });
+      gsap.set(chars, { opacity: 0, y: 40, scale: 0.9 });
 
-      const tl = gsap.timeline({ delay: 1.2 });
-
-      // 光柱強まる
-      tl.to(axisGlowRef.current, {
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-      });
-
-      // 収束
-      tl.to(chars, {
-        x: 0,
+      gsap.to(chars, {
         y: 0,
-        rotation: 0,
         scale: 1,
         opacity: 1,
-        duration: 2.4,
-        stagger: 0.08,
+        duration: 2.6,
+        delay: 1.1,
+        stagger: 0.07,
         ease: "power4.out",
-      }, "-=0.3");
+      });
 
-      // 時間停止（0.12秒）
-      tl.to({}, { duration: 0.12 });
+      /* ロゴ刻印 */
+      gsap.fromTo(
+        logoRef.current,
+        { opacity: 0, scale: 0.95 },
+        {
+          opacity: 0.65,
+          scale: 1,
+          duration: 2,
+          delay: 2,
+          ease: "power2.out",
+        }
+      );
 
-      // 微細な確定
-      tl.to(chars, {
-        scale: 1.01,
-        duration: 0.6,
-        ease: "power2.out",
+      gsap.to(logoRef.current, {
+        opacity: 0.72,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
       });
 
     }, containerRef);
@@ -107,17 +92,19 @@ export default function HeroPC() {
   }, []);
 
   /* =========================
-     視差
+     マウス追従（神の存在）
   ========================== */
   useEffect(() => {
     const move = (e) => {
+      if (!silhouetteRef.current) return;
+
       const x = (e.clientX - window.innerWidth / 2) / window.innerWidth;
       const y = (e.clientY - window.innerHeight / 2) / window.innerHeight;
 
-      gsap.to(namesRef.current, {
-        x: x * 14,
-        y: y * 14,
-        duration: 1.5,
+      gsap.to(silhouetteRef.current, {
+        x: x * 40,
+        y: y * 40,
+        duration: 2,
         ease: "power3.out",
       });
     };
@@ -127,67 +114,140 @@ export default function HeroPC() {
   }, []);
 
   /* =========================
-     儀式遷移
+     Hover 神出現（溶解版）
   ========================== */
-  const handleEnter = (route) => {
-    const tl = gsap.timeline({
-      onComplete: () => navigate(route),
+  const showSilhouette = (image) => {
+    const el = silhouetteRef.current;
+    if (!el) return;
+
+    gsap.to(el, {
+      opacity: 0,
+      duration: 0.25,
+      onComplete: () => {
+        el.src = image;
+
+        gsap.fromTo(
+          el,
+          { opacity: 0, scale: 0.94 },
+          {
+            opacity: 0.10,
+            scale: 1,
+            duration: 1.2,
+            ease: "power3.out",
+          }
+        );
+      },
     });
 
-    tl.to(axisGlowRef.current, { opacity: 1, duration: 0.3 })
-      .to(
-        namesRef.current,
-        {
-          opacity: 0,
-          scale: 0.95,
-          duration: 0.3,
-          stagger: 0.05,
-        },
-        0
-      )
-      .to(containerRef.current, {
-        opacity: 0,
-        duration: 0.45,
-      });
+    gsap.to(axisGlowRef.current, {
+      opacity: 1,
+      duration: 0.6,
+      ease: "power2.out",
+    });
   };
 
-const names = [
-  { text: "VAN GOGH", sub: "感性", route: "/vangogh", style: "top-[18%] left-[12%]" },
-  { text: "LEONARDO", sub: "構造", route: "/leonardo", style: "top-[62%] right-[8%]" },
+  const hideSilhouette = () => {
+    gsap.to(silhouetteRef.current, {
+      opacity: 0,
+      duration: 0.6,
+      ease: "power2.out",
+    });
 
-  // 🔥 追加（中央寄り・軸近く）
-  { text: "EINSTEIN", sub: "直感", route: "/einstein", style: "top-[13%] left-[48%]" },
+    gsap.to(axisGlowRef.current, {
+      opacity: 0.7,
+      duration: 0.6,
+      ease: "power2.out",
+    });
+  };
 
-  { text: "JOBS", sub: "本質", route: "/jobs", style: "top-[75%] left-[28%]" },
-  { text: "MUSK", sub: "革命", route: "/musk", style: "top-[28%] right-[24%]" },
-];
+  /* =========================
+     遷移
+  ========================== */
+  const handleEnter = (route) => {
+    gsap.to(containerRef.current, {
+      opacity: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      onComplete: () => navigate(route),
+    });
+  };
 
+  const names = [
+    {
+      text: "VAN GOGH",
+      sub: "感性",
+      route: "/vangogh",
+      style: "top-[18%] left-[12%]",
+      image: "/silhouettes/vangogh.png",
+    },
+    {
+      text: "LEONARDO",
+      sub: "構造",
+      route: "/leonardo",
+      style: "top-[62%] right-[8%]",
+      image: "/silhouettes/leonardo.png",
+    },
+    {
+      text: "EINSTEIN",
+      sub: "直感",
+      route: "/einstein",
+      style: "top-[13%] left-[48%]",
+      image: "/silhouettes/einstein.png",
+    },
+    {
+      text: "JOBS",
+      sub: "本質",
+      route: "/jobs",
+      style: "top-[75%] left-[28%]",
+      image: "/silhouettes/jobs.png",
+    },
+    {
+      text: "MUSK",
+      sub: "革命",
+      route: "/musk",
+      style: "top-[28%] right-[24%]",
+      image: "/silhouettes/musk.png",
+    },
+  ];
 
   return (
     <section
       ref={containerRef}
-      className="relative w-screen h-screen bg-[#040404] text-white overflow-hidden"
+      className="relative w-screen h-screen bg-[#030303] text-white overflow-hidden"
     >
       {/* 背景 */}
       <img
         src="/origin-bg.png"
         alt=""
-        className="absolute inset-0 w-full h-full object-cover opacity-55"
+        className="absolute inset-0 w-full h-full object-cover opacity-45"
         style={{
-          filter: "blur(0.5px) brightness(0.78) contrast(1.1)",
+          filter: "blur(0.4px) brightness(0.75) contrast(1.15)",
         }}
       />
 
-      {/* 空気層 */}
+      {/* 神域光膜 */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(255,255,255,0.02), transparent 40%, rgba(255,255,255,0.02))",
+            "radial-gradient(1200px 800px at 50% 45%, rgba(255,255,255,0.03), transparent 70%)",
         }}
       />
 
-      {/* 光柱芯 */}
+      {/* シルエット */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <img
+          ref={silhouetteRef}
+          src=""
+          alt=""
+          className="w-[1400px] opacity-0"
+          style={{
+            filter: "blur(6px) brightness(1.15) contrast(1.05)",
+          }}
+        />
+      </div>
+
+      {/* 軸芯 */}
       <div
         ref={axisCoreRef}
         className="absolute left-1/2 top-0 h-full w-[1px]"
@@ -198,41 +258,26 @@ const names = [
         }}
       />
 
-      {/* 光柱滲み */}
+      {/* 軸滲み */}
       <div
         ref={axisGlowRef}
         className="absolute left-1/2 top-0 h-full w-[3px]"
         style={{
           background:
-            "linear-gradient(to bottom, transparent, rgba(255,255,255,0.25), transparent)",
-          filter: "blur(4px)",
-          opacity: 0.5,
+            "linear-gradient(to bottom, transparent, rgba(255,255,255,0.3), transparent)",
+          filter: "blur(6px)",
+          opacity: 0.4,
         }}
       />
 
-      {/* 光膜 */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(900px 700px at 50% 45%, rgba(255,255,255,0.035), transparent 75%)",
-        }}
-      />
-
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-      />
-
-
-      {/* タイトル */}
+      {/* 中央領域 */}
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
         <h1
           ref={titleRef}
-          className="text-[64px] tracking-[0.45em] font-light mb-6"
+          className="text-[72px] tracking-[0.42em] font-light mb-10"
           style={{
             textShadow:
-              "0 0 50px rgba(255,255,255,0.25), 0 0 200px rgba(255,255,255,0.08)",
+              "0 0 60px rgba(255,255,255,0.25), 0 0 220px rgba(255,255,255,0.07)",
           }}
         >
           {"創造の源".split("").map((char, i) => (
@@ -241,56 +286,45 @@ const names = [
             </span>
           ))}
         </h1>
-<div className="relative w-full flex justify-center items-center pointer-events-none select-none -translate-y-[4vh]">
 
+        <div className="relative flex justify-center items-center -translate-y-[3vh]">
+          <div
+            className="absolute w-[480px] h-[480px] rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(255,220,170,0.08) 0%, rgba(0,0,0,0) 65%)",
+              filter: "blur(70px)",
+              opacity: 0.5,
+            }}
+          />
 
-  {/* 微光グロー */}
-  <div
-    className="absolute w-[420px] h-[420px] rounded-full"
-    style={{
-      background:
-        "radial-gradient(circle, rgba(255,220,170,0.12) 0%, rgba(0,0,0,0) 65%)",
-      filter: "blur(60px)",
-      opacity: 0.6,
-    }}
-  />
-
-  {/* ロゴ本体 */}
-  <img
-    src="/images/origin-logo.png"
-    alt="ORIGIN"
-    className="
-      relative
-      w-[220px]
-      md:w-[260px]
-      opacity-90
-      transition duration-[1600ms] ease-out
-      hover:opacity-100
-    "
-    style={{
-      filter: `
-        drop-shadow(0 0 12px rgba(255,215,170,0.18))
-        drop-shadow(0 0 36px rgba(255,200,140,0.08))
-      `,
-    }}
-  />
-
-</div>
-
-
+          <img
+            ref={logoRef}
+            src="/images/origin-logo.png"
+            alt="ORIGIN"
+            className="relative w-[240px] opacity-0"
+            style={{
+              filter:
+                "drop-shadow(0 0 12px rgba(255,215,170,0.14))",
+            }}
+          />
+        </div>
       </div>
 
+      {/* 周囲碑文 */}
       {names.map((item, i) => (
         <div
           key={i}
           ref={(el) => (namesRef.current[i] = el)}
+          onMouseEnter={() => showSilhouette(item.image)}
+          onMouseLeave={hideSilhouette}
           onClick={() => handleEnter(item.route)}
           className={`absolute ${item.style} flex flex-col items-start cursor-pointer select-none`}
         >
-          <span className="text-sm tracking-[0.45em]" style={{ opacity: 0.32 }}>
+          <span className="text-sm tracking-[0.45em]" style={{ opacity: 0.3 }}>
             {item.text}
           </span>
-          <span className="mt-3 text-[12px] tracking-[0.5em]" style={{ opacity: 0.7 }}>
+          <span className="mt-3 text-[12px] tracking-[0.5em]" style={{ opacity: 0.65 }}>
             {item.sub}
           </span>
         </div>
