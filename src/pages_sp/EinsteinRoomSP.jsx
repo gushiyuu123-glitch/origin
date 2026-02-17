@@ -1,58 +1,176 @@
 // src/pages_sp/EinsteinRoomSP.jsx
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export default function EinsteinRoomSP() {
+  const containerRef = useRef(null);
+  const heroTitleRef = useRef(null);
+
   useEffect(() => {
-    gsap.fromTo(
-      ".fade-up",
-      { opacity: 0, y: 24 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.4,
-        ease: "power3.out",
+    const ctx = gsap.context(() => {
+
+      /* ================================
+         HERO 微小時間歪み（SP弱）
+      ================================= */
+      if (heroTitleRef.current) {
+        gsap.to(heroTitleRef.current, {
+          letterSpacing: "0.28em",
+          duration: 6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
       }
-    );
+
+      /* ================================
+         セクションフェード
+      ================================= */
+      const sections = gsap.utils.toArray(".es-sp-section");
+
+      sections.forEach((sec) => {
+        const target = sec.querySelector(".fade-up");
+
+        if (target) {
+          gsap.set(target, { opacity: 0, y: 24 });
+
+          gsap.to(target, {
+            opacity: 1,
+            y: 0,
+            duration: 1.4,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sec,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        }
+      });
+
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
-  return (
-    <section className="min-h-screen bg-black text-white px-[6vw] pt-[18vh] pb-[18vh]">
-      <div className="max-w-[520px] mx-auto">
+  /* ================================
+     Timeline Section（SP）
+  ================================= */
 
-        <h1
-          className="
-            text-[28px]
-            tracking-[0.25em]
-            font-light
-            mb-6
-            fade-up
-          "
-        >
-          時空の設計者
-        </h1>
+  const TimelineSection = ({ year, title, image }) => (
+    <section className="es-sp-section relative min-h-[100svh] flex items-center px-[6vw] overflow-hidden">
 
-        <p
-          className="
-            text-[11px]
-            tracking-[0.6em]
-            opacity-60
-            mb-12
-            fade-up
-          "
-        >
-          ALBERT EINSTEIN
+      {/* Background */}
+      <img
+        src={image}
+        className="absolute inset-0 w-full h-full object-cover opacity-40"
+        alt=""
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/85 to-black z-10" />
+
+      {/* Content */}
+      <div className="relative z-20 w-full max-w-[520px] mx-auto fade-up">
+        <p className="text-[10px] tracking-[0.45em] text-white/50 mb-4">
+          {year}
         </p>
 
-        <p className="text-[15px] leading-[2.1] opacity-80 fade-up">
-          直感は、論理よりも速い。
-          <br /><br />
-          数式は直感の翻訳だった。
-          <br /><br />
-          観測が、世界を決める。
-        </p>
-
+        <h2 className="text-[22px] tracking-[0.18em] font-light leading-[1.4]">
+          {title}
+        </h2>
       </div>
     </section>
+  );
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full bg-black text-white overflow-hidden"
+    >
+
+      {/* ================= HERO ================= */}
+      <section className="es-sp-section relative min-h-[100svh] flex items-center px-[6vw] overflow-hidden">
+
+        <img
+          src="/images/einstein/hero1.png"
+          className="absolute inset-0 w-full h-full object-cover object-[25%_50%] opacity-50"
+          alt=""
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/85 to-black z-10" />
+
+        <div className="relative z-20 w-full text-right fade-up">
+
+          <h1
+            ref={heroTitleRef}
+            className="
+              text-[32px]
+              tracking-[0.28em]
+              font-light
+              leading-[1.3]
+            "
+          >
+            時空の設計者
+          </h1>
+
+          <p
+            className="
+              mt-6
+              text-[10px]
+              tracking-[0.55em]
+              text-white/40
+            "
+          >
+            ALBERT EINSTEIN
+          </p>
+
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <TimelineSection
+        year="1879"
+        title="コンパス — 世界は見えない力でできている"
+        image="/images/einstein/1879.png"
+      />
+
+      <TimelineSection
+        year="1896"
+        title="チューリッヒ — 天才ではない。ただ疑う"
+        image="/images/einstein/1896.png"
+      />
+
+      <TimelineSection
+        year="1902"
+        title="特許庁 — 埋もれた時間"
+        image="/images/einstein/1902.png"
+      />
+
+      <TimelineSection
+        year="1905"
+        title="奇跡の年 — 時間が壊れる"
+        image="/images/einstein/1905.png"
+      />
+
+      <TimelineSection
+        year="1915"
+        title="一般相対性理論 — 重力が曲がる"
+        image="/images/einstein/1915.png"
+      />
+
+      <TimelineSection
+        year="1933"
+        title="亡命 — 世界が狂う"
+        image="/images/einstein/1933.png"
+      />
+
+      <TimelineSection
+        year="1955"
+        title="静かな終わり — 時間を壊した男の最期"
+        image="/images/einstein/1955.png"
+      />
+
+      <div className="h-[12vh] bg-gradient-to-b from-transparent to-black" />
+
+    </div>
   );
 }

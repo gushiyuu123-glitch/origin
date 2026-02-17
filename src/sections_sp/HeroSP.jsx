@@ -12,68 +12,71 @@ export default function HeroSP() {
   const logoRef = useRef(null);
   const glowRef = useRef(null);
   const silhouetteRef = useRef(null);
+
+  const breatheTweenRef = useRef(null);
   const navigate = useNavigate();
 
   /* ==================================================
-     GSAP 起動
+     GSAP 起動（静けさ重視）
   ================================================== */
   useEffect(() => {
     const ctx = gsap.context(() => {
 
+      // 人物フェード
       gsap.fromTo(
         ".sp-item",
-        { opacity: 0, y: 28 },
+        { opacity: 0, y: 24 },
         {
-          opacity: 1,
+          opacity: 0.8,
           y: 0,
           duration: 1.6,
-          stagger: 0.22,
+          stagger: 0.18,
           ease: "power3.out",
         }
       );
 
-      gsap.to(axisRef.current, {
-        opacity: 0.7,
-        duration: 6,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+      // 軸 × 光膜 同期呼吸
+      const tl = gsap.timeline({ repeat: -1, yoyo: true });
 
+      tl.to(axisRef.current, {
+        opacity: 0.75,
+        duration: 6,
+        ease: "sine.inOut",
+      }, 0);
+
+      tl.to(glowRef.current, {
+        opacity: 0.65,
+        duration: 6,
+        ease: "sine.inOut",
+      }, 0);
+
+      // タイトル
       const chars = titleRef.current.querySelectorAll(".char");
 
-      gsap.set(chars, { opacity: 0, scale: 0.85, y: 30 });
+      gsap.set(chars, { opacity: 0, y: 24 });
       gsap.set(logoRef.current, { opacity: 0, scale: 0.96 });
 
-      const tl = gsap.timeline({ delay: 0.8 });
+      const intro = gsap.timeline({ delay: 0.6 });
 
-      tl.to(chars, {
+      intro.to(chars, {
         y: 0,
-        scale: 1,
         opacity: 1,
-        duration: 1.8,
+        duration: 1.6,
         stagger: 0.06,
-        ease: "power4.out",
+        ease: "power3.out",
       });
 
-      tl.to(logoRef.current, {
-        opacity: 0.72,
-        scale: 1,
-        duration: 1.4,
-        ease: "power2.out",
-      }, "-=1.2");
-
-      gsap.to(logoRef.current, {
-        scale: 1.015,
-        duration: 2.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      gsap.to(glowRef.current, {
+      intro.to(logoRef.current, {
         opacity: 0.7,
-        duration: 3.2,
+        scale: 1,
+        duration: 1.2,
+        ease: "power2.out",
+      }, "-=1");
+
+      // ロゴ微呼吸（弱）
+      gsap.to(logoRef.current, {
+        scale: 1.01,
+        duration: 3.6,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
@@ -85,22 +88,39 @@ export default function HeroSP() {
   }, []);
 
   /* ==================================================
-     シルエット制御（SP弱演出）
+     シルエット（SPは軽く）
   ================================================== */
 
   const showSilhouette = (image) => {
-    silhouetteRef.current.src = image;
+    const el = silhouetteRef.current;
+    if (!el) return;
 
-    gsap.fromTo(
-      silhouetteRef.current,
-      { opacity: 0, scale: 0.96 },
-      {
-        opacity: 0.1,   // ← SPはかなり薄く
-        scale: 1,
-        duration: 0.8,
-        ease: "power2.out",
+    if (breatheTweenRef.current) {
+      breatheTweenRef.current.kill();
+      breatheTweenRef.current = null;
+    }
+
+    el.src = image;
+
+    gsap.killTweensOf(el);
+
+    gsap.set(el, { opacity: 0, scale: 0.98 });
+
+    gsap.to(el, {
+      opacity: 0.12, // ← SPは超薄
+      scale: 1,
+      duration: 0.7,
+      ease: "power2.out",
+      onComplete: () => {
+        breatheTweenRef.current = gsap.to(el, {
+          opacity: 0.14,
+          duration: 5.5,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut",
+        });
       }
-    );
+    });
 
     gsap.to(axisRef.current, {
       opacity: 1,
@@ -109,13 +129,22 @@ export default function HeroSP() {
   };
 
   const hideSilhouette = () => {
-    gsap.to(silhouetteRef.current, {
+    const el = silhouetteRef.current;
+    if (!el) return;
+
+    if (breatheTweenRef.current) {
+      breatheTweenRef.current.kill();
+      breatheTweenRef.current = null;
+    }
+
+    gsap.to(el, {
       opacity: 0,
       duration: 0.5,
+      ease: "power2.out",
     });
 
     gsap.to(axisRef.current, {
-      opacity: 0.7,
+      opacity: 0.75,
       duration: 0.5,
     });
   };
@@ -131,9 +160,9 @@ export default function HeroSP() {
 
     tl.to(".sp-item", {
       opacity: 0,
-      y: -12,
+      y: -10,
       duration: 0.3,
-      stagger: 0.05,
+      stagger: 0.04,
       ease: "power2.in",
     }).to(containerRef.current, {
       opacity: 0,
@@ -154,6 +183,7 @@ export default function HeroSP() {
       ref={containerRef}
       className="relative w-full min-h-screen bg-[#060606] text-white overflow-hidden flex flex-col items-center justify-center px-[8vw]"
     >
+      {/* 背景 */}
       <img
         src="/origin-bg.png"
         alt=""
@@ -171,32 +201,29 @@ export default function HeroSP() {
           alt=""
           className="w-[120vw] opacity-0"
           style={{
-            filter: "blur(6px) brightness(1.15)",
+            filter: "blur(6px) brightness(1.1)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
+            maskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
           }}
         />
       </div>
 
+      {/* 軸 */}
       <div
         ref={axisRef}
         className="absolute left-1/2 top-0 h-full w-[1px]"
         style={{
           background:
             "linear-gradient(to bottom, transparent, rgba(255,255,255,0.45), transparent)",
-          opacity: 0.5,
+          opacity: 0.6,
         }}
       />
 
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
-
       {/* タイトル */}
-      <div className="relative z-10 text-center mt-14 mb-20">
+      <div className="relative z-10 text-center mt-12 mb-16">
         <h1
           ref={titleRef}
-          className="text-[42px] tracking-[0.32em] font-light mb-6"
-          style={{
-            textShadow:
-              "0 0 35px rgba(255,255,255,0.45), 0 0 110px rgba(255,230,200,0.10)",
-          }}
+          className="text-[40px] tracking-[0.32em] font-light mb-6"
         >
           {"創造の源".split("").map((char, i) => (
             <span key={i} className="char inline-block">
@@ -205,15 +232,15 @@ export default function HeroSP() {
           ))}
         </h1>
 
-        <div className="relative flex justify-center items-center mt-4 select-none">
+        <div className="relative flex justify-center items-center mt-4">
           <div
             ref={glowRef}
-            className="absolute w-[240px] h-[240px] rounded-full"
+            className="absolute w-[200px] h-[200px] rounded-full"
             style={{
               background:
                 "radial-gradient(circle, rgba(255,215,170,0.06) 0%, rgba(0,0,0,0) 65%)",
               filter: "blur(45px)",
-              opacity: 0.5,
+              opacity: 0.55,
             }}
           />
 
@@ -221,47 +248,30 @@ export default function HeroSP() {
             ref={logoRef}
             src="/images/origin-logo.png"
             alt="ORIGIN"
-            className="relative w-[140px]"
-            style={{
-              opacity: 0.75,
-              filter: `
-                saturate(0.85)
-                brightness(0.92)
-                drop-shadow(0 0 8px rgba(255,215,170,0.10))
-              `,
-            }}
+            className="relative w-[130px]"
           />
         </div>
       </div>
 
       {/* 人物 */}
-      <div className="relative z-10 flex flex-col gap-14 w-full max-w-[320px]">
+      <div className="relative z-10 flex flex-col gap-12 w-full max-w-[320px]">
         {names.map((item, i) => (
           <div
             key={i}
             onTouchStart={() => showSilhouette(item.image)}
             onTouchEnd={hideSilhouette}
             onClick={() => handleEnter(item.route)}
-            className="sp-item flex flex-col items-center cursor-pointer select-none transition-all duration-300 active:scale-[0.96]"
+            className="sp-item flex flex-col items-center cursor-pointer active:scale-[0.96]"
           >
-            <span
-              className="text-[16px] tracking-[0.45em] font-light"
-              style={{
-                opacity: 0.82,
-                textShadow: "0 0 30px rgba(255,255,255,0.28)",
-              }}
-            >
+            <span className="text-[15px] tracking-[0.45em] font-light">
               {item.text}
             </span>
 
-            <span
-              className="mt-3 text-[11px] tracking-[0.7em]"
-              style={{ opacity: 0.95 }}
-            >
+            <span className="mt-3 text-[11px] tracking-[0.7em] opacity-90">
               {item.sub}
             </span>
 
-            <div className="mt-6 w-[70px] h-px bg-white/35" />
+            <div className="mt-5 w-[60px] h-px bg-white/35" />
           </div>
         ))}
       </div>

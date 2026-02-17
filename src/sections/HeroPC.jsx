@@ -10,6 +10,14 @@ export default function HeroPC() {
   const titleRef = useRef(null);
   const logoRef = useRef(null);
   const silhouetteRef = useRef(null);
+
+  const breatheTweenRef = useRef(null);
+  const isHoveringRef = useRef(false);
+
+  // quickTo（追従の質UP）
+  const followXRef = useRef(null);
+  const followYRef = useRef(null);
+
   const navigate = useNavigate();
 
   /* =========================
@@ -17,96 +25,112 @@ export default function HeroPC() {
   ========================== */
   useEffect(() => {
     const ctx = gsap.context(() => {
-
-      /* 軸呼吸 */
-      gsap.to(axisGlowRef.current, {
-        opacity: 0.7,
-        duration: 6,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      /* 名前出現 */
-      gsap.fromTo(
-        namesRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 0.6,
-          y: 0,
-          duration: 2.5,
-          stagger: 0.4,
-          ease: "power3.out",
-        }
-      );
-
-      namesRef.current.forEach((el) => {
-        gsap.to(el, {
-          y: "+=10",
-          duration: 18 + Math.random() * 6,
+      // 軸呼吸
+      if (axisGlowRef.current) {
+        gsap.to(axisGlowRef.current, {
+          opacity: 0.7,
+          duration: 6,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
         });
-      });
+      }
 
-      /* タイトル */
-      const chars = titleRef.current.querySelectorAll(".char");
+      // 名前出現
+      if (namesRef.current?.length) {
+        gsap.fromTo(
+          namesRef.current,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 0.6,
+            y: 0,
+            duration: 2.5,
+            stagger: 0.4,
+            ease: "power3.out",
+          }
+        );
 
-      gsap.set(chars, { opacity: 0, y: 40, scale: 0.9 });
+        // ゆらぎ
+        namesRef.current.forEach((el) => {
+          if (!el) return;
+          gsap.to(el, {
+            y: "+=10",
+            duration: 18 + Math.random() * 6,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        });
+      }
 
-      gsap.to(chars, {
-        y: 0,
-        scale: 1,
-        opacity: 1,
-        duration: 2.6,
-        delay: 1.1,
-        stagger: 0.07,
-        ease: "power4.out",
-      });
+      // タイトル
+      if (titleRef.current) {
+        const chars = titleRef.current.querySelectorAll(".char");
+        gsap.set(chars, { opacity: 0, y: 40, scale: 0.9 });
 
-      /* ロゴ刻印 */
-      gsap.fromTo(
-        logoRef.current,
-        { opacity: 0, scale: 0.95 },
-        {
-          opacity: 0.65,
+        gsap.to(chars, {
+          y: 0,
           scale: 1,
-          duration: 2,
-          delay: 2,
-          ease: "power2.out",
-        }
-      );
+          opacity: 1,
+          duration: 2.6,
+          delay: 1.1,
+          stagger: 0.07,
+          ease: "power4.out",
+        });
+      }
 
-      gsap.to(logoRef.current, {
-        opacity: 0.72,
-        duration: 5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+      // ロゴ
+      if (logoRef.current) {
+        gsap.fromTo(
+          logoRef.current,
+          { opacity: 0, scale: 0.95 },
+          {
+            opacity: 0.65,
+            scale: 1,
+            duration: 2,
+            delay: 2,
+            ease: "power2.out",
+          }
+        );
 
+        gsap.to(logoRef.current, {
+          opacity: 0.72,
+          duration: 5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }
+
+      // シルエット初期化（残留防止）
+      if (silhouetteRef.current) {
+        gsap.set(silhouetteRef.current, { x: 0, y: 0 });
+      }
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   /* =========================
-     マウス追従（神の存在）
+     マウス追従（hover時のみ）
+     - gsap.to連打をやめて quickTo
   ========================== */
   useEffect(() => {
+    const el = silhouetteRef.current;
+    if (!el) return;
+
+    followXRef.current = gsap.quickTo(el, "x", { duration: 0.9, ease: "power3.out" });
+    followYRef.current = gsap.quickTo(el, "y", { duration: 0.9, ease: "power3.out" });
+
     const move = (e) => {
-      if (!silhouetteRef.current) return;
+      if (!isHoveringRef.current) return;
 
       const x = (e.clientX - window.innerWidth / 2) / window.innerWidth;
       const y = (e.clientY - window.innerHeight / 2) / window.innerHeight;
 
-      gsap.to(silhouetteRef.current, {
-        x: x * 40,
-        y: y * 40,
-        duration: 2,
-        ease: "power3.out",
-      });
+      // 40→34（上品寄せ）
+      followXRef.current?.(x * 34);
+      followYRef.current?.(y * 34);
     };
 
     window.addEventListener("mousemove", move);
@@ -114,50 +138,86 @@ export default function HeroPC() {
   }, []);
 
   /* =========================
-     Hover 神出現（溶解版）
+     Hover 神顕現（一本化）
   ========================== */
   const showSilhouette = (image) => {
     const el = silhouetteRef.current;
     if (!el) return;
 
-    gsap.to(el, {
-      opacity: 0,
-      duration: 0.25,
-      onComplete: () => {
-        el.src = image;
+    isHoveringRef.current = true;
 
-        gsap.fromTo(
-          el,
-          { opacity: 0, scale: 0.94 },
-          {
-            opacity: 0.10,
-            scale: 1,
-            duration: 1.2,
-            ease: "power3.out",
-          }
-        );
+    // 既存呼吸停止
+    if (breatheTweenRef.current) {
+      breatheTweenRef.current.kill();
+      breatheTweenRef.current = null;
+    }
+
+    // いったん全Tween殺す（ブレ防止）
+    gsap.killTweensOf(el);
+
+    // src差し替え
+    el.src = image;
+
+    // 出現（速すぎを抑える）
+    gsap.set(el, { opacity: 0, scale: 0.992 });
+
+    gsap.to(el, {
+      opacity: 0.20,
+      scale: 1,
+      duration: 0.75,
+      ease: "power2.out",
+      onComplete: () => {
+        // 呼吸（hover中のみ）※ここだけでOK
+        breatheTweenRef.current = gsap.to(el, {
+          opacity: 0.235,
+          duration: 6.2,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut",
+        });
       },
     });
 
-    gsap.to(axisGlowRef.current, {
-      opacity: 1,
-      duration: 0.6,
-      ease: "power2.out",
-    });
+    // 軸強調
+    if (axisGlowRef.current) {
+      gsap.to(axisGlowRef.current, {
+        opacity: 1,
+        duration: 0.7,
+        ease: "power2.out",
+      });
+    }
   };
 
   const hideSilhouette = () => {
-    gsap.to(silhouetteRef.current, {
+    const el = silhouetteRef.current;
+    if (!el) return;
+
+    isHoveringRef.current = false;
+
+    if (breatheTweenRef.current) {
+      breatheTweenRef.current.kill();
+      breatheTweenRef.current = null;
+    }
+
+    gsap.killTweensOf(el);
+
+    gsap.to(el, {
       opacity: 0,
-      duration: 0.6,
+      duration: 0.55,
       ease: "power2.out",
+      onComplete: () => {
+        // 追従残留を消す
+        gsap.set(el, { x: 0, y: 0 });
+      },
     });
 
-    gsap.to(axisGlowRef.current, {
-      opacity: 0.7,
-      duration: 0.6,
-      ease: "power2.out",
-    });
+    if (axisGlowRef.current) {
+      gsap.to(axisGlowRef.current, {
+        opacity: 0.7,
+        duration: 0.55,
+        ease: "power2.out",
+      });
+    }
   };
 
   /* =========================
@@ -220,9 +280,7 @@ export default function HeroPC() {
         src="/origin-bg.png"
         alt=""
         className="absolute inset-0 w-full h-full object-cover opacity-45"
-        style={{
-          filter: "blur(0.4px) brightness(0.75) contrast(1.15)",
-        }}
+        style={{ filter: "blur(0.4px) brightness(0.75) contrast(1.15)" }}
       />
 
       {/* 神域光膜 */}
@@ -243,11 +301,13 @@ export default function HeroPC() {
           className="w-[1400px] opacity-0"
           style={{
             filter: "blur(6px) brightness(1.15) contrast(1.05)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
+            maskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
           }}
         />
       </div>
 
-      {/* 軸芯 */}
+      {/* 軸 */}
       <div
         ref={axisCoreRef}
         className="absolute left-1/2 top-0 h-full w-[1px]"
@@ -258,7 +318,6 @@ export default function HeroPC() {
         }}
       />
 
-      {/* 軸滲み */}
       <div
         ref={axisGlowRef}
         className="absolute left-1/2 top-0 h-full w-[3px]"
@@ -270,7 +329,7 @@ export default function HeroPC() {
         }}
       />
 
-      {/* 中央領域 */}
+      {/* 中央 */}
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
         <h1
           ref={titleRef}
@@ -287,28 +346,7 @@ export default function HeroPC() {
           ))}
         </h1>
 
-        <div className="relative flex justify-center items-center -translate-y-[3vh]">
-          <div
-            className="absolute w-[480px] h-[480px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(255,220,170,0.08) 0%, rgba(0,0,0,0) 65%)",
-              filter: "blur(70px)",
-              opacity: 0.5,
-            }}
-          />
-
-          <img
-            ref={logoRef}
-            src="/images/origin-logo.png"
-            alt="ORIGIN"
-            className="relative w-[240px] opacity-0"
-            style={{
-              filter:
-                "drop-shadow(0 0 12px rgba(255,215,170,0.14))",
-            }}
-          />
-        </div>
+        <img ref={logoRef} src="/images/origin-logo.png" alt="ORIGIN" className="w-[240px] opacity-0" />
       </div>
 
       {/* 周囲碑文 */}

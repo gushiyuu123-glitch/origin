@@ -1,115 +1,229 @@
 // src/rooms/EinsteinRoom.jsx
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function EinsteinRoom() {
+  const containerRef = useRef(null);
+  const heroRef = useRef(null);
+  const heroTitleRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      ".fade-up",
-      { opacity: 0, y: 60 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.6,
-        ease: "power3.out",
-        stagger: 0.12,
+    const ctx = gsap.context(() => {
+
+      /* ================================
+         HERO 微小時間歪み（超上品）
+      ================================= */
+      if (heroRef.current && heroTitleRef.current) {
+
+        gsap.to(heroRef.current, {
+          scale: 1.006,
+          duration: 8,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+
+        gsap.to(heroTitleRef.current, {
+          letterSpacing: "0.38em",
+          duration: 6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+
+        gsap.to(heroTitleRef.current, {
+          filter: "blur(0.2px)",
+          duration: 7,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
       }
-    );
+
+      /* ================================
+         セクション制御
+      ================================= */
+
+      const sections = gsap.utils.toArray(".es-section");
+
+      sections.forEach((sec) => {
+        const target = sec.querySelector(".fade-up");
+        const bg = sec.querySelector(".es-bg");
+
+        if (target) {
+          gsap.set(target, { opacity: 0, y: 40 });
+
+          gsap.to(target, {
+            opacity: 1,
+            y: 0,
+            duration: 1.6,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sec,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        }
+
+        if (bg) {
+          gsap.to(bg, {
+            y: -80,
+            scale: 1.05,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sec,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.2,
+            },
+          });
+        }
+      });
+
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
-  const Section = ({ image, title, children }) => (
-    <section className="relative min-h-screen flex items-center px-[8vw] overflow-hidden">
+  /* ================================
+     Timeline Section Component
+  ================================= */
 
-      {/* 背景画像 */}
-      <div className="absolute inset-0">
-        <img
-          src={image}
-          alt=""
-          className="w-full h-full object-cover opacity-[0.28]"
-        />
-        <div className="absolute inset-0 bg-black/80" />
-      </div>
+  const TimelineSection = ({ year, title, image }) => (
+    <section className="es-section relative min-h-screen flex items-center justify-center text-center px-8 overflow-hidden">
 
-      {/* テキスト */}
-      <div className="relative z-10 max-w-[780px] mx-auto">
-        <h2 className="text-[28px] md:text-[40px] tracking-[0.2em] mb-12 fade-up">
+      {/* Background */}
+      <img
+        src={image}
+        className="es-bg absolute inset-0 w-full h-full object-cover opacity-40"
+        alt=""
+      />
+
+      {/* Dark layer */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 to-black/95 z-10" />
+
+      {/* Content */}
+      <div className="relative z-20 max-w-[780px] fade-up">
+        <p className="text-[12px] tracking-[0.5em] text-white/50 font-light mb-6">
+          {year}
+        </p>
+
+        <h2 className="text-[clamp(34px,4vw,56px)] tracking-[0.24em] font-light leading-[1.3]">
           {title}
         </h2>
-        <div className="text-[18px] leading-[2.3] opacity-85 space-y-8 fade-up">
-          {children}
-        </div>
       </div>
     </section>
   );
 
   return (
-    <div className="bg-black text-white">
+    <div
+      ref={containerRef}
+      className="relative w-full bg-black text-white overflow-hidden"
+    >
 
-      {/* HERO */}
-      <section className="relative min-h-screen flex items-center px-[8vw] overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/images/einstein-hero.png"
-            alt=""
-            className="w-full h-full object-cover opacity-[0.35]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/85 to-black" />
-        </div>
+      {/* ================= HERO ================= */}
+      <section
+        ref={heroRef}
+        className="es-section relative min-h-screen flex items-center justify-center text-center px-8 overflow-hidden"
+      >
+       <img
+  src="/images/einstein/hero1.png"
+  className="
+    es-bg
+    absolute inset-0
+    w-full h-full
+    object-cover
+    object-[10%_50%]   // ← 横を左寄せ
+    opacity-45
+  "
+  alt=""
+/>
 
-        <div className="relative z-10 max-w-[900px] mx-auto">
-          <h1 className="text-[52px] md:text-[80px] tracking-[0.22em] font-light mb-12 fade-up">
-            時空の設計者
-          </h1>
-          <p className="text-[20px] leading-[2.4] opacity-85 fade-up">
-            世界は、最初から歪んでいた。
-          </p>
-        </div>
+
+<div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black z-10" />
+
+<div className="relative z-20 w-full flex justify-end px-[8vw]">
+
+  <div className="text-right max-w-[900px]">
+
+    <h1
+      ref={heroTitleRef}
+      className="
+        text-[clamp(52px,6vw,92px)]
+        tracking-[0.35em]
+        font-light
+        leading-[1.2]
+      "
+    >
+      時空の設計者
+    </h1>
+
+    <p
+      className="
+        mt-8
+        text-center md:text-[14px]
+        tracking-[0.6em]
+        text-white/40
+        font-light
+        fade-up 
+      "
+    >
+      ALBERT EINSTEIN
+    </p>
+
+  </div>
+
+</div>
+
       </section>
 
-      {/* 静かな少年 */}
-      <Section image="/images/einstein-school.png" title="静かな少年">
-        <p>教室の後ろに、静かな少年がいる。</p>
-        <p>成績は悪くない。だが、並外れているわけでもない。</p>
-        <p>暗記はできる。だが、意味を感じない。</p>
-        <p>「なぜそうなるのか」その答えがなければ、納得しなかった。</p>
-      </Section>
+      <TimelineSection
+        year="1879"
+        title="コンパス — 世界は見えない力でできている"
+        image="/images/einstein/1879.png"
+      />
 
-      {/* 方位磁針 */}
-      <Section image="/images/einstein-compass.png" title="見えない力">
-        <p>五歳のとき、父が渡した方位磁針。</p>
-        <p>何も触れていないのに、針は北を指す。</p>
-        <p>見えない力が、世界を動かしている。</p>
-        <p>その違和感は、消えなかった。</p>
-      </Section>
+      <TimelineSection
+        year="1896"
+        title="チューリッヒ — 天才ではない。ただ疑う"
+        image="/images/einstein/1896.png"
+      />
 
-      {/* 特許庁 */}
-      <Section image="/images/einstein-patent.png" title="埋もれた時間">
-        <p>研究職に就けず、特許庁で働く。</p>
-        <p>書類を読み、整合性を確認する日々。</p>
-        <p>華やかさはない。</p>
-        <p>だが、頭の中では宇宙が動いていた。</p>
-      </Section>
+      <TimelineSection
+        year="1902"
+        title="特許庁 — 埋もれた時間"
+        image="/images/einstein/1902.png"
+      />
 
-      {/* 思考実験 */}
-      <Section image="/images/einstein-light.png" title="光を追う">
-        <p>もし光と並んで走ったら、何が見えるのか。</p>
-        <p>多くは忘れる。</p>
-        <p>彼は忘れなかった。</p>
-      </Section>
+      <TimelineSection
+        year="1905"
+        title="奇跡の年 — 時間が壊れる"
+        image="/images/einstein/1905.png"
+      />
 
-      {/* 1905 */}
-      <Section image="/images/einstein-1905.png" title="1905">
-        <p>時間は絶対ではない。</p>
-        <p>空間は曲がる。</p>
-        <p>世界は静かに書き換えられた。</p>
-      </Section>
+      <TimelineSection
+        year="1915"
+        title="一般相対性理論 — 重力が曲がる"
+        image="/images/einstein/1915.png"
+      />
 
-      {/* 本質 */}
-      <Section image="/images/einstein-final.png" title="直感">
-        <p>直感とは、突然のひらめきではない。</p>
-        <p>長い違和感の蓄積が、ある瞬間、形になることだ。</p>
-      </Section>
+      <TimelineSection
+        year="1933"
+        title="亡命 — 世界が狂う"
+        image="/images/einstein/1933.png"
+      />
+
+      <TimelineSection
+        year="1955"
+        title="静かな終わり — 時間を壊した男の最期"
+        image="/images/einstein/1955.png"
+      />
+
+      <div className="h-[16vh] bg-gradient-to-b from-transparent to-black" />
 
     </div>
   );
