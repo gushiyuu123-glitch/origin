@@ -145,24 +145,17 @@ scale: 1.002,
 
 <div className="relative z-30 max-w-[92vw] ld-fade py-[20vh]">
 
-  {/* upper meta */}
-  <p className="text-[10px] tracking-[0.38em] text-white/65 font-light mb-6">
-    STRUCTURE / OBSESSION / <span className="text-[#d4af37]/90">HUMAN</span>
-  </p>
+<p className="text-[12px] tracking-[0.6em] text-white/50 font-light mb-6">
+  ORIGIN 第二章
+</p>
 
-  {/* 🔥 追加タイトル（思想） */}
-  <p className="text-[11px] tracking-[0.55em] text-white/55 font-light mb-6">
-    構造の解体者。
-  </p>
+<h2 className="text-[clamp(28px,4vw,44px)] tracking-[0.2em] font-light">
+  構造の解体者
+</h2>
 
-  {/* title */}
-  <h1 className="text-[clamp(36px,9vw,54px)] tracking-[0.16em] font-light leading-[1.1] text-[#f4f1e9]">
-    Leonardo
-  </h1>
-
-  <p className="mt-3 text-[10px] tracking-[0.45em] text-[#d4af37]/80 font-light">
-    レオナルド・ダ・ヴィンチ
-  </p>
+<p className="mt-4 text-[12px] tracking-[0.55em] text-white/40 font-light">
+  レオナルド・ダ・ヴィンチ
+</p>
 
     <div className="my-10 w-[70px] h-px bg-[#d4af37]/45 mx-auto ld-line" />
 

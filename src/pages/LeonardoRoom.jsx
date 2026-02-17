@@ -186,21 +186,20 @@ export default function LeonardoRoom() {
 
   <div className="relative z-30 max-w-[980px] ld-fade py-28">
 
-    <p className="text-[11px] tracking-[0.55em] text-white/55 font-light mb-6">
-      STRUCTURE / OBSESSION / <span className="text-[#d4af37]/85">HUMAN</span>
-    </p>
-<p className="text-[12px] tracking-[0.7em] text-white/45 font-light mb-8">
-  構造の解体者。
+<p className="text-[12px] tracking-[0.6em] text-white/50 font-light mb-6">
+  ORIGIN 第二章
 </p>
 
-<h1 className="text-[clamp(52px,6vw,106px)] tracking-[0.24em] font-light leading-[1.05] text-[#f4f1e9]">
-  Leonardo
-</h1>
+<h2 className="text-[clamp(28px,4vw,44px)] tracking-[0.2em] font-light">
+  構造の解体者
+</h2>
+
+<p className="mt-4 text-[12px] tracking-[0.55em] text-white/40 font-light">
+  レオナルド・ダ・ヴィンチ
+</p>
 
 
-    <p className="mt-4 text-[12px] tracking-[0.62em] text-[#d4af37]/75 font-light">
-      レオナルド・ダ・ヴィンチ
-    </p>
+
 
     <div className="my-16 w-[130px] h-px bg-[#d4af37]/35 mx-auto" />
 

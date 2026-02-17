@@ -108,39 +108,68 @@ export default function VangoghRoom() {
       ref={containerRef}
       className="vangogh-room relative w-full bg-[#0f1016] text-white overflow-hidden"
     >
-
 {/* ================= HERO ================= */}
-<section className="vg-section relative min-h-screen flex items-center justify-center text-center px-8 overflow-hidden">
+<section className="
+  vg-section
+  relative
+  min-h-[110vh]
+  flex
+  items-start
+  justify-center
+  text-center
+  px-8
+  pt-[22vh]
+  pb-[18vh]
+  overflow-hidden
+">
 
   {/* Background */}
   <img
     src="/images/vg-selfportrait.png"
-    className="vg-bg absolute inset-0 w-full h-full object-cover object-[50%_35%] opacity-35"
+    className="
+      vg-bg
+      absolute inset-0
+      w-full h-full
+      object-cover
+      object-[50%_25%]
+      opacity-35
+    "
     alt="Vincent van Gogh self portrait"
   />
 
   {/* Vignette */}
-  <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/65 via-black/45 to-black/80" />
+  <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/45 to-black/85" />
 
-  <div className="relative z-30 max-w-[760px] fade-up">
+  <div className="relative z-30 max-w-[820px] fade-up">
 
-    {/* THEME (冠) */}
+    {/* CHAPTER */}
     <p className="
-      text-[11px]
-      tracking-[0.5em]
-      text-white/55
+      text-[10px]
+      tracking-[0.65em]
+      text-white/40
       font-light
-      mb-6
+      mb-3
     ">
-      衝動の純度。
+      ORIGIN 第一章
+    </p>
+
+    {/* 🔥 追加ライン */}
+    <p className="
+      text-[12px]
+      tracking-[0.55em]
+      text-white/65
+      font-light
+      mb-10
+    ">
+      色彩の狂人
     </p>
 
     {/* MAIN NAME */}
     <h1 className="
-      text-[clamp(48px,6vw,96px)]
-      tracking-[0.18em]
+      text-[clamp(52px,6vw,104px)]
+      tracking-[0.2em]
       font-light
-      leading-[1.08]
+      leading-[1.06]
     ">
       Van&nbsp;Gogh
     </h1>
@@ -157,11 +186,11 @@ export default function VangoghRoom() {
     </p>
 
     {/* Divider */}
-    <div className="mt-12 mb-12 w-[70px] h-px bg-white/25 mx-auto" />
+    <div className="mt-14 mb-14 w-[64px] h-px bg-white/25 mx-auto" />
 
     {/* Body */}
     <p className="
-      leading-[2.25]
+      leading-[2.2]
       text-white/85
       text-[17px]
       md:text-[19px]
@@ -169,12 +198,10 @@ export default function VangoghRoom() {
     ">
       1853年、オランダに生まれる。<br /><br />
 
-      画家になる前、<br />
-      彼は画商であり、聖職志願者であり、<br />
+      画家になる前、彼は画商であり、聖職志願者であり、
       何度も道を変えた人間だった。<br /><br />
 
-      絵を描き始めたのは27歳。<br /><br />
-
+      絵を描き始めたのは27歳。<br />
       遅すぎると言われた出発。<br /><br />
 
       だが――<br /><br />
@@ -185,6 +212,7 @@ export default function VangoghRoom() {
 
   </div>
 </section>
+
 
 {/* ================= 以降のセクション ================= */}
 {/* 文章のみ強化済み（構造そのまま） */}

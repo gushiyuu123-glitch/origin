@@ -105,47 +105,113 @@ export default function VangoghRoomSP() {
       ref={containerRef}
       className="vangogh-room relative w-full bg-[#0f1016] text-white overflow-hidden"
     >
-      {/* ================= HERO ================= */}
-      <section className="vg-section relative min-h-[100svh] flex items-center justify-center text-center px-6">
-        <img
-          src="/images/vg-selfportrait.png"
-          className="vg-bg absolute inset-0 w-full h-full object-cover object-[50%_30%] opacity-45"
-          alt=""
-        />
+{/* ================= HERO ================= */}
+<section
+  className="
+    vg-section
+    relative
+    min-h-[105svh]
+    flex
+    items-start
+    justify-center
+    text-center
+    px-6
+    pt-[18vh]
+    pb-[14vh]
+    overflow-hidden
+  "
+>
 
-        <div className="vg-vignette absolute inset-0 z-10 bg-gradient-to-b from-black/65 via-black/45 to-black/85" />
+  {/* Background */}
+  <img
+    src="/images/vg-selfportrait.png"
+    className="
+      vg-bg
+      absolute inset-0
+      w-full h-full
+      object-cover
+      object-[50%_22%]
+      opacity-42
+    "
+    alt=""
+  />
 
-<div className="relative z-30 max-w-[92vw] fade-up">
+  {/* Vignette */}
+  <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/45 to-black/90" />
 
-  {/* 🔥 思想ワンライン */}
-  <p className="text-[11px] tracking-[0.55em] text-white/55 font-light mb-6">
-    色彩の狂人。
-  </p>
+  <div className="relative z-30 max-w-[92vw] fade-up">
 
-  <h1 className="text-[36px] tracking-[0.18em] font-light">
-    Van&nbsp;Gogh
-  </h1>
+    {/* CHAPTER */}
+    <p className="
+      text-[10px]
+      tracking-[0.65em]
+      text-white/45
+      font-light
+      mb-3
+    ">
+      ORIGIN 第一章
+    </p>
 
-  <h2 className="mt-5 text-[11px] tracking-[0.45em] text-white/50 font-light">
-    ヴィンセント・ヴァン・ゴッホ
-  </h2>
+    {/* THEME */}
+    <p className="
+      text-[11px]
+      tracking-[0.55em]
+      text-white/65
+      font-light
+      mb-5
+    ">
+      色彩の狂人。
+    </p>
+
+    {/* MAIN NAME */}
+    <h1 className="
+      text-[38px]
+      tracking-[0.2em]
+      font-light
+      leading-[1.08]
+    ">
+      Van&nbsp;Gogh
+    </h1>
+
+    {/* JAPANESE */}
+    <h2 className="
+      mt-4
+      text-[11px]
+      tracking-[0.5em]
+      text-white/50
+      font-light
+    ">
+      ヴィンセント・ヴァン・ゴッホ
+    </h2>
+
+    {/* DIVIDER */}
+    <div className="mt-8 mb-10 w-[56px] h-px bg-white/20 mx-auto" />
+
+    {/* BODY */}
+    <p className="
+      leading-[2.2]
+      text-white/90
+      text-[15px]
+      font-light
+    ">
+      1853年、オランダに生まれる。<br /><br />
+
+      画家になる前、彼は画商であり、<br />
+      聖職志願者であり、何度も道を変えた。<br /><br />
+
+      絵を描き始めたのは27歳。<br />
+      遅すぎると言われた出発だった。<br /><br />
+
+      だが――<br /><br />
+
+      色は、すでに内側で燃えていた。<br />
+      衝動は、まだ名を持っていなかった。
+    </p>
+
+  </div>
+</section>
 
 
-          <div className="mt-10 mb-12 w-[60px] h-px bg-white/20 mx-auto" />
-
-          <p className="leading-[2.65] text-white/88 text-[15px] font-light">
-            1853年、オランダに生まれる。<br /><br />
-            画家になる前、<br />
-            彼は画商であり、聖職志願者であり、<br />
-            何度も道を変えた人間だった。<br /><br />
-            絵を描き始めたのは27歳。<br /><br />
-            遅すぎると言われた出発だった。<br /><br />
-            だが――<br /><br />
-            色は、すでに内側で燃えていた。<br /><br />
-衝動は、まだ名を持っていなかった。
-          </p>
-        </div>
-      </section>
 
       {/* ================= 以降のセクション ================= */}
       {/* 文章のみ強化済み（構造そのまま） */}
