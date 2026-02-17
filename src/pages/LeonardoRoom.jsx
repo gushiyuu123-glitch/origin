@@ -625,30 +625,32 @@ export default function LeonardoRoom() {
 
     <div className="mt-14 mb-20 w-[130px] h-px bg-[#d4af37]/38 mx-auto" />
 
-    <p className="leading-[3.4] text-[18px] md:text-[22px] font-light text-[#e6dfd2]/96">
-      絵画。解剖学。工学。幾何学。<br />
-      彼にとって、それらは分野ではなかった。<br /><br />
+  <p className="leading-[3.4] text-[18px] md:text-[22px] font-light text-[#e6dfd2]/96">
+  絵画。解剖学。工学。幾何学。<br />
+  彼にとって、それらは分野ではなかった。<br /><br />
 
-      世界は一つの構造体。<br />
-      分解し、理解し、再接続する。<br />
-      それが創造だった。<br /><br />
+  世界は一つの構造体。<br />
+  分解し、理解し、再接続する。<br />
+  それが創造だった。<br /><br />
 
-      だが理解は終わらない。<br />
-      “なぜ？”は尽きない。<br /><br />
+  だが理解は終わらない。<br />
+  “なぜ？”は尽きない。<br /><br />
 
-      完成へ向かうほど、<br />
-      未知は広がっていく。<br /><br />
+  完成へ向かうほど、<br />
+  未知は広がっていく。<br /><br />
 
-      だから彼の人生は、<br />
-      <span className="text-white text-[23px] tracking-[0.06em]">
-        未完成のまま
-      </span>
-      残った。<br /><br />
+  だから彼の人生は、<br />
+  <span className="text-white text-[23px] tracking-[0.06em]">
+    未完成のまま
+  </span>
+  残った。<br /><br />
 
-      それでも――<br />
-      彼は四百年先を見ていた。<br />
-      未来が追いつくことを、疑わなかった。
-    </p>
+   彼のノートには、<br />
+  まだ存在しない機械の設計図が描かれていた。<br />
+  実現するのは、数百年後だった。
+
+</p>
+
 
     <div className="mt-20">
       <p className="text-[12px] tracking-[0.46em] text-white/45">

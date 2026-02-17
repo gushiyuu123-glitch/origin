@@ -56,7 +56,8 @@ const rooms = [
   description:
     "直感は論理よりも速い。時空を再設計した思考の跳躍。",
   ogp: "/og/einstein.png",
-  // pc と sp を消す
+  pc: EinsteinRoom,
+    sp: EinsteinRoomSP,
   },
   {
     path: "/jobs",

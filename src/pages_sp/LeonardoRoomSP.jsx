@@ -682,32 +682,33 @@ scale: 1.002,
     </h2>
 
     <div className="my-12 w-[90px] h-px bg-[#d4af37]/40 mx-auto ld-line" />
+{/* TEXT（SP用） */}
+<p className="leading-[3.05] text-[16px] font-light text-[#e6dfd2]/97">
 
-    {/* TEXT（SP用圧縮） */}
-    <p className="leading-[3.05] text-[16px] font-light text-[#e6dfd2]/97">
+  絵画。解剖学。工学。幾何学。<br />
+  彼にとって、それらは分野ではなかった。<br /><br />
 
-      絵画。解剖学。工学。幾何学。<br />
-      彼にとって、それらは分野ではなかった。<br /><br />
+  世界は一つの構造体。<br />
+  分解し、理解し、再接続する。<br />
+  それが創造だった。<br /><br />
 
-      世界は一つの構造体。<br />
-      分解し、理解し、再接続する。<br />
-      それが創造だった。<br /><br />
+  だが理解は終わらない。<br />
+  “なぜ？”は尽きない。<br /><br />
 
-      だが理解は終わらない。<br />
-      “なぜ？”は尽きない。<br /><br />
+  完成へ向かうほど、<br />
+  未知は広がっていく。<br /><br />
 
-      完成へ向かうほど、<br />
-      未知は広がっていく。<br /><br />
+  だから彼の人生は、<br />
+  <span className="text-white text-[19px] tracking-[0.06em]">
+    未完成のまま
+  </span>
+  残った。<br /><br />
 
-      だから彼の人生は、<br />
-      <span className="text-white text-[19px] tracking-[0.06em]">
-        未完成のまま
-      </span>
-      残った。<br /><br />
+  彼のノートには、<br />
+  数百年先の技術が記されていた。<br />
+  未来が追いつくことを、彼は疑わなかった。
+</p>
 
-      それでも――<br />
-      彼は四百年先を見ていた。
-    </p>
 
     {/* FINAL AXIS */}
     <div className="mt-16">
