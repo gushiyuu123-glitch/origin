@@ -91,46 +91,56 @@ export default function GlobalRoomNavSP() {
 
   return (
     <>
-      {/* ORIGIN 左上 */}
-      <div
-        onClick={() => {
-          navigate("/");
-          window.scrollTo(0, 0);
-        }}
-        style={{
-          position: "fixed",
-          top: "22px",
-          left: "22px",
-          zIndex: 10000,
-        }}
-        className="text-[10px] tracking-[0.6em] text-white cursor-pointer select-none"
-      >
-        ORIGIN
-      </div>
+{/* ORIGIN LOGO - SP */}
+<div
+  onClick={() => {
+    navigate("/");
+    window.scrollTo(0, 0);
+  }}
+  style={{
+    position: "fixed",
+    top: "18px",
+    left: "18px",
+    zIndex: 10000,
+  }}
+  className="cursor-pointer select-none"
+>
+  <img
+    src="/images/origin-logo.png"
+    alt="ORIGIN"
+    style={{
+      width: "88px",   // ← SPは少し小さめ
+      opacity: 0.85,
+      display: "block",
+    }}
+  />
+</div>
 
-      {/* 右上 閉じた本 */}
-      {!open && (
-        <div
-          onClick={handleOpen}
-          style={{
-            position: "fixed",
-            top: "18px",
-            right: "18px",
-            zIndex: 10000,
-          }}
-          className="cursor-pointer select-none"
-        >
-          <img
-            src="/images/closed-book.png"
-            alt="menu"
-            style={{
-              width: "56px",
-              opacity: 0.85,
-              display: "block",
-            }}
-          />
-        </div>
-      )}
+
+{/* 右下 閉じた本 */}
+{!open && (
+  <div
+    onClick={handleOpen}
+    style={{
+      position: "fixed",
+      bottom: "24px",
+      right: "20px",
+      zIndex: 10000,
+    }}
+    className="cursor-pointer select-none"
+  >
+    <img
+      src="/images/closed-book.png"
+      alt="menu"
+      style={{
+        width: "54px",
+        opacity: 0.85,
+        display: "block",
+      }}
+    />
+  </div>
+)}
+
 
       {/* OPEN BOOK */}
       {open && (
@@ -146,21 +156,23 @@ export default function GlobalRoomNavSP() {
             justifyContent: "center",
           }}
         >
-          {/* CLOSE ボタン */}
-          <div
-            onClick={handleClose}
-            style={{
-              position: "fixed",
-              top: "22px",
-              right: "22px",
-              fontSize: "22px",
-              color: "white",
-              opacity: 0.8,
-              cursor: "pointer",
-            }}
-          >
-            ×
-          </div>
+    {/* CLOSE ボタン（右下統一） */}
+<div
+  onClick={handleClose}
+  style={{
+    position: "fixed",
+    bottom: "26px",
+    right: "22px",
+    fontSize: "12px",
+    letterSpacing: "0.25em",
+    color: "white",
+  opacity: 0.65,
+    cursor: "pointer",
+  }}
+>
+  本を閉じる
+</div>
+
 
           <div
             ref={bookRef}

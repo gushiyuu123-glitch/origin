@@ -82,16 +82,21 @@ export default function GlobalRoomNavPC() {
 
   return (
     <>
-      {/* ORIGIN */}
-      <div
-        onClick={() => {
-          navigate("/");
-          window.scrollTo(0, 0);
-        }}
-        className="fixed top-6 left-6 z-[10000] text-[11px] tracking-[0.65em] text-white cursor-pointer"
-      >
-        ORIGIN
-      </div>
+{/* ORIGIN LOGO */}
+<div
+  onClick={() => {
+    navigate("/");
+    window.scrollTo(0, 0);
+  }}
+  className="fixed top-6 left-6 z-[10000] cursor-pointer select-none"
+>
+  <img
+    src="/images/origin-logo.png"
+    alt="ORIGIN"
+    className="w-[110px] opacity-90 hover:opacity-100 transition duration-500"
+  />
+</div>
+
 
       {/* CLOSED BOOK */}
 {/* CLOSED BOOK */}
@@ -122,29 +127,41 @@ export default function GlobalRoomNavPC() {
   onClick={handleClose}
   className="fixed top-8 right-10 z-[10000] cursor-pointer"
 >
- {/* CLOSE */}
+{/* CLOSE */}
 <div
   onClick={handleClose}
   style={{
     position: "fixed",
-    top: "32px",
-    right: "40px",
+    top: "36px",
+    right: "48px",
     zIndex: 10000,
-    width: "44px",
-    height: "44px",
+    width: "48px",
+    height: "48px",
     borderRadius: "50%",
-    border: "1px solid rgba(255,255,255,0.35)",
+    border: "1px solid rgba(255,255,255,0.28)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     color: "white",
-    fontSize: "16px",
+    fontSize: "18px",
     cursor: "pointer",
-    opacity: 0.75,
+    opacity: 0.7,
+    transition: "all 0.3s ease",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.opacity = "1";
+    e.currentTarget.style.border = "1px solid rgba(255,255,255,0.5)";
+    e.currentTarget.style.transform = "scale(1.05)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.opacity = "0.7";
+    e.currentTarget.style.border = "1px solid rgba(255,255,255,0.28)";
+    e.currentTarget.style.transform = "scale(1)";
   }}
 >
   ×
 </div>
+
 
 </div>
 
