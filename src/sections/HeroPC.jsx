@@ -241,10 +241,43 @@ const names = [
             </span>
           ))}
         </h1>
+<div className="relative w-full flex justify-center items-center pointer-events-none select-none -translate-y-[4vh]">
 
-        <p className="text-xs tracking-[0.9em] opacity-70">
-          — ORIGIN —
-        </p>
+
+  {/* 微光グロー */}
+  <div
+    className="absolute w-[420px] h-[420px] rounded-full"
+    style={{
+      background:
+        "radial-gradient(circle, rgba(255,220,170,0.12) 0%, rgba(0,0,0,0) 65%)",
+      filter: "blur(60px)",
+      opacity: 0.6,
+    }}
+  />
+
+  {/* ロゴ本体 */}
+  <img
+    src="/images/origin-logo.png"
+    alt="ORIGIN"
+    className="
+      relative
+      w-[220px]
+      md:w-[260px]
+      opacity-90
+      transition duration-[1600ms] ease-out
+      hover:opacity-100
+    "
+    style={{
+      filter: `
+        drop-shadow(0 0 12px rgba(255,215,170,0.18))
+        drop-shadow(0 0 36px rgba(255,200,140,0.08))
+      `,
+    }}
+  />
+
+</div>
+
+
       </div>
 
       {names.map((item, i) => (

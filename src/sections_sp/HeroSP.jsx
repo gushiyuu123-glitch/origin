@@ -192,29 +192,52 @@ const names = [
         }}
       />
 
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+ <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
 
-      {/* タイトル */}
-      <div className="relative z-10 text-center mb-20">
-        <h1
-          ref={titleRef}
-          className="text-[38px] tracking-[0.45em] font-light mb-4"
-          style={{
-            textShadow:
-              "0 0 50px rgba(255,255,255,0.35), 0 0 140px rgba(255,255,255,0.08)",
-          }}
-        >
-          {"創造の源".split("").map((char, i) => (
-            <span key={i} className="char inline-block">
-              {char}
-            </span>
-          ))}
-        </h1>
+{/* タイトルブロック */}
+<div className="relative z-10 text-center mt-12 mb-20">
+  <h1
+    ref={titleRef}
+    className="text-[42px] tracking-[0.38em] font-light mb-6"
+    style={{
+      textShadow:
+        "0 0 40px rgba(255,255,255,0.45), 0 0 120px rgba(255,230,200,0.12)",
+      letterSpacing: "0.32em",
+    }}
+  >
+    {"創造の源".split("").map((char, i) => (
+      <span key={i} className="char inline-block">
+        {char}
+      </span>
+    ))}
+  </h1>
 
-        <p className="text-[10px] tracking-[0.8em] opacity-75">
-          — ORIGIN —
-        </p>
-      </div>
+  {/* ロゴ */}
+  <div className="relative flex justify-center items-center pointer-events-none select-none mt-4">
+    {/* 光膜 */}
+    <div
+      className="absolute w-[240px] h-[240px] rounded-full"
+      style={{
+        background:
+          "radial-gradient(circle, rgba(255,215,170,0.08) 0%, rgba(0,0,0,0) 65%)",
+        filter: "blur(40px)",
+        opacity: 0.6,
+      }}
+    />
+
+    <img
+      src="/images/origin-logo.png"
+      alt="ORIGIN"
+      className="relative w-[140px] opacity-85"
+      style={{
+        filter: `
+          drop-shadow(0 0 10px rgba(255,215,170,0.12))
+        `,
+      }}
+    />
+  </div>
+</div>
+
 
       {/* 人物 */}
       <div className="relative z-10 flex flex-col gap-14 w-full max-w-[320px]">
