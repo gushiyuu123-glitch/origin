@@ -132,7 +132,7 @@ export default function VangoghRoom() {
       font-light
       mb-6
     ">
-      感性の衝動
+      衝動の純度。
     </p>
 
     {/* MAIN NAME */}
@@ -140,14 +140,14 @@ export default function VangoghRoom() {
       text-[clamp(48px,6vw,96px)]
       tracking-[0.18em]
       font-light
-      leading-[1.1]
+      leading-[1.08]
     ">
       Van&nbsp;Gogh
     </h1>
 
     {/* JAPANESE */}
     <p className="
-      mt-8
+      mt-6
       text-[12px]
       tracking-[0.6em]
       text-white/40
@@ -157,11 +157,11 @@ export default function VangoghRoom() {
     </p>
 
     {/* Divider */}
-    <div className="mt-16 mb-16 w-[80px] h-px bg-white/25 mx-auto" />
+    <div className="mt-12 mb-12 w-[70px] h-px bg-white/25 mx-auto" />
 
     {/* Body */}
     <p className="
-      leading-[2.8]
+      leading-[2.25]
       text-white/85
       text-[17px]
       md:text-[19px]
@@ -179,8 +179,8 @@ export default function VangoghRoom() {
 
       だが――<br /><br />
 
-      色は、すでに内側で燃えていた。
-それが、衝動だった。
+      色は、すでに内側で燃えていた。<br />
+      それが、衝動だった。
     </p>
 
   </div>

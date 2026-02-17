@@ -156,12 +156,17 @@ export default function HeroSP() {
       }, 0);
   };
 
-  const names = [
-    { text: "VAN GOGH", sub: "感性", route: "/vangogh" },
-    { text: "LEONARDO", sub: "構造", route: "/leonardo" },
-    { text: "JOBS", sub: "本質", route: "/jobs" },
-    { text: "MUSK", sub: "革命", route: "/musk" },
-  ];
+const names = [
+  { text: "VAN GOGH", sub: "感性", route: "/vangogh" },
+  { text: "LEONARDO", sub: "構造", route: "/leonardo" },
+
+  // 🔥 追加
+  { text: "EINSTEIN", sub: "直感", route: "/einstein" },
+
+  { text: "JOBS", sub: "本質", route: "/jobs" },
+  { text: "MUSK", sub: "革命", route: "/musk" },
+];
+
 
   return (
     <section

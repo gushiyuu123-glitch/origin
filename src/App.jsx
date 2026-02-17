@@ -13,8 +13,14 @@ import VangoghRoomSP from "./pages_sp/VangoghRoomSP";
 import LeonardoRoom from "./pages/LeonardoRoom";
 import LeonardoRoomSP from "./pages_sp/LeonardoRoomSP";
 
+import EinsteinRoom from "./pages/EinsteinRoom";
+import EinsteinRoomSP from "./pages_sp/EinsteinRoomSP";
+
+
 import ComingSoon from "./pages/ComingSoon";
 import GlobalRoomNav from "./components/GlobalRoomNav";
+
+
 
 /* ================= SITE CONFIG ================= */
 
@@ -44,6 +50,15 @@ const rooms = [
     sp: LeonardoRoomSP,
   },
   {
+   path: "/einstein",
+  title: "EINSTEIN",
+  concept: "直感",
+  description:
+    "直感は論理よりも速い。時空を再設計した思考の跳躍。",
+  ogp: "/og/einstein.png",
+  // pc と sp を消す
+  },
+  {
     path: "/jobs",
     title: "JOBS",
     concept: "本質",
@@ -60,6 +75,7 @@ const rooms = [
     ogp: "/og/musk.png",
   },
 ];
+
 
 export default function App() {
   const location = useLocation();

@@ -115,14 +115,21 @@ export default function VangoghRoomSP() {
 
         <div className="vg-vignette absolute inset-0 z-10 bg-gradient-to-b from-black/65 via-black/45 to-black/85" />
 
-        <div className="relative z-30 max-w-[92vw] fade-up">
-          <h1 className="text-[36px] tracking-[0.18em] font-light">
-            Van&nbsp;Gogh
-          </h1>
+<div className="relative z-30 max-w-[92vw] fade-up">
 
-          <h2 className="mt-5 text-[11px] tracking-[0.45em] text-white/50 font-light">
-            ヴィンセント・ヴァン・ゴッホ
-          </h2>
+  {/* 🔥 思想ワンライン */}
+  <p className="text-[11px] tracking-[0.55em] text-white/55 font-light mb-6">
+    色彩の狂人。
+  </p>
+
+  <h1 className="text-[36px] tracking-[0.18em] font-light">
+    Van&nbsp;Gogh
+  </h1>
+
+  <h2 className="mt-5 text-[11px] tracking-[0.45em] text-white/50 font-light">
+    ヴィンセント・ヴァン・ゴッホ
+  </h2>
+
 
           <div className="mt-10 mb-12 w-[60px] h-px bg-white/20 mx-auto" />
 

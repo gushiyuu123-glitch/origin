@@ -151,12 +151,17 @@ export default function HeroPC() {
       });
   };
 
-  const names = [
-    { text: "VAN GOGH", sub: "感性", route: "/vangogh", style: "top-[18%] left-[12%]" },
-    { text: "LEONARDO", sub: "構造", route: "/leonardo", style: "top-[62%] right-[8%]" },
-    { text: "JOBS", sub: "本質", route: "/jobs", style: "top-[45%] left-[34%]" },
-    { text: "MUSK", sub: "革命", route: "/musk", style: "top-[28%] right-[28%]" },
-  ];
+const names = [
+  { text: "VAN GOGH", sub: "感性", route: "/vangogh", style: "top-[18%] left-[12%]" },
+  { text: "LEONARDO", sub: "構造", route: "/leonardo", style: "top-[62%] right-[8%]" },
+
+  // 🔥 追加（中央寄り・軸近く）
+  { text: "EINSTEIN", sub: "直感", route: "/einstein", style: "top-[13%] left-[48%]" },
+
+  { text: "JOBS", sub: "本質", route: "/jobs", style: "top-[75%] left-[28%]" },
+  { text: "MUSK", sub: "革命", route: "/musk", style: "top-[28%] right-[24%]" },
+];
+
 
   return (
     <section

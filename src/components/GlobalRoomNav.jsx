@@ -17,16 +17,27 @@ export default function GlobalRoomNav() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // 🔥 ここ追加：スクロール付きナビ
+  const goToRoom = (path) => {
+    navigate(path);
+    window.scrollTo({
+      top: 0,
+      behavior: "instant", // ← 静けさ重視なら instant
+      // behavior: "smooth"  ← 演出入れるならこっち
+    });
+  };
+
   const rooms = [
     { name: "VAN GOGH", path: "/vangogh" },
     { name: "LEONARDO", path: "/leonardo" },
+    { name: "EINSTEIN", path: "/einstein" }, // 🔥 追加
     { name: "JOBS", path: "/jobs" },
     { name: "MUSK", path: "/musk" },
   ];
 
   return (
     <>
-      {/* ================= TOP LIGHT FADE ================= */}
+      {/* TOP LIGHT FADE */}
       <div
         className="fixed top-0 left-0 w-full h-[100px] z-[9000] pointer-events-none"
         style={{
@@ -35,9 +46,9 @@ export default function GlobalRoomNav() {
         }}
       />
 
-      {/* ================= ORIGIN ================= */}
+      {/* ORIGIN */}
       <div
-        onClick={() => navigate("/")}
+        onClick={() => goToRoom("/")}
         className="
           fixed top-6 left-6 z-[9999]
           cursor-pointer select-none
@@ -59,20 +70,14 @@ export default function GlobalRoomNav() {
 
       {/* ================= PC NAV ================= */}
       {!isSP && (
-        <div
-          className="
-            fixed top-6 right-6 z-[9999]
-            flex gap-10
-            select-none
-          "
-        >
+        <div className="fixed top-6 right-6 z-[9999] flex gap-10 select-none">
           {rooms.map((room) => {
             const isActive = location.pathname === room.path;
 
             return (
               <div
                 key={room.path}
-                onClick={() => navigate(room.path)}
+                onClick={() => goToRoom(room.path)}
                 className="
                   text-[11px]
                   tracking-[0.5em]
@@ -97,8 +102,6 @@ export default function GlobalRoomNav() {
       {/* ================= SP NAV ================= */}
       {isSP && (
         <div className="fixed bottom-6 right-6 z-[9999] select-none">
-          
-          {/* ROOM BUTTON */}
           <div
             onClick={() => setOpen(!open)}
             className="
@@ -116,18 +119,15 @@ export default function GlobalRoomNav() {
             ROOM
           </div>
 
-          {/* EXPANDED LIST */}
           <div
-            className={`
+            className="
               absolute bottom-8 right-0
               flex flex-col items-end gap-4
               transition-all duration-700
-            `}
+            "
             style={{
               opacity: open ? 1 : 0,
-              transform: open
-                ? "translateY(0px)"
-                : "translateY(10px)",
+              transform: open ? "translateY(0px)" : "translateY(10px)",
               pointerEvents: open ? "auto" : "none",
             }}
           >
@@ -138,7 +138,7 @@ export default function GlobalRoomNav() {
                 <div
                   key={room.path}
                   onClick={() => {
-                    navigate(room.path);
+                    goToRoom(room.path);
                     setOpen(false);
                   }}
                   className="
