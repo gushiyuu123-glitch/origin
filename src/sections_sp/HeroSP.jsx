@@ -7,7 +7,6 @@ import gsap from "gsap";
 export default function HeroSP() {
   const containerRef = useRef(null);
   const axisRef = useRef(null);
-  const canvasRef = useRef(null);
   const titleRef = useRef(null);
   const logoRef = useRef(null);
   const glowRef = useRef(null);
@@ -17,43 +16,34 @@ export default function HeroSP() {
   const navigate = useNavigate();
 
   /* ==================================================
-     GSAP 起動（静けさ重視）
+     GSAP 起動（軽量）
   ================================================== */
   useEffect(() => {
     const ctx = gsap.context(() => {
 
-      // 人物フェード
       gsap.fromTo(
         ".sp-item",
         { opacity: 0, y: 24 },
         {
-          opacity: 0.8,
+          opacity: 0.85,
           y: 0,
-          duration: 1.6,
-          stagger: 0.18,
+          duration: 1.4,
+          stagger: 0.15,
           ease: "power3.out",
         }
       );
 
-      // 軸 × 光膜 同期呼吸
-      const tl = gsap.timeline({ repeat: -1, yoyo: true });
-
-      tl.to(axisRef.current, {
-        opacity: 0.75,
+      gsap.to(axisRef.current, {
+        opacity: 0.8,
         duration: 6,
+        repeat: -1,
+        yoyo: true,
         ease: "sine.inOut",
-      }, 0);
+      });
 
-      tl.to(glowRef.current, {
-        opacity: 0.65,
-        duration: 6,
-        ease: "sine.inOut",
-      }, 0);
-
-      // タイトル
       const chars = titleRef.current.querySelectorAll(".char");
 
-      gsap.set(chars, { opacity: 0, y: 24 });
+      gsap.set(chars, { opacity: 0, y: 20 });
       gsap.set(logoRef.current, { opacity: 0, scale: 0.96 });
 
       const intro = gsap.timeline({ delay: 0.6 });
@@ -61,26 +51,17 @@ export default function HeroSP() {
       intro.to(chars, {
         y: 0,
         opacity: 1,
-        duration: 1.6,
-        stagger: 0.06,
+        duration: 1.4,
+        stagger: 0.05,
         ease: "power3.out",
       });
 
       intro.to(logoRef.current, {
         opacity: 0.7,
         scale: 1,
-        duration: 1.2,
+        duration: 1,
         ease: "power2.out",
-      }, "-=1");
-
-      // ロゴ微呼吸（弱）
-      gsap.to(logoRef.current, {
-        scale: 1.01,
-        duration: 3.6,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+      }, "-=0.8");
 
     }, containerRef);
 
@@ -88,10 +69,10 @@ export default function HeroSP() {
   }, []);
 
   /* ==================================================
-     シルエット（SPは軽く）
+     シルエット（サイズ制御）
   ================================================== */
 
-  const showSilhouette = (image) => {
+  const showSilhouette = (image, size = "165vw") => {
     const el = silhouetteRef.current;
     if (!el) return;
 
@@ -101,30 +82,33 @@ export default function HeroSP() {
     }
 
     el.src = image;
+    el.style.width = size;
 
     gsap.killTweensOf(el);
 
-    gsap.set(el, { opacity: 0, scale: 0.98 });
-
-    gsap.to(el, {
-      opacity: 0.12, // ← SPは超薄
-      scale: 1,
-      duration: 0.7,
-      ease: "power2.out",
-      onComplete: () => {
-        breatheTweenRef.current = gsap.to(el, {
-          opacity: 0.14,
-          duration: 5.5,
-          yoyo: true,
-          repeat: -1,
-          ease: "sine.inOut",
-        });
+    gsap.fromTo(
+      el,
+      { opacity: 0, scale: 0.98 },
+      {
+        opacity: 0.18,
+        scale: 1.01,
+        duration: 0.7,
+        ease: "power2.out",
+        onComplete: () => {
+          breatheTweenRef.current = gsap.to(el, {
+            opacity: 0.22,
+            duration: 5,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut",
+          });
+        },
       }
-    });
+    );
 
     gsap.to(axisRef.current, {
       opacity: 1,
-      duration: 0.5,
+      duration: 0.4,
     });
   };
 
@@ -139,13 +123,13 @@ export default function HeroSP() {
 
     gsap.to(el, {
       opacity: 0,
-      duration: 0.5,
+      duration: 0.4,
       ease: "power2.out",
     });
 
     gsap.to(axisRef.current, {
-      opacity: 0.75,
-      duration: 0.5,
+      opacity: 0.8,
+      duration: 0.4,
     });
   };
 
@@ -154,29 +138,27 @@ export default function HeroSP() {
   ================================================== */
 
   const handleEnter = (route) => {
-    const tl = gsap.timeline({
-      onComplete: () => navigate(route),
-    });
-
-    tl.to(".sp-item", {
-      opacity: 0,
-      y: -10,
-      duration: 0.3,
-      stagger: 0.04,
-      ease: "power2.in",
-    }).to(containerRef.current, {
+    gsap.to(containerRef.current, {
       opacity: 0,
       duration: 0.4,
-    }, 0);
+      ease: "power2.out",
+      onComplete: () => navigate(route),
+    });
   };
 
-  const names = [
-    { text: "VAN GOGH", sub: "感性", route: "/vangogh", image: "/silhouettes/vangogh.png" },
-    { text: "LEONARDO", sub: "構造", route: "/leonardo", image: "/silhouettes/leonardo.png" },
-    { text: "EINSTEIN", sub: "直感", route: "/einstein", image: "/silhouettes/einstein.png" },
-    { text: "JOBS", sub: "本質", route: "/jobs", image: "/silhouettes/jobs.png" },
-    { text: "MUSK", sub: "革命", route: "/musk", image: "/silhouettes/musk.png" },
-  ];
+  /* ==================================================
+     データ（サイズ指定）
+  ================================================== */
+
+const names = [
+  { text: "VAN GOGH", sub: "感性", route: "/vangogh", image: "/silhouettes/1.png", size: "220vw" },
+  { text: "LEONARDO", sub: "構造", route: "/leonardo", image: "/silhouettes/2.png", size: "220vw" },
+  { text: "EINSTEIN", sub: "直感", route: "/einstein", image: "/silhouettes/3.png", size: "220vw" },
+
+  { text: "JOBS", sub: "本質", route: "/jobs", image: "/silhouettes/jobs.png", size: "110vw" },
+  { text: "MUSK", sub: "革命", route: "/musk", image: "/silhouettes/musk.png", size: "110vw" },
+];
+
 
   return (
     <section
@@ -199,11 +181,12 @@ export default function HeroSP() {
           ref={silhouetteRef}
           src=""
           alt=""
-          className="w-[120vw] opacity-0"
+          className="opacity-0"
           style={{
-            filter: "blur(6px) brightness(1.1)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
-            maskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
+           width: "220vw",
+            filter: "blur(3px) brightness(1.15)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 50%, transparent 92%)",
+            maskImage: "linear-gradient(to bottom, black 50%, transparent 92%)",
           }}
         />
       </div>
@@ -215,7 +198,7 @@ export default function HeroSP() {
         style={{
           background:
             "linear-gradient(to bottom, transparent, rgba(255,255,255,0.45), transparent)",
-          opacity: 0.6,
+          opacity: 0.8,
         }}
       />
 
@@ -258,7 +241,7 @@ export default function HeroSP() {
         {names.map((item, i) => (
           <div
             key={i}
-            onTouchStart={() => showSilhouette(item.image)}
+            onTouchStart={() => showSilhouette(item.image, item.size)}
             onTouchEnd={hideSilhouette}
             onClick={() => handleEnter(item.route)}
             className="sp-item flex flex-col items-center cursor-pointer active:scale-[0.96]"
@@ -275,6 +258,26 @@ export default function HeroSP() {
           </div>
         ))}
       </div>
+      {/* 外界への導線（SPはフロー配置） */}
+<div className="relative z-10 mt-16 mb-6 flex justify-center">
+  <a
+    href="https://gushikendesign.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="GUSHIKEN DESIGN｜沖縄・全国対応のWebデザイン制作スタジオ"
+    className="
+      text-[9px]
+      tracking-[0.35em]
+      font-light
+      opacity-30
+      active:opacity-60
+      transition-opacity duration-500
+    "
+    style={{ letterSpacing: "0.4em" }}
+  >
+    GUSHIKEN DESIGN
+  </a>
+</div>
     </section>
   );
 }

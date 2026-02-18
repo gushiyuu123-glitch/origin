@@ -14,7 +14,6 @@ export default function HeroPC() {
   const breatheTweenRef = useRef(null);
   const isHoveringRef = useRef(false);
 
-  // quickTo（追従の質UP）
   const followXRef = useRef(null);
   const followYRef = useRef(null);
 
@@ -25,7 +24,6 @@ export default function HeroPC() {
   ========================== */
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 軸呼吸
       if (axisGlowRef.current) {
         gsap.to(axisGlowRef.current, {
           opacity: 0.7,
@@ -36,7 +34,6 @@ export default function HeroPC() {
         });
       }
 
-      // 名前出現
       if (namesRef.current?.length) {
         gsap.fromTo(
           namesRef.current,
@@ -49,21 +46,8 @@ export default function HeroPC() {
             ease: "power3.out",
           }
         );
-
-        // ゆらぎ
-        namesRef.current.forEach((el) => {
-          if (!el) return;
-          gsap.to(el, {
-            y: "+=10",
-            duration: 18 + Math.random() * 6,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-          });
-        });
       }
 
-      // タイトル
       if (titleRef.current) {
         const chars = titleRef.current.querySelectorAll(".char");
         gsap.set(chars, { opacity: 0, y: 40, scale: 0.9 });
@@ -79,7 +63,6 @@ export default function HeroPC() {
         });
       }
 
-      // ロゴ
       if (logoRef.current) {
         gsap.fromTo(
           logoRef.current,
@@ -92,17 +75,8 @@ export default function HeroPC() {
             ease: "power2.out",
           }
         );
-
-        gsap.to(logoRef.current, {
-          opacity: 0.72,
-          duration: 5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
       }
 
-      // シルエット初期化（残留防止）
       if (silhouetteRef.current) {
         gsap.set(silhouetteRef.current, { x: 0, y: 0 });
       }
@@ -112,8 +86,7 @@ export default function HeroPC() {
   }, []);
 
   /* =========================
-     マウス追従（hover時のみ）
-     - gsap.to連打をやめて quickTo
+     マウス追従
   ========================== */
   useEffect(() => {
     const el = silhouetteRef.current;
@@ -128,7 +101,6 @@ export default function HeroPC() {
       const x = (e.clientX - window.innerWidth / 2) / window.innerWidth;
       const y = (e.clientY - window.innerHeight / 2) / window.innerHeight;
 
-      // 40→34（上品寄せ）
       followXRef.current?.(x * 34);
       followYRef.current?.(y * 34);
     };
@@ -138,36 +110,32 @@ export default function HeroPC() {
   }, []);
 
   /* =========================
-     Hover 神顕現（一本化）
+     Hover（サイズ可変）
   ========================== */
-  const showSilhouette = (image) => {
+  const showSilhouette = (image, size = 1400) => {
     const el = silhouetteRef.current;
     if (!el) return;
 
     isHoveringRef.current = true;
 
-    // 既存呼吸停止
     if (breatheTweenRef.current) {
       breatheTweenRef.current.kill();
       breatheTweenRef.current = null;
     }
 
-    // いったん全Tween殺す（ブレ防止）
     gsap.killTweensOf(el);
 
-    // src差し替え
     el.src = image;
+    el.style.width = `${size}px`;   // ← ここが重要
 
-    // 出現（速すぎを抑える）
     gsap.set(el, { opacity: 0, scale: 0.992 });
 
     gsap.to(el, {
-      opacity: 0.20,
+      opacity: 0.2,
       scale: 1,
       duration: 0.75,
       ease: "power2.out",
       onComplete: () => {
-        // 呼吸（hover中のみ）※ここだけでOK
         breatheTweenRef.current = gsap.to(el, {
           opacity: 0.235,
           duration: 6.2,
@@ -178,12 +146,10 @@ export default function HeroPC() {
       },
     });
 
-    // 軸強調
     if (axisGlowRef.current) {
       gsap.to(axisGlowRef.current, {
         opacity: 1,
         duration: 0.7,
-        ease: "power2.out",
       });
     }
   };
@@ -206,7 +172,6 @@ export default function HeroPC() {
       duration: 0.55,
       ease: "power2.out",
       onComplete: () => {
-        // 追従残留を消す
         gsap.set(el, { x: 0, y: 0 });
       },
     });
@@ -215,14 +180,10 @@ export default function HeroPC() {
       gsap.to(axisGlowRef.current, {
         opacity: 0.7,
         duration: 0.55,
-        ease: "power2.out",
       });
     }
   };
 
-  /* =========================
-     遷移
-  ========================== */
   const handleEnter = (route) => {
     gsap.to(containerRef.current, {
       opacity: 0,
@@ -232,42 +193,17 @@ export default function HeroPC() {
     });
   };
 
+  /* =========================
+     データ（サイズ指定）
+  ========================== */
   const names = [
-    {
-      text: "VAN GOGH",
-      sub: "感性",
-      route: "/vangogh",
-      style: "top-[18%] left-[12%]",
-      image: "/silhouettes/vangogh.png",
-    },
-    {
-      text: "LEONARDO",
-      sub: "構造",
-      route: "/leonardo",
-      style: "top-[62%] right-[8%]",
-      image: "/silhouettes/leonardo.png",
-    },
-    {
-      text: "EINSTEIN",
-      sub: "直感",
-      route: "/einstein",
-      style: "top-[13%] left-[48%]",
-      image: "/silhouettes/einstein.png",
-    },
-    {
-      text: "JOBS",
-      sub: "本質",
-      route: "/jobs",
-      style: "top-[75%] left-[28%]",
-      image: "/silhouettes/jobs.png",
-    },
-    {
-      text: "MUSK",
-      sub: "革命",
-      route: "/musk",
-      style: "top-[28%] right-[24%]",
-      image: "/silhouettes/musk.png",
-    },
+    { text: "VAN GOGH", sub: "感性", route: "/vangogh", style: "top-[18%] left-[12%]", image: "/silhouettes/vangogh.png", imageSize: 1400 },
+    { text: "LEONARDO", sub: "構造", route: "/leonardo", style: "top-[62%] right-[8%]", image: "/silhouettes/leonardo.png", imageSize: 1400 },
+    { text: "EINSTEIN", sub: "直感", route: "/einstein", style: "top-[13%] left-[48%]", image: "/silhouettes/einstein.png", imageSize: 1400 },
+
+    // 半分サイズ
+    { text: "JOBS", sub: "本質", route: "/jobs", style: "top-[75%] left-[28%]", image: "/silhouettes/jobs.png", imageSize: 750 },
+    { text: "MUSK", sub: "革命", route: "/musk", style: "top-[28%] right-[24%]", image: "/silhouettes/musk.png", imageSize: 750 },
   ];
 
   return (
@@ -275,7 +211,15 @@ export default function HeroPC() {
       ref={containerRef}
       className="relative w-screen h-screen bg-[#030303] text-white overflow-hidden"
     >
-      {/* 背景 */}
+        {/* 神域光膜 */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(1200px 800px at 50% 45%, rgba(255,255,255,0.03), transparent 70%)",
+        }}
+      />
+    {/* 背景 */}
       <img
         src="/origin-bg.png"
         alt=""
@@ -290,16 +234,16 @@ export default function HeroPC() {
           background:
             "radial-gradient(1200px 800px at 50% 45%, rgba(255,255,255,0.03), transparent 70%)",
         }}
-      />
-
-      {/* シルエット */}
+      />    
+  {/* シルエット */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <img
           ref={silhouetteRef}
           src=""
           alt=""
-          className="w-[1400px] opacity-0"
+          className="opacity-0"
           style={{
+            width: "1400px",
             filter: "blur(6px) brightness(1.15) contrast(1.05)",
             WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
             maskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
@@ -307,7 +251,7 @@ export default function HeroPC() {
         />
       </div>
 
-      {/* 軸 */}
+  {/* 軸 */}
       <div
         ref={axisCoreRef}
         className="absolute left-1/2 top-0 h-full w-[1px]"
@@ -347,14 +291,13 @@ export default function HeroPC() {
         </h1>
 
         <img ref={logoRef} src="/images/origin-logo.png" alt="ORIGIN" className="w-[240px] opacity-0" />
-      </div>
-
-      {/* 周囲碑文 */}
+      </div>    
+  {/* 周囲碑文 */}
       {names.map((item, i) => (
         <div
           key={i}
           ref={(el) => (namesRef.current[i] = el)}
-          onMouseEnter={() => showSilhouette(item.image)}
+          onMouseEnter={() => showSilhouette(item.image, item.imageSize)}
           onMouseLeave={hideSilhouette}
           onClick={() => handleEnter(item.route)}
           className={`absolute ${item.style} flex flex-col items-start cursor-pointer select-none`}
@@ -362,7 +305,8 @@ export default function HeroPC() {
           <span className="text-sm tracking-[0.45em]" style={{ opacity: 0.3 }}>
             {item.text}
           </span>
-          <span className="mt-3 text-[12px] tracking-[0.5em]" style={{ opacity: 0.65 }}>
+
+          <span className="mt-2 text-[12px] tracking-[0.5em]" style={{ opacity: 0.65 }}>
             {item.sub}
           </span>
         </div>
