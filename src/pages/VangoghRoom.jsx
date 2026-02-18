@@ -42,14 +42,14 @@ export default function VangoghRoom() {
         ============================= */
         if (bg) {
           gsap.to(bg, {
-            y: -100,
-            scale: 1.07,
+         y: -160,
+scale: 1.1,
+scrub: 1.6,
             ease: "none",
             scrollTrigger: {
               trigger: sec,
               start: "top bottom",
               end: "bottom top",
-              scrub: 1.4,
             },
           });
         }
@@ -75,28 +75,41 @@ export default function VangoghRoom() {
       /* =============================
          🌌 星月夜 渦生命化（精密化）
       ============================= */
-      if (swirlRef.current) {
+    if (swirlRef.current) {
 
-        gsap.set(swirlRef.current, { opacity: 0.22, scale: 0.88 });
+  gsap.set(swirlRef.current, { opacity: 0.22, scale: 0.88 });
 
-        gsap.to(swirlRef.current, {
-          rotate: 360,
-          duration: 260,
-          repeat: -1,
-          ease: "none",
-        });
+  // 回転（宇宙）
+  gsap.to(swirlRef.current, {
+    rotate: 360,
+    duration: 260,
+    repeat: -1,
+    ease: "none",
+  });
 
-        gsap.to(swirlRef.current, {
-          opacity: 0.55,
-          scale: 1.18,
-          scrollTrigger: {
-            trigger: ".star-section",
-            start: "top center",
-            end: "bottom center",
-            scrub: 1.2,
-          },
-        });
-      }
+  // 横呼吸（PC強化）
+  gsap.to(swirlRef.current, {
+    scaleX: 1.3,
+    duration: 120,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut",
+  });
+
+  // スクロール連動
+  gsap.to(swirlRef.current, {
+    opacity: 0.55,
+    scale: 1.18,
+    scrollTrigger: {
+      trigger: ".star-section",
+      start: "top center",
+      end: "bottom center",
+      scrub: 1.2,
+    },
+  });
+
+}
+
 
     }, containerRef);
 
@@ -142,7 +155,7 @@ export default function VangoghRoom() {
   {/* Vignette */}
   <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/78 via-black/55 to-black/92" />
 
-  <div className="relative z-30 max-w-[720px] fade-up">
+  <div className="relative z-30 max-w-[880px] fade-up">
 
     {/* CHAPTER */}
     <p className="text-[10px] tracking-[0.65em] text-white/40 font-light mb-3">

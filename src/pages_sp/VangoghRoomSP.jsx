@@ -79,7 +79,7 @@ export default function VangoghRoomSP() {
 
         gsap.to(swirlRef.current, {
           rotate: 360,
-          duration: 320,
+          duration: 400,
           repeat: -1,
           ease: "none",
         });
@@ -479,7 +479,7 @@ export default function VangoghRoomSP() {
   夜は、黒ではなかった。<br /><br />
 
   青は震え、<br />
-  星は爆ぜ、<br />
+  星は瞬き、<br />
   空は渦を巻く。<br /><br />
 
   それは風景ではない。<br />
@@ -525,7 +525,7 @@ export default function VangoghRoomSP() {
 
   37歳。<br /><br />
 
-  評価はなかった。<br /><br />
+ 理解されなかった。<br /><br />
 
   だが――<br /><br />
 
@@ -562,8 +562,8 @@ export default function VangoghRoomSP() {
 
   兄を信じ続けた、ただ一人。<br /><br />
 
-  金銭も、言葉も、<br />
-  すべてを送り続けた。<br /><br />
+  生活費も、励ましの言葉も、<br />
+絶えず送り続けた。<br /><br />
 
   ゴッホは800通以上の手紙を残した。<br />
   その多くが、テオ宛だった。<br /><br />
