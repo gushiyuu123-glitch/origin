@@ -138,15 +138,17 @@ export default function EinsteinRoom() {
     w-full h-full
     object-cover
     object-[10%_50%]   // ← 横を左寄せ
-    opacity-45
+    opacity-55
   "
   alt=""
 />
 
 
-<div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black z-10" />
+<div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/65 to-black/90 z-10" />
 
-<div className="relative z-20 w-full flex justify-end px-[8vw]">
+
+<div className="relative z-20 w-full flex justify-end pr-[5vw]">
+
 
   <div className="text-right max-w-[900px]">
 

@@ -92,38 +92,57 @@ export default function EinsteinRoomSP() {
 
         <img
           src="/images/einstein/hero1.png"
-          className="absolute inset-0 w-full h-full object-cover object-[25%_50%] opacity-50"
+          className="absolute inset-0 w-full h-full object-cover object-[25%_50%] opacity-60"
           alt=""
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/85 to-black z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/65 to-black z-10" />
+<div
+  className="absolute inset-0 opacity-[0.06] pointer-events-none"
+  style={{
+    background:
+      "radial-gradient(circle at 70% 40%, rgba(255,255,255,0.25) 0%, transparent 60%)",
+  }}
+/>
 
-        <div className="relative z-20 w-full text-right fade-up">
 
-          <h1
-            ref={heroTitleRef}
-            className="
-              text-[32px]
-              tracking-[0.28em]
-              font-light
-              leading-[1.3]
-            "
-          >
-            時空の設計者
-          </h1>
 
-          <p
-            className="
-              mt-6
-              text-[10px]
-              tracking-[0.55em]
-              text-white/40
-            "
-          >
-            ALBERT EINSTEIN
-          </p>
+     {/* タイトル（中央より少し下・右寄せ微調整） */}
+<div className="relative z-20 w-full text-right pr-[10vw] mt-[16vh] fade-up">
 
-        </div>
+<h1
+  ref={heroTitleRef}
+  className="
+    text-[30px]
+tracking-[0.30em]
+
+    font-light
+    leading-[1.35]
+  text-white/75
+
+
+  "
+>
+  時空の設計者
+</h1>
+
+<p
+  className="
+    mt-5
+    text-[9px]
+    tracking-[0.5em]
+    text-white/35
+    text-center
+    self-center
+  "
+>
+
+  ALBERT EINSTEIN
+</p>
+
+
+</div>
+
       </section>
 
       {/* Timeline */}
