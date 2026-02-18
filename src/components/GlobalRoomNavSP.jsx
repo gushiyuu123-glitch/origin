@@ -1,11 +1,12 @@
 // src/components/GlobalRoomNavSP.jsx
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import gsap from "gsap";
 
 export default function GlobalRoomNavSP() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const bookRef = useRef(null);
   const overlayRef = useRef(null);
 
@@ -18,18 +19,11 @@ export default function GlobalRoomNavSP() {
   ];
 
   /* =============================
-     スクロールロック
+     Scroll Lock
   ============================== */
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => (document.body.style.overflow = "");
   }, [open]);
 
   /* =============================
@@ -41,14 +35,12 @@ export default function GlobalRoomNavSP() {
     requestAnimationFrame(() => {
       if (!bookRef.current || !overlayRef.current) return;
 
-      // 背景フェード
       gsap.fromTo(
         overlayRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.35, ease: "power2.out" }
       );
 
-      // 本出現
       gsap.fromTo(
         bookRef.current,
         { scale: 0.92, opacity: 0 },
@@ -80,9 +72,6 @@ export default function GlobalRoomNavSP() {
     });
   };
 
-  /* =============================
-     NAV
-  ============================== */
   const go = (path) => {
     navigate(path);
     handleClose();
@@ -91,56 +80,54 @@ export default function GlobalRoomNavSP() {
 
   return (
     <>
-{/* ORIGIN LOGO - SP */}
-<div
-  onClick={() => {
-    navigate("/");
-    window.scrollTo(0, 0);
-  }}
-  style={{
-    position: "fixed",
-    top: "18px",
-    left: "18px",
-    zIndex: 10000,
-  }}
-  className="cursor-pointer select-none"
->
-  <img
-    src="/images/origin-logo.png"
-    alt="ORIGIN"
-    style={{
-      width: "88px",   // ← SPは少し小さめ
-      opacity: 0.85,
-      display: "block",
-    }}
-  />
-</div>
+      {/* ORIGIN LOGO */}
+      <div
+        onClick={() => {
+          navigate("/");
+          window.scrollTo(0, 0);
+        }}
+        style={{
+          position: "fixed",
+          top: "18px",
+          left: "18px",
+          zIndex: 10000,
+        }}
+        className="cursor-pointer select-none"
+      >
+        <img
+          src="/images/origin-logo.png"
+          alt="ORIGIN"
+          style={{
+            width: "88px",
+            opacity: 0.85,
+            display: "block",
+          }}
+        />
+      </div>
 
-
-{/* 右下 閉じた本 */}
-{!open && (
-  <div
-    onClick={handleOpen}
-    style={{
-      position: "fixed",
-      bottom: "24px",
-      right: "20px",
-      zIndex: 10000,
-    }}
-    className="cursor-pointer select-none"
-  >
-    <img
-      src="/images/closed-book.png"
-      alt="menu"
-      style={{
-        width: "54px",
-        opacity: 0.85,
-        display: "block",
-      }}
-    />
-  </div>
-)}
-
+      {/* CLOSED BOOK */}
+      {!open && (
+        <div
+          onClick={handleOpen}
+          style={{
+            position: "fixed",
+            bottom: "24px",
+            right: "20px",
+            zIndex: 10000,
+          }}
+          className="cursor-pointer select-none"
+        >
+          <img
+            src="/images/closed-book.png"
+            alt="menu"
+            style={{
+              width: "54px",
+              opacity: 0.85,
+              display: "block",
+            }}
+          />
+        </div>
+      )}
 
       {/* OPEN BOOK */}
       {open && (
@@ -156,23 +143,22 @@ export default function GlobalRoomNavSP() {
             justifyContent: "center",
           }}
         >
-    {/* CLOSE ボタン（右下統一） */}
-<div
-  onClick={handleClose}
-  style={{
-    position: "fixed",
-    bottom: "26px",
-    right: "22px",
-    fontSize: "12px",
-    letterSpacing: "0.25em",
-    color: "white",
-  opacity: 0.65,
-    cursor: "pointer",
-  }}
->
-  本を閉じる
-</div>
-
+          {/* CLOSE */}
+          <div
+            onClick={handleClose}
+            style={{
+              position: "fixed",
+              bottom: "26px",
+              right: "22px",
+              fontSize: "12px",
+              letterSpacing: "0.25em",
+              color: "white",
+              opacity: 0.65,
+              cursor: "pointer",
+            }}
+          >
+            本を閉じる
+          </div>
 
           <div
             ref={bookRef}
@@ -190,7 +176,7 @@ export default function GlobalRoomNavSP() {
               }}
             />
 
-    {/* 章テキスト */}
+       {/* 章テキスト */}
 <div
   style={{
     position: "absolute",
@@ -199,35 +185,45 @@ export default function GlobalRoomNavSP() {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: "12px",
-    fontSize: "12px",
-    letterSpacing: "0.10em",
-    lineHeight: 1.5,
-    color: "black",
-    padding: "0 24px",
+    gap: "13px",                // 少しだけ詰める
+    fontSize: "11px",           // ← 14 → 13 に微調整
+    fontFamily: "serif",
+    color: "#1b1b1b",
     textAlign: "center",
+    padding: "0 28px",
+    transform: "translateY(-4%)",  // ← ほんの少し上へ
   }}
 >
-  {rooms.map((room) => (
-    <div
-      key={room.path}
-      onClick={() => go(room.path)}
-      style={{
-        cursor: "pointer",
-        transition: "opacity 0.25s ease",
-      }}
-      onTouchStart={(e) =>
-        (e.currentTarget.style.opacity = "0.6")
-      }
-      onTouchEnd={(e) =>
-        (e.currentTarget.style.opacity = "1")
-      }
-    >
-      {room.name}
-    </div>
-  ))}
-</div>
 
+              {rooms.map((room, i) => {
+                const active = location.pathname === room.path;
+
+                return (
+                  <div
+                    key={room.path}
+                    onClick={() => go(room.path)}
+                    style={{
+                      cursor: "pointer",
+                      letterSpacing: "0.16em",
+                      opacity: active ? 1 : 0.75,
+                      transform: `rotate(${i % 2 === 0 ? "-0.25deg" : "0.25deg"})`,
+                      textShadow:
+                        "0 1px 0 rgba(255,255,255,0.25), 0 2px 4px rgba(0,0,0,0.08)",
+                      transition: "all 0.3s ease",
+                    }}
+                    onTouchStart={(e) =>
+                      (e.currentTarget.style.opacity = "0.6")
+                    }
+                    onTouchEnd={(e) =>
+                      (e.currentTarget.style.opacity =
+                        active ? "1" : "0.75")
+                    }
+                  >
+                    {room.name}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}

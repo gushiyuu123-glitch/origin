@@ -22,9 +22,7 @@ export default function GlobalRoomNavPC() {
      Scroll Lock
   ========================== */
   useEffect(() => {
-    if (open) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
-
+    document.body.style.overflow = open ? "hidden" : "";
     return () => (document.body.style.overflow = "");
   }, [open]);
 
@@ -82,127 +80,131 @@ export default function GlobalRoomNavPC() {
 
   return (
     <>
-{/* ORIGIN LOGO */}
-<div
-  onClick={() => {
-    navigate("/");
-    window.scrollTo(0, 0);
-  }}
-  className="fixed top-6 left-6 z-[10000] cursor-pointer select-none"
->
-  <img
-    src="/images/origin-logo.png"
-    alt="ORIGIN"
-    className="w-[110px] opacity-90 hover:opacity-100 transition duration-500"
-  />
-</div>
-
+      {/* ORIGIN LOGO */}
+      <div
+        onClick={() => {
+          navigate("/");
+          window.scrollTo(0, 0);
+        }}
+        className="fixed top-6 left-6 z-[10000] cursor-pointer select-none"
+      >
+        <img
+          src="/images/origin-logo.png"
+          alt="ORIGIN"
+          className="w-[110px] opacity-90 hover:opacity-100 transition duration-500"
+        />
+      </div>
 
       {/* CLOSED BOOK */}
-{/* CLOSED BOOK */}
-{!open && (
-  <div
-    onClick={handleOpen}
-    className="fixed top-8 right-8 z-[9999] cursor-pointer text-center select-none"
-  >
-    <img
-      src="/images/closed-book.png"
-      className="w-[72px] opacity-75 hover:opacity-100 transition duration-500"
-    />
-    <div className="text-[9px] tracking-[0.45em] text-white mt-2 opacity-60">
-      CHAPTER
-    </div>
-  </div>
-)}
+      {!open && (
+        <div
+          onClick={handleOpen}
+          className="fixed top-8 right-8 z-[9999] cursor-pointer text-center select-none"
+        >
+          <img
+            src="/images/closed-book.png"
+            className="w-[72px] opacity-75 hover:opacity-100 transition duration-500"
+          />
+          <div className="text-[9px] tracking-[0.45em] text-white mt-2 opacity-60">
+            CHAPTER
+          </div>
+        </div>
+      )}
 
+      {/* OPEN BOOK */}
+      {open && (
+        <div
+          ref={overlayRef}
+          onClick={handleClose}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85"
+        >
+          {/* CLOSE BUTTON */}
+          <div
+            onClick={handleClose}
+            style={{
+              position: "fixed",
+              top: "36px",
+              right: "48px",
+              zIndex: 10000,
+              width: "48px",
+              height: "48px",
+              borderRadius: "50%",
+              border: "1px solid rgba(255,255,255,0.28)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "white",
+              fontSize: "18px",
+              cursor: "pointer",
+              opacity: 0.7,
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = "1";
+              e.currentTarget.style.border =
+                "1px solid rgba(255,255,255,0.5)";
+              e.currentTarget.style.transform = "scale(1.05)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = "0.7";
+              e.currentTarget.style.border =
+                "1px solid rgba(255,255,255,0.28)";
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          >
+            ×
+          </div>
 
-   {/* OPEN BOOK */}
-{open && (
-  <div
-    ref={overlayRef}
-    onClick={handleClose}   // ← 背景クリックで閉じる
-    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85"
-  >
-<div
-  onClick={handleClose}
-  className="fixed top-8 right-10 z-[10000] cursor-pointer"
->
-{/* CLOSE */}
-<div
-  onClick={handleClose}
-  style={{
-    position: "fixed",
-    top: "36px",
-    right: "48px",
-    zIndex: 10000,
-    width: "48px",
-    height: "48px",
-    borderRadius: "50%",
-    border: "1px solid rgba(255,255,255,0.28)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "white",
-    fontSize: "18px",
-    cursor: "pointer",
-    opacity: 0.7,
-    transition: "all 0.3s ease",
-  }}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.opacity = "1";
-    e.currentTarget.style.border = "1px solid rgba(255,255,255,0.5)";
-    e.currentTarget.style.transform = "scale(1.05)";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.opacity = "0.7";
-    e.currentTarget.style.border = "1px solid rgba(255,255,255,0.28)";
-    e.currentTarget.style.transform = "scale(1)";
-  }}
->
-  ×
-</div>
+          <div
+            ref={bookRef}
+            className="relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src="/images/open-book.png"
+              className="w-[1000px] max-w-[94vw]"
+            />
 
-
-</div>
-
-    <div
-      ref={bookRef}
-      className="relative"
-      onClick={(e) => e.stopPropagation()}  // ← 本クリックは閉じない
-    >
-      <img
-        src="/images/open-book.png"
-        className="w-[1000px] max-w-[94vw]"
-      />
-
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-10 text-[15px] tracking-[0.25em] text-black font-light">
-        {rooms.map((room) => {
-          const active = location.pathname === room.path;
-
-          return (
+            {/* 本の文字 */}
             <div
-              key={room.path}
-              onClick={() => go(room.path)}
-              className="cursor-pointer transition duration-300"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-8 text-[17px] font-light"
               style={{
-                opacity: active ? 1 : 0.75,
+                fontFamily: "serif",
+                color: "#1b1b1b",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.opacity = "1")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.opacity = active ? "1" : "0.75")
-              }
             >
-              {room.name}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  </div>
-)}
+              {rooms.map((room, i) => {
+                const active = location.pathname === room.path;
 
+                return (
+                  <div
+                    key={room.path}
+                    onClick={() => go(room.path)}
+                    className="cursor-pointer transition-all duration-400"
+                    style={{
+                      opacity: active ? 1 : 0.7,
+                      letterSpacing: "0.18em",
+                      transform: `rotate(${i % 2 === 0 ? "-0.2deg" : "0.2deg"})`,
+                      textShadow:
+                        "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.08)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.opacity = "1";
+                      e.currentTarget.style.letterSpacing = "0.22em";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.opacity = active ? "1" : "0.7";
+                      e.currentTarget.style.letterSpacing = "0.18em";
+                    }}
+                  >
+                    {room.name}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
