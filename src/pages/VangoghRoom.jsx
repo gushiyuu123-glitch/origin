@@ -196,10 +196,9 @@ export default function VangoghRoom() {
       md:text-[19px]
       font-light
     ">
-      1853年、オランダに生まれる。<br /><br />
 
-      画家になる前、彼は画商であり、聖職志願者であり、
-      何度も道を変えた人間だった。<br /><br />
+      画家になる前、<br />彼は画商であり、聖職志願者であり、
+      <br />何度も道を変えた人間だった。<br /><br />
 
       絵を描き始めたのは27歳。<br />
       遅すぎると言われた出発。<br /><br />
@@ -241,7 +240,7 @@ alt=""
 
 <p className="leading-[3.0] text-white/88 text-[17px] md:text-[19px] font-light">
 
-牧師の家に生まれる。<br /><br />
+1853年、オランダで牧師の家に生まれる。<br /><br />
 
 その一年前、同じ名の兄は死産していた。<br /><br />
 
