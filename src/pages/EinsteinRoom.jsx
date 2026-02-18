@@ -112,7 +112,7 @@ const TimelineSection = ({ year, title, text, image }) => (
         {year}
       </p>
 
-      <h2 className="text-[clamp(34px,4vw,56px)] tracking-[0.24em] font-light leading-[1.3] mb-10  whitespace-pre-line">
+      <h2 className="text-[clamp(34px,4vw,56px)] tracking-[0.24em] font-light leading-[1.3] mb-10  whitespace-pre-line whitespace-nowrap">
         {title}
       </h2>
 <p className="
