@@ -528,10 +528,7 @@ scale: 1.002,
   {/* CONTENT */}
   <div className="relative z-30 max-w-[92vw] ld-fade py-[24vh]">
 
-    {/* TITLE */}
-    <h2 className="text-[clamp(30px,8vw,42px)] tracking-[0.24em] font-light leading-[1.22] text-[#f4f1ea]">
-      モナ・リザ
-    </h2>
+ 
 
     <div className="my-12 w-[80px] h-px bg-[#d4af37]/45 mx-auto ld-line" />
 
