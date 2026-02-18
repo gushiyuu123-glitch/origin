@@ -187,25 +187,22 @@ export default function VangoghRoomSP() {
     {/* DIVIDER */}
     <div className="mt-8 mb-10 w-[56px] h-px bg-white/20 mx-auto" />
 
-    {/* BODY */}
-    <p className="
-      leading-[2.2]
-      text-white/90
-      text-[15px]
-      font-light
-    ">
+<p className="leading-[2.2] text-white/90 text-[15px] font-light">
 
-        画家になる前、<br />彼は画商であり、聖職志願者であり、
-      <br />何度も道を変えた人間だった。<br /><br />
+  画家になる前、<br />
+  彼は画商であり、聖職志願者であり、<br />
+  何度も道を変えた人間だった。<br /><br />
 
-      絵を描き始めたのは27歳。<br />
-      遅すぎると言われた出発だった。<br /><br />
+  絵を描き始めたのは27歳。<br />
+  遅すぎると言われた出発。<br /><br />
 
-      だが――<br /><br />
+  だが――<br /><br />
 
-      色は、すでに内側で燃えていた。<br />
-      衝動は、まだ名を持っていなかった。
-    </p>
+  色は、すでに燃えていた。<br />
+  名を持たぬ衝動が、<br />
+  彼の内側で膨らんでいた。
+
+</p>
 
   </div>
 </section>
@@ -233,18 +230,27 @@ export default function VangoghRoomSP() {
           </p>
 
           <div className="mt-9 mb-12 w-[60px] h-px bg-white/20 mx-auto" />
+<p className="leading-[2.65] text-white/88 text-[15px] font-light">
 
-          <p className="leading-[2.65] text-white/88 text-[15px] font-light">
-            1853年、オランダで牧師の家に生まれる。<br /><br />
-            その一年前、同じ名の兄は死産していた。<br /><br />
-            彼の誕生日には、<br />
-            墓石に刻まれた同じ名があった。<br /><br />
-            世界は加速し始めていた。<br />
-            鉄道、都市、産業。<br /><br />
-           しかし彼は、
-森と雲のほうを見ていた。<br /><br />
-世界よりも、震えのほうを選んでいた。
-          </p>
+  1853年、オランダに生まれる。<br /><br />
+
+  その一年前、<br />
+  同じ名の兄は死産していた。<br /><br />
+
+  誕生日は、<br />
+  墓石と並んでいた。<br /><br />
+
+  世界は加速していた。<br />
+  鉄道、都市、産業。<br /><br />
+
+  だが彼は、<br />
+  森と雲を見ていた。<br /><br />
+
+  世界よりも、<br />
+  震えを選んでいた。
+
+</p>
+
         </div>
       </section>
 
@@ -269,32 +275,33 @@ export default function VangoghRoomSP() {
             1879　BORINAGE
           </p>
 
-          <p className="mt-10 leading-[2.65] text-white/88 text-[15px] font-light">
-            画商を辞め、<br />
-            聖職を志し、<br />
-            教会の訓練校にも入った。<br /><br />
-            だが、どこにも長くはいられなかった。<br /><br />
-            理想が強すぎた。<br />
-            世界と噛み合わなかった。<br /><br />
-            そして彼は、<br />
-            ベルギー南部ボリナージュへ向かう。<br /><br />
-            地下深く、光の届かない炭鉱地帯。<br /><br />
-            伝道師として働きながら、<br />
-            労働者たちと同じ粗末な部屋に住み、<br />
-            自分の持ち物を分け与えた。<br /><br />
-            だが教会は、<br />
-            それを「過度な献身」と判断する。<br /><br />
-            任務は解かれ、<br />
-            彼はまた職を失う。<br /><br />
-            何度目かの挫折だった。<br /><br />
-            だが――<br /><br />
-            地上へ戻ったとき、<br />
-            彼の信仰は、かたちを変えていた。<br /><br />
-            人を救うのではない。<br />
-            世界を描く。<br /><br />
-            ここから、<br />
-            絵が始まる。
-          </p>
+   <p className="mt-10 leading-[2.65] text-white/88 text-[15px] font-light">
+
+  理想が強すぎた。<br />
+  世界と噛み合わなかった。<br /><br />
+
+  1879年、ボリナージュ。<br />
+  地下深く、光の届かない炭鉱地帯。<br /><br />
+
+  彼は労働者と共に暮らし、<br />
+  すべてを分け与えた。<br /><br />
+
+  教会はそれを「過度」と判断する。<br /><br />
+
+  また失職。<br />
+  また挫折。<br /><br />
+
+  だが――<br /><br />
+
+  信仰は、形を変えた。<br /><br />
+
+  人を救うのではない。<br />
+  世界を描く。<br /><br />
+
+  ここから、絵が始まる。
+
+</p>
+
         </div>
       </section>
 
@@ -325,18 +332,24 @@ export default function VangoghRoomSP() {
 
           <div className="mt-8 mb-10 w-[60px] h-px bg-yellow-200/30 mx-auto" />
 
-          <p className="leading-[2.65] text-white/90 text-[15px] font-light">
-            1888年、南フランス・アルルへ移り住む。<br /><br />
-            光は鋭く、空は深く、風は乾いていた。<br />
-            北の灰色とはまるで違う世界だった。<br /><br />
-            彼は「黄色の家」を借り、<br />
-            芸術家たちの共同体を夢見る。<br /><br />
-            ここで色彩は爆発する。<br />
-            ひまわりは燃えるように咲き、<br />
-            壁は太陽のように塗られた。<br /><br />
-            絵はもはや風景ではない。<br />
-            内側の熱そのものだった。
-          </p>
+       <p className="leading-[2.65] text-white/90 text-[15px] font-light">
+
+  1888年、アルル。<br /><br />
+
+  光は鋭く、空は深い。<br />
+  すべてが、燃えていた。<br /><br />
+
+  彼は「黄色の家」を借りる。<br />
+  芸術家の共同体を夢見る。<br /><br />
+
+  色彩は爆発する。<br />
+  ひまわりは炎のように咲いた。<br /><br />
+
+  絵は風景ではなくなった。<br />
+  内側の熱、そのものだった。
+
+</p>
+
         </div>
       </section>
 
@@ -361,25 +374,33 @@ export default function VangoghRoomSP() {
 
           <div className="mt-10 mb-12 w-[60px] h-px bg-white/20 mx-auto" />
 
-          <p className="leading-[2.65] text-white/88 text-[15px] font-light px-1">
-            アルルの冬は、思ったよりも冷たかった。<br /><br />
-            黄色の家には、もう一人の画家がいた。<br />
-            ポール・ゴーギャン。<br /><br />
-            彼は夢見ていた。<br />
-            南仏に芸術家の共同体をつくることを。<br />
-            孤独ではなく、対話の中で生まれる絵を。<br /><br />
-            しかし、理想は長くは続かなかった。<br />
-            議論は衝突へ変わり、衝突は沈黙へ変わる。<br /><br />
-            1888年12月23日、夜。<br />
-            彼は自らの左耳の一部を切り落とす。<br /><br />
-            理由は、いまも完全には分からない。<br />
-            発作だったのか、絶望だったのか、<br />
-            それとも、崩れゆく夢への最後の抵抗だったのか。<br /><br />
-            血に染まった夜のあと、彼は病院へ運ばれる。<br /><br />
-            だが――<br />
-            その数週間後、彼はまた筆を取っていた。<br />
-            光は、まだ消えていなかった。
-          </p>
+      <p className="leading-[2.65] text-white/88 text-[15px] font-light">
+
+  理想は、長く続かなかった。<br /><br />
+
+  ゴーギャンとの衝突。<br />
+  言葉は刃になった。<br /><br />
+
+  1888年12月23日。<br />
+  夜。<br /><br />
+
+  彼は自らの左耳を切り落とす。<br /><br />
+
+  理由は、いまも完全には分からない。<br /><br />
+
+  発作か。<br />
+  絶望か。<br />
+  それとも、崩れる夢への抵抗か。<br /><br />
+
+  だが――<br /><br />
+
+  数週間後、<br />
+  彼はまた筆を握っていた。<br /><br />
+
+  光は、まだ消えていなかった。
+
+</p>
+
         </div>
       </section>
 
@@ -403,21 +424,26 @@ export default function VangoghRoomSP() {
           </p>
 
           <div className="mt-10 mb-12 w-[60px] h-px bg-white/15 mx-auto" />
+<p className="leading-[2.7] text-white/88 text-[15px] font-light">
 
-          <p className="leading-[2.7] text-white/88 text-[15px] font-light px-1">
-            彼は自ら、療養施設の門をくぐった。<br /><br />
-            南フランス、サン＝レミ。<br />
-            石造りの壁に囲まれた静かな場所だった。<br /><br />
-            発作は突然訪れ、視界を歪ませた。<br />
-            意識は揺れ、世界はほどける。<br /><br />
-            しかし――<br /><br />
-            その窓の外には、空があった。<br />
-            糸杉が揺れ、月が滲み、<br />
-            夜は、青く燃えていた。<br /><br />
-            彼は、閉ざされた場所で描き続けた。<br />
-            苦しみの只中で、<br />
-            世界の震えを、そのまま、描いた。
-          </p>
+  1889年、サン＝レミ。<br /><br />
+
+  石壁に囲まれた静かな場所。<br /><br />
+
+  発作は突然訪れる。<br />
+  世界は歪み、ほどける。<br /><br />
+
+  だが窓の外には、空があった。<br /><br />
+
+  青は揺れ、<br />
+  糸杉は伸び、<br />
+  夜は燃えていた。<br /><br />
+
+  彼は描き続ける。<br />
+  壊れながらも、描き続ける。
+
+</p>
+
         </div>
       </section>
 
@@ -448,18 +474,25 @@ export default function VangoghRoomSP() {
           <h2 className="text-[28px] tracking-[0.22em] font-light">星月夜</h2>
 
           <div className="mt-10 mb-12 w-[60px] h-px bg-white/15 mx-auto" />
+<p className="leading-[2.8] text-white/92 text-[15px] font-light">
 
-          <p className="leading-[2.8] text-white/92 text-[15px] font-light">
-            夜は、黒ではなかった。<br /><br />
-            青は震え、<br />
-            星は燃え、<br />
-            空は渦を巻いた。<br /><br />
-            それは風景だった。<br />
-            だが同時に、<br />
-            彼の内部でもあった。<br /><br />
-            世界は壊れていない。<br />
-            ただ、揺れているだけだ。
-          </p>
+  夜は、黒ではなかった。<br /><br />
+
+  青は震え、<br />
+  星は爆ぜ、<br />
+  空は渦を巻く。<br /><br />
+
+  それは風景ではない。<br />
+  感情そのものだった。<br /><br />
+
+  孤独、恐怖、祈り。<br />
+  すべてが、空に放たれた。<br /><br />
+
+  世界は壊れていない。<br />
+  ただ、激しく揺れている。
+
+</p>
+
         </div>
       </section>
 
@@ -481,31 +514,30 @@ export default function VangoghRoomSP() {
     </h2>
 
     <div className="mt-10 mb-12 w-[56px] h-px bg-white/20 mx-auto" />
+<p className="leading-[2.7] text-white/92 text-[15px] font-light">
 
-    <p className="leading-[2.7] text-white/92 text-[15px] font-light">
+  1890年7月27日。<br /><br />
 
-      1890年7月27日。<br /><br />
+  麦畑。<br />
+  銃声。<br /><br />
 
-      フランス、オーヴェル。<br />
-      麦畑の中で銃声が響く。<br /><br />
+  二日後、息を引き取る。<br /><br />
 
-      二日後、<br />
-      弟テオに見守られながら息を引き取る。<br /><br />
+  37歳。<br /><br />
 
-      37歳。<br /><br />
+  評価はなかった。<br /><br />
 
-      生前、彼は評価されなかった。<br /><br />
+  だが――<br /><br />
 
-      だが――<br /><br />
+  美は濁らなかった。<br /><br />
 
-美を濁さなかった。<br /><br />
+  色は死ななかった。<br /><br />
 
-      色は死ななかった。<br /><br />
+  彼の青は、<br />
+  いまも揺れている。
 
-      彼の青は、<br />
-      いまも世界に残っている。
+</p>
 
-    </p>
 
   </div>
 </section>
@@ -526,15 +558,37 @@ export default function VangoghRoomSP() {
 
           <div className="mt-10 mb-12 w-[60px] h-px bg-white/15 mx-auto" />
 
-          <p className="leading-[2.8] text-white/90 text-[15px] font-light">
-            兄を信じ続けた、ただ一人の存在。<br /><br />
-            経済的にも、精神的にも、<br />
-            炎が消えないよう支え続けた。<br /><br />
-            兄の死から半年後、<br />
-            テオもまたこの世を去る。<br /><br />
-            いま、二人は同じ墓に眠る。<br /><br />
-            色は、二人で守ったものだった。
-          </p>
+     <p className="leading-[2.8] text-white/90 text-[15px] font-light">
+
+  兄を信じ続けた、ただ一人。<br /><br />
+
+  金銭も、言葉も、<br />
+  すべてを送り続けた。<br /><br />
+
+  ゴッホは800通以上の手紙を残した。<br />
+  その多くが、テオ宛だった。<br /><br />
+
+  色の理論。<br />
+  生活の苦しさ。<br />
+  発作への恐怖。<br /><br />
+
+  1890年、テオはこう記す。<br /><br />
+
+<span className="italic text-white/95">
+  “He put his life at the service of his art.”
+</span><br />
+<span className="text-white/60 text-[14px] tracking-[0.06em]">
+  （彼は、自らの人生を芸術に捧げた。）
+</span><br /><br />
+
+  兄の死から半年後、<br />
+  テオもまた去る。<br /><br />
+
+  色は、ひとりでは残らなかった。<br />
+  それは、二人の仕事だった。
+
+</p>
+
         </div>
       </section>
     </div>

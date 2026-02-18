@@ -149,36 +149,38 @@ scale: 1.002,
   ORIGIN 第二章
 </p>
 
-<h2 className="text-[clamp(28px,4vw,44px)] tracking-[0.2em] font-light">
+<h2 className="text-[32px] tracking-[0.26em] font-light text-[#f3f1ea]">
   構造の解体者
 </h2>
 
-<p className="mt-4 text-[12px] tracking-[0.55em] text-white/40 font-light">
-  レオナルド・ダ・ヴィンチ
+<p className="mt-5 text-[11px] tracking-[0.55em] text-white/35 font-light">
+  LEONARDO DA VINCI
 </p>
 
-    <div className="my-10 w-[70px] h-px bg-[#d4af37]/45 mx-auto ld-line" />
+<div className="my-12 w-[60px] h-px bg-[#d4af37]/50 mx-auto" />
 
-    {/* 詩をSP用に再設計（密度を上げすぎない） */}
-    <p className="leading-[2.9] text-[15px] font-light text-[#e6dfd2]/96">
-      彼は、天才だった。<br />
-      だがそれより先に、<br />
-      <span className="text-white text-[18px] tracking-[0.05em]">
-        止められない人間
-      </span>
-      だった。<br /><br />
+<p className="leading-[3.1] text-[16px] font-light text-[#e6dfd2]/95">
 
-      曖昧な線を、曖昧なまま許せない。<br />
-      見たものを、そのままにしておけない。<br /><br />
+  彼は天才だった。<br />
+  ――そう呼ばれる前に、<br /><br />
 
-      世界が未完成であることに、<br />
-      どうしても耐えられなかった。
-    </p>
+  <span className="text-white text-[19px] tracking-[0.05em]">
+    止められない人間
+  </span>
+  だった。<br /><br />
 
-    {/* WHY（SPは縦余白大きめ） */}
-    <div className="mt-16 text-[10px] tracking-[0.32em] text-white/65">
-      <span className="ld-q text-[#d4af37]/95">WHY?</span>
-    </div>
+  曖昧を許さない。<br />
+  未完成を放置できない。<br /><br />
+
+  世界の構造を、<br />
+  解体せずにはいられなかった。
+
+</p>
+
+<div className="mt-20 text-[10px] tracking-[0.35em] text-white/60">
+  <span className="text-[#d4af37]/90">WHY?</span>
+</div>
+
 
   </div>
 </section>
@@ -222,35 +224,33 @@ scale: 1.002,
 
     <div className="my-10 w-[70px] h-px bg-[#d4af37]/40 mx-auto ld-line" />
 
-    {/* 詩型に再構成（SP用に圧縮） */}
-    <p className="leading-[2.9] text-[15px] font-light text-[#e6dfd2]/96">
-      彼は私生児として生まれた。<br />
-      名はあっても、席はなかった。<br /><br />
+ {/* 詩型に再構成（SP最適化） */}
+<p className="leading-[3.0] text-[16px] font-light text-[#e6dfd2]/95">
 
-      正規の大学へ進む道は閉ざされ、<br />
-      権威の言葉を持たなかった。<br /><br />
+  私生児として生まれた。<br />
+  名はあっても、席はない。<br /><br />
 
-      王道に入れない。<br />
-      ならば──<br /><br />
+  王道に入れない。<br />
+  権威を持たない。<br /><br />
 
-      <span className="text-white text-[18px] tracking-[0.05em]">
-        世界そのものを、師にすればいい。
-      </span>
-      <br /><br />
+  ならば──<br /><br />
 
-      風の流れ。<br />
-      光の屈折。<br />
-      筋肉の構造。<br />
-      鳥の羽ばたき。<br /><br />
+  <span className="text-white text-[19px] tracking-[0.05em]">
+    世界を、師にすればいい。
+  </span>
+  <br /><br />
 
-      本を閉じ、<br />
-      世界を開いた。
-    </p>
+  風。光。筋肉。水。<br /><br />
 
-    {/* closing axis（SPはシンプルに） */}
-    <p className="mt-16 text-[10px] tracking-[0.32em] text-white/50">
-      OBSERVE → STRUCTURE
-    </p>
+  本を閉じ、<br />
+  世界を開いた。
+
+</p>
+
+{/* closing axis */}
+<p className="mt-20 text-[10px] tracking-[0.36em] text-white/55">
+  OBSERVE → STRUCTURE
+</p>
 
   </div>
 </section>
@@ -437,42 +437,46 @@ scale: 1.002,
 
   <div className="relative z-30 max-w-[92vw] ld-fade py-[22vh]">
 
-    {/* TITLE */}
-    <h2 className="text-[clamp(28px,7.5vw,40px)] tracking-[0.22em] font-light leading-[1.25] text-[#f3f1ea]">
-      夜の解剖
-    </h2>
+   {/* TITLE */}
+<h2 className="text-[clamp(28px,7.5vw,40px)] tracking-[0.22em] font-light leading-[1.25] text-[#f3f1ea]">
+  夜の解剖
+</h2>
 
-    <div className="my-10 w-[70px] h-px bg-[#d4af37]/45 mx-auto ld-line" />
+<div className="my-10 w-[70px] h-px bg-[#d4af37]/45 mx-auto ld-line" />
 
-    {/* TEXT（SP密度版） */}
-    <p className="leading-[2.95] text-[15px] font-light text-[#e6dfd2]/96">
+{/* TEXT */}
+<p className="leading-[3.05] text-[16px] font-light text-[#e6dfd2]/95">
 
-      彼は夜、死体を解剖した。<br />
-      それは禁忌だった。<br /><br />
+  彼は夜、死体を解剖した。<br />
+  当時、それは禁忌だった。<br /><br />
 
-      誰も見ない時間。<br />
-      誰も触れない領域。<br /><br />
+  誰も見ない時間。<br />
+  誰も触れない領域。<br /><br />
 
-      だが彼は、踏み込んだ。<br /><br />
+  だが彼は、踏み込んだ。<br /><br />
 
-      なぜなら――<br /><br />
+  なぜなら――<br /><br />
 
-      <span className="text-white text-[18px] tracking-[0.05em]">
-        人間を、正確に描きたかった。
-      </span>
-      <br /><br />
+  <span className="text-white text-[18px] tracking-[0.05em]">
+    仕組みを知らずに、描くことはできない。
+  </span>
+  <br /><br />
 
-      美のために、科学へ。<br />
-      感情ではなく、構造へ。<br /><br />
+  骨。筋肉。神経。血流。<br />
+  すべてを分解し、構造を掴む。<br /><br />
 
-      解体しなければ、<br />
-      本当の“生”は描けないと知っていた。
-    </p>
+  美は感情ではなかった。<br />
+  正確な理解の、その先にあった。<br /><br />
 
-    {/* closing axis */}
-    <p className="mt-16 text-[10px] tracking-[0.32em] text-white/50">
-      BEAUTY → STRUCTURE → LIFE
-    </p>
+  解体しなければ、<br />
+  本当の“生”は立ち上がらない。
+
+</p>
+
+{/* closing axis */}
+<p className="mt-20 text-[10px] tracking-[0.36em] text-white/55">
+  DISSECT → UNDERSTAND → CREATE
+</p>
 
   </div>
 </section>
@@ -531,36 +535,51 @@ scale: 1.002,
 
     <div className="my-12 w-[80px] h-px bg-[#d4af37]/45 mx-auto ld-line" />
 
-    {/* TEXT（リズム再構築） */}
-    <p className="leading-[3.05] text-[15px] font-light text-[#e6dfd2]/96">
+{/* TITLE */}
+<h2 className="text-[clamp(30px,8vw,42px)] tracking-[0.24em] font-light leading-[1.22] text-[#f4f1ea]">
+  モナ・リザ
+</h2>
 
-      彼女は、笑っているのか。<br />
-      それとも、笑っていないのか。<br /><br />
+<div className="my-12 w-[80px] h-px bg-[#d4af37]/45 mx-auto ld-line" />
 
-      その“曖昧さ”に、<br />
-      レオナルドは、囚われた。<br /><br />
+{/* TEXT */}
+<p className="leading-[3.15] text-[16px] font-light text-[#e6dfd2]/95">
 
-      一枚の肖像を、何年も手放さない。<br />
-      塗り直す。溶かす。壊す。戻す。<br />
-      また疑い、また描き直す。<br /><br />
+  彼女は、笑っているのか。<br />
+  それとも、笑っていないのか。<br /><br />
 
-      完成させないのではない。<br /><br />
+  その境界を、<br />
+  彼は消した。<br /><br />
 
-      <span className="text-white text-[17px] tracking-[0.05em]">
-        まだ、理解しきれていない。
-      </span>
-      <br /><br />
+  輪郭をぼかす。<br />
+  光と影を溶かす。<br />
+  表情を固定しない。<br /><br />
 
-      人間の曖昧さを、<br />
-      曖昧なまま残す。<br /><br />
+  それは偶然ではない。<br />
+  スフマートという、計算された曖昧さ。<br /><br />
 
-      それさえも、設計だった。
-    </p>
+  一枚の肖像を、何年も手放さない。<br />
+  依頼主に渡さず、描き続ける。<br />
+  また疑い、また塗り重ねる。<br /><br />
 
-    {/* closing axis */}
-    <p className="mt-18 text-[10px] tracking-[0.34em] text-white/50">
-      OBSESSION → DOUBT → STRUCTURE
-    </p>
+  完成しないのではない。<br /><br />
+
+  <span className="text-white text-[18px] tracking-[0.05em]">
+    人間を、まだ解き明かせていない。
+  </span>
+  <br /><br />
+
+  曖昧さを、曖昧なまま残す。<br />
+  それは感情ではない。<br /><br />
+
+  構造だった。
+
+</p>
+
+{/* closing axis */}
+<p className="mt-20 text-[10px] tracking-[0.36em] text-white/55">
+  BLUR → AMBIGUITY → CONTROL
+</p>
 
   </div>
 </section>
@@ -676,14 +695,13 @@ scale: 1.002,
 
   <div className="relative z-30 max-w-[92vw] ld-fade py-[24vh]">
 
-    {/* TITLE */}
-    <h2 className="text-[clamp(30px,8vw,44px)] tracking-[0.28em] font-light leading-[1.2] text-[#f4f1ea]">
-      未完成という運命
-    </h2>
+<h2 className="text-[clamp(30px,8vw,46px)] tracking-[0.3em] font-light leading-[1.15] text-[#f4f1ea]">
+  未完成という運命
+</h2>
 
-    <div className="my-12 w-[90px] h-px bg-[#d4af37]/40 mx-auto ld-line" />
-{/* TEXT（SP用） */}
-<p className="leading-[3.05] text-[16px] font-light text-[#e6dfd2]/97">
+<div className="my-14 w-[100px] h-px bg-[#d4af37]/45 mx-auto ld-line" />
+
+<p className="leading-[3.2] text-[16px] font-light text-[#e6dfd2]/97">
 
   絵画。解剖学。工学。幾何学。<br />
   彼にとって、それらは分野ではなかった。<br /><br />
@@ -695,27 +713,35 @@ scale: 1.002,
   だが理解は終わらない。<br />
   “なぜ？”は尽きない。<br /><br />
 
-  完成へ向かうほど、<br />
+  完成へ近づくほど、<br />
   未知は広がっていく。<br /><br />
 
   だから彼の人生は、<br />
-  <span className="text-white text-[19px] tracking-[0.06em]">
+  <span className="text-white text-[20px] tracking-[0.06em]">
     未完成のまま
   </span>
   残った。<br /><br />
 
   彼のノートには、<br />
-  数百年先の技術が記されていた。<br />
-  未来が追いつくことを、彼は疑わなかった。
+  まだ存在しない機械の設計図が描かれていた。<br />
+  実現するのは、数百年後だった。<br /><br />
+
+  未来が追いつくことを、<br />
+  彼は疑わなかった。<br /><br />
+
+  いや――<br /><br />
+
+  <span className="text-white text-[18px] tracking-[0.05em]">
+    追いつくまで、問いは残る。
+  </span>
+
 </p>
 
-
-    {/* FINAL AXIS */}
-    <div className="mt-16">
-      <p className="text-[10px] tracking-[0.34em] text-white/55">
-        THE HUMAN WHO COULDN'T STOP ASKING WHY
-      </p>
-    </div>
+<div className="mt-20">
+  <p className="text-[10px] tracking-[0.4em] text-white/60">
+    THE HUMAN WHO COULDN'T STOP ASKING WHY
+  </p>
+</div>
 
   </div>
 </section>

@@ -203,20 +203,30 @@ export default function LeonardoRoom() {
 
     <div className="my-16 w-[130px] h-px bg-[#d4af37]/35 mx-auto" />
 
-    <p className="leading-[3.3] text-[18px] md:text-[20px] font-light text-[#e6dfd2]/95">
-      彼は、天才だった。<br />
-      ――そう呼ばれる前に、<br />
-      <span className="text-white text-[22px] md:text-[23px] tracking-[0.06em]">
-        止められない人間
-      </span>
-      だった。<br /><br />
+  <p className="leading-[3.3] text-[18px] md:text-[20px] font-light text-[#e6dfd2]/95">
+  彼は、万能だった。<br />
+  ――そう呼ばれる前に、<br />
+  <span className="text-white text-[22px] md:text-[23px] tracking-[0.06em]">
+    止まれない観察者
+  </span>
+  だった。<br /><br />
 
-      見たものを、そのままにしておけない。<br />
-      曖昧な線を、曖昧なまま許せない。<br /><br />
+  絵を描きながら、解剖をした。<br />
+  機械を設計しながら、水の流れを記録した。<br /><br />
 
-      世界が未完成であることに、<br />
-      どうしても耐えられなかった。
-    </p>
+  モナ・リザの微笑みの裏には、<br />
+  筋肉と骨格の理解があった。<br /><br />
+
+  最後の晩餐の遠近法の奥には、<br />
+  幾何学と光の計算があった。<br /><br />
+
+  芸術家ではない。<br />
+  科学者でもない。<br /><br />
+
+  世界を分解し、<br />
+  再構築せずにはいられない人間だった。
+</p>
+
 
     <div className="mt-20 flex items-center justify-center gap-4 text-[12px] tracking-[0.34em] text-white/50">
       <span className="text-[#d4af37]/90">WHY?</span>
@@ -251,23 +261,29 @@ export default function LeonardoRoom() {
       1452 / VINC I
     </p>
 
-    <h2 className="text-[46px] md:text-[56px] tracking-[0.34em] font-light text-[#f2efe8]">
-      少年は、王道に入れなかった
-    </h2>
+<h2 className="text-[46px] md:text-[56px] tracking-[0.34em] font-light text-[#f2efe8]">
+  少年は、王道に入れなかった
+</h2>
 
-    <div className="ld-line mt-14 mb-18 w-[120px] h-px bg-[#d4af37]/30 mx-auto" />
+<div className="ld-line mt-14 mb-18 w-[120px] h-px bg-[#d4af37]/30 mx-auto" />
 
-  <p className="leading-[3.1] text-[18px] md:text-[21px] font-light text-[#e6dfd2]/96">
+<p className="leading-[3.1] text-[18px] md:text-[21px] font-light text-[#e6dfd2]/96">
   彼は私生児として生まれた。<br />
-  名前はあっても、席はなかった。<br />
+  名前はあっても、家系図には刻まれない。<br />
   正規の大学へ進む道は閉ざされ、<br />
-  ラテン語の教育も、断片的だった。<br /><br />
+  ラテン語教育も、完全ではなかった。<br /><br />
 
   学問の“王道”に入れない。<br />
   権威の言葉を借りられない。<br /><br />
 
-  ならば──<br />
-  <span className="text-white/90">世界そのものを、師にすればいい。</span><br /><br />
+  だが──<br />
+  <span className="text-white/90">
+    それは、自由でもあった。
+  </span><br /><br />
+
+  既存の理論に縛られず、<br />
+  誰の体系にも従わず、<br />
+  ただ、目の前の現象だけを見る。<br /><br />
 
   風の流れ、光の屈折、筋肉の構造、<br />
   鳥の羽ばたき、水の渦。<br /><br />
@@ -279,6 +295,7 @@ export default function LeonardoRoom() {
 <p className="mt-16 text-[12px] tracking-[0.38em] text-white/40">
   排除 → 観察 → 世界が教科書になる
 </p>
+
 
 
   </div>
@@ -321,32 +338,33 @@ export default function LeonardoRoom() {
 
   <div className="relative z-30 max-w-[920px] ld-fade py-32">
 
-    <h2 className="text-[46px] md:text-[54px] tracking-[0.38em] font-light text-[#f3f1ea]">
-      絵が、入口だった
-    </h2>
+<h2 className="text-[46px] md:text-[54px] tracking-[0.38em] font-light text-[#f3f1ea]">
+  絵が、入口だった
+</h2>
 
-    <div className="mt-14 mb-18 w-[120px] h-px bg-[#d4af37]/36 mx-auto" />
+<div className="mt-14 mb-18 w-[120px] h-px bg-[#d4af37]/36 mx-auto" />
 
-    <p className="leading-[3.3] text-[18px] md:text-[21px] font-light text-[#e6dfd2]/95">
-      14歳で工房に入る。<br />
-      絵画、彫刻、建築、機械、舞台装置。<br />
-      そこは“総合技術”の実験場だった。<br /><br />
+<p className="leading-[3.3] text-[18px] md:text-[21px] font-light text-[#e6dfd2]/95">
+  14歳、ヴェロッキオの工房へ入る。<br />
+  絵画、彫刻、建築、機械、舞台装置。<br />
+  そこは芸術と技術が混ざり合う場所だった。<br /><br />
 
-      本来は、絵を学ぶ場所。<br />
-      だが彼は、描くだけでは止まらなかった。<br /><br />
+  本来は、絵を学ぶ場所。<br />
+  だが彼は、描くことだけに留まらなかった。<br /><br />
 
-      <span className="text-white text-[22px] tracking-[0.05em]">
-        描くには、理解が必要だ。
-      </span><br /><br />
+  <span className="text-white text-[22px] tracking-[0.05em]">
+    描くには、理解がいる。
+  </span><br /><br />
 
-      馬を描くなら、筋肉を知らなければならない。<br />
-      川を描くなら、水の流れを知らなければならない。<br />
-      光を描くなら、光の仕組みを知らなければならない。<br /><br />
+  馬を描くなら、筋肉を知る。<br />
+  川を描くなら、水の流れを知る。<br />
+  光を描くなら、光の仕組みを知る。<br /><br />
 
-      絵は入口だった。<br />
-      だが彼の欲望は、<br />
-      世界の構造そのものへ向かっていった。
-    </p>
+  絵は入口だった。<br />
+  彼が欲していたのは、<br />
+  形の奥にある“構造”だった。
+</p>
+
 
   </div>
 </section>
@@ -385,30 +403,32 @@ export default function LeonardoRoom() {
   <div className="absolute inset-8 border border-white/10 z-20 pointer-events-none" />
 
   <div className="relative z-30 max-w-[900px] ld-fade py-32">
+<h2 className="text-[46px] md:text-[54px] tracking-[0.38em] font-light text-[#f3f1ea]">
+  観察しか、信じられなかった
+</h2>
 
-    <h2 className="text-[46px] md:text-[54px] tracking-[0.38em] font-light text-[#f3f1ea]">
-      観察しか、信じられなかった
-    </h2>
+<div className="mt-14 mb-18 w-[120px] h-px bg-[#d4af37]/36 mx-auto" />
 
-    <div className="mt-14 mb-18 w-[120px] h-px bg-[#d4af37]/36 mx-auto" />
+<p className="leading-[3.3] text-[18px] md:text-[21px] font-light text-[#e6dfd2]/95">
+  本は引用できる。<br />
+  権威は借りられる。<br />
+  だが彼には、そのどちらもなかった。<br /><br />
 
-    <p className="leading-[3.3] text-[18px] md:text-[21px] font-light text-[#e6dfd2]/95">
-      本で学べない。権威に頼れない。<br />
-      ならば、世界から学ぶしかない。<br /><br />
+  だから、見るしかなかった。<br />
+  世界そのものを。<br /><br />
 
-      彼のノートは日記ではない。<br />
-      それは、“現実を捕まえるための装置”だった。<br /><br />
+  彼のノートは日記ではない。<br />
+  現実を捕まえるための、実験装置だった。<br /><br />
 
-      図解する。測る。分解する。<br />
-      逆さに書く。何度でも描き直す。<br />
-      疑い、確かめ、また疑う。<br /><br />
+  図解する。測る。分解する。<br />
+  逆さに書く。描き直す。<br />
+  疑い、確かめ、また疑う。<br /><br />
 
-      <span className="text-white text-[22px] tracking-[0.05em]">
-        経験こそが、唯一の教師。
-      </span><br /><br />
+  <span className="text-white text-[22px] tracking-[0.05em]">
+    経験だけが、教師だった。
+  </span>
+</p>
 
-      彼は、観察でしか世界を信じられなかった。
-    </p>
 
   </div>
 </section>
@@ -439,31 +459,33 @@ export default function LeonardoRoom() {
 
   <div className="relative z-30 max-w-[900px] ld-fade py-32">
 
-    <h2 className="text-[46px] md:text-[54px] tracking-[0.36em] font-light text-[#f3f1ea]">
-      夜の解剖
-    </h2>
+   <h2 className="text-[46px] md:text-[54px] tracking-[0.36em] font-light text-[#f3f1ea]">
+  夜の解剖
+</h2>
 
-    <div className="mt-14 mb-18 w-[120px] h-px bg-[#d4af37]/36 mx-auto" />
+<div className="mt-14 mb-18 w-[120px] h-px bg-[#d4af37]/36 mx-auto" />
 
-    <p className="leading-[3.3] text-[18px] md:text-[21px] font-light text-[#e6dfd2]/95">
-      彼は夜、死体を解剖した。<br />
-      当時、それは禁忌だった。<br /><br />
+<p className="leading-[3.3] text-[18px] md:text-[21px] font-light text-[#e6dfd2]/95">
+  彼は夜、死体を解剖した。<br />
+  当時、それは禁忌だった。<br /><br />
 
-      誰も見ない時間。<br />
-      誰も触れない領域。<br /><br />
+  誰もいない時間。<br />
+  冷たい石の上。<br />
+  ひらかれた身体。<br /><br />
 
-      だが彼は、踏み込んだ。<br /><br />
+  皮膚の下にある秩序を、<br />
+  彼は探していた。<br /><br />
 
-      なぜなら――<br />
-      <span className="text-white text-[22px] tracking-[0.05em]">
-        人間を、正確に描きたかった
-      </span>
-      から。<br /><br />
+  <span className="text-white text-[22px] tracking-[0.05em]">
+    正確に、描きたかった。
+  </span><br /><br />
 
-      美のために、科学へ行った。<br />
-      感情を描くのではない。<br />
-      構造を解体し、そこから“生”を立ち上げようとした。
-    </p>
+  美を描くために、<br />
+  美を壊した。<br /><br />
+
+  感情ではなく、構造。<br />
+  生命の裏側から、“生”を立ち上げようとした。
+</p>
 
   </div>
 </section>
@@ -496,33 +518,33 @@ export default function LeonardoRoom() {
   <div className="absolute inset-8 border border-white/10 z-20 pointer-events-none" />
 
   <div className="relative z-30 max-w-[920px] ld-fade py-32">
+<h2 className="text-[46px] md:text-[56px] tracking-[0.38em] font-light text-[#f4f1ea]">
+  モナ・リザ
+</h2>
 
-    <h2 className="text-[46px] md:text-[56px] tracking-[0.38em] font-light text-[#f4f1ea]">
-      モナ・リザ
-    </h2>
+<div className="mt-14 mb-18 w-[130px] h-px bg-[#d4af37]/45 mx-auto" />
 
-    <div className="mt-14 mb-18 w-[130px] h-px bg-[#d4af37]/45 mx-auto" />
+<p className="leading-[3.35] text-[18px] md:text-[22px] font-light text-[#e6dfd2]/96">
+  彼女は、笑っているのか。<br />
+  それとも、笑っていないのか。<br /><br />
 
-    <p className="leading-[3.35] text-[18px] md:text-[22px] font-light text-[#e6dfd2]/96">
-      彼女は、笑っているのか。<br />
-      それとも、笑っていないのか。<br /><br />
+  答えは、見る者の目に委ねられる。<br /><br />
 
-      その曖昧さに、<br />
-      レオナルドは捕らわれた。<br /><br />
+  彼は何年も、この一枚を手放さなかった。<br />
+  塗り重ねる。溶かす。削る。戻す。<br />
+  そしてまた、疑う。<br /><br />
 
-      一枚の肖像を、何年も手放さない。<br />
-      塗り直す。溶かす。壊す。戻す。<br />
-      また疑い、また描き直す。<br /><br />
+  <span className="text-white text-[23px] tracking-[0.06em]">
+    曖昧さは、偶然ではない。
+  </span><br /><br />
 
-      完成させないのではない。<br />
-      <span className="text-white text-[23px] tracking-[0.06em]">
-        まだ理解しきれていない
-      </span>
-      のだ。<br /><br />
+  口元の輪郭をぼかし、<br />
+  光を層にし、<br />
+  境界を溶かす。<br /><br />
 
-      人間の曖昧さを、曖昧なまま残す。<br />
-      それさえも、設計だった。
-    </p>
+  感情を描いたのではない。<br />
+  “知覚そのもの”を設計した。
+</p>
 
   </div>
 </section>
@@ -534,14 +556,14 @@ export default function LeonardoRoom() {
   {/* BG IMAGE（やや強め） */}
   <img
     src={IMG.supper}
-    className="absolute inset-0 w-full h-full object-cover opacity-26"
+    className="absolute inset-0 w-full h-full object-cover opacity-11"
     alt=""
   />
 
   {/* vertical control（重厚だが潰さない） */}
-  <div className="absolute inset-0 z-10 
-    bg-gradient-to-b from-black/82 via-black/60 to-black/92"
-  />
+<div className="absolute inset-0 z-10 
+  bg-gradient-to-b from-black/88 via-black/78 to-black/96"
+/>
 
   {/* peak radial（中心強調） */}
   <div
@@ -557,38 +579,42 @@ export default function LeonardoRoom() {
 
   <div className="relative z-30 max-w-[980px] ld-fade py-32">
 
-    <p className="text-[11px] tracking-[0.6em] text-[#d4af37]/65 font-light mb-6">
-      PEAK / SPACE CONTROL
-    </p>
+   <p className="text-[11px] tracking-[0.6em] text-[#d4af37]/65 font-light mb-6">
+  PEAK / SPACE CONTROL
+</p>
 
-    <h2 className="text-[50px] md:text-[64px] tracking-[0.4em] font-light text-[#f4f1ea]">
-      最後の晩餐
-    </h2>
+<h2 className="text-[50px] md:text-[64px] tracking-[0.4em] font-light text-[#f4f1ea]">
+  最後の晩餐
+</h2>
 
-    <div className="mt-14 mb-20 w-[160px] h-px bg-[#d4af37]/60 mx-auto" />
+<div className="mt-14 mb-20 w-[160px] h-px bg-[#d4af37]/60 mx-auto" />
 
-    <p className="leading-[3.5] text-[19px] md:text-[24px] font-light text-[#e6dfd2]/98">
-      混乱の中に、秩序がある。<br /><br />
+<p className="leading-[3.5] text-[19px] md:text-[24px] font-light text-white/90" style={{ textShadow: "0 3px 10px rgba(0,0,0,0.10)" }}>
+  「この中に、裏切り者がいる。」
 
-      感情は波打つ。<br />
-      だが構造は揺れない。<br /><br />
+  その一言で、空間は裂けた。<br /><br />
 
-      すべての線は、中心へ。<br />
-      すべての視線は、中心へ。<br /><br />
+  感情は爆発する。<br />
+  手は上がり、身体は傾き、ざわめきが走る。<br /><br />
 
-      彼は物語を描いたのではない。<br />
-      <span className="text-white text-[26px] tracking-[0.06em]">
-        空間そのもの
-      </span>
-      を設計した。<br /><br />
+  だが――<br />
+  <span className="text-white text-[26px] tracking-[0.06em]">
+    構造は、揺れない。
+  </span><br /><br />
 
-      完璧に見える構造。<br />
-      だが彼は、また実験した。<br />
-      乾かぬ技法は剥がれ、壁画は崩れていく。<br /><br />
+  すべての線は、キリストへ。<br />
+  すべての視線は、中心へ。<br /><br />
 
-      構造を極めても、現実は容赦しない。<br />
-      それでも彼は、構造を選んだ。
-    </p>
+  彼は物語を描いたのではない。<br />
+  空間を支配した。<br /><br />
+
+  しかし彼は、また実験した。<br />
+  伝統的なフレスコを拒み、独自の技法を試す。<br />
+  その結果、絵は早く傷んだ。<br /><br />
+
+  完璧な構造でも、物質は裏切る。<br />
+  それでも彼は、構造を選んだ。
+</p>
 
   </div>
 </section>
@@ -619,13 +645,13 @@ export default function LeonardoRoom() {
 
   <div className="relative z-30 max-w-[940px] ld-fade py-32">
 
-    <h2 className="text-[46px] md:text-[56px] tracking-[0.36em] font-light text-[#f4f1ea]">
-      未完成という運命
-    </h2>
+<h2 className="text-[46px] md:text-[56px] tracking-[0.36em] font-light text-[#f4f1ea]">
+  未完成という運命
+</h2>
 
-    <div className="mt-14 mb-20 w-[130px] h-px bg-[#d4af37]/38 mx-auto" />
+<div className="mt-14 mb-20 w-[130px] h-px bg-[#d4af37]/38 mx-auto" />
 
-  <p className="leading-[3.4] text-[18px] md:text-[22px] font-light text-[#e6dfd2]/96">
+<p className="leading-[3.4] text-[18px] md:text-[22px] font-light text-[#e6dfd2]/96">
   絵画。解剖学。工学。幾何学。<br />
   彼にとって、それらは分野ではなかった。<br /><br />
 
@@ -636,8 +662,7 @@ export default function LeonardoRoom() {
   だが理解は終わらない。<br />
   “なぜ？”は尽きない。<br /><br />
 
-  完成へ向かうほど、<br />
-  未知は広がっていく。<br /><br />
+  完成へ向かうほど、未知は広がる。<br /><br />
 
   だから彼の人生は、<br />
   <span className="text-white text-[23px] tracking-[0.06em]">
@@ -645,18 +670,18 @@ export default function LeonardoRoom() {
   </span>
   残った。<br /><br />
 
-   彼のノートには、<br />
-  まだ存在しない機械の設計図が描かれていた。<br />
-  実現するのは、数百年後だった。
+  ノートには、まだ存在しない機械の設計図。<br />
+  それが現実になるのは、数百年後だった。<br /><br />
 
+  彼は、終わらなかった。<br />
+  ただ、時間が追いつかなかった。
 </p>
 
-
-    <div className="mt-20">
-      <p className="text-[12px] tracking-[0.46em] text-white/45">
-        THE HUMAN WHO COULDN'T STOP ASKING WHY
-      </p>
-    </div>
+<div className="mt-20">
+  <p className="text-[12px] tracking-[0.46em] text-white/45">
+    THE HUMAN WHO COULDN'T STOP ASKING WHY
+  </p>
+</div>
 
   </div>
 </section>

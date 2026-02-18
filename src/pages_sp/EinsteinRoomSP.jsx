@@ -1,6 +1,9 @@
 // src/pages_sp/EinsteinRoomSP.jsx
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function EinsteinRoomSP() {
   const containerRef = useRef(null);
@@ -55,31 +58,37 @@ export default function EinsteinRoomSP() {
   /* ================================
      Timeline Section（SP）
   ================================= */
+const TimelineSection = ({ year, title, description, image }) => (
+  <section className="es-sp-section relative min-h-[100svh] flex items-center px-[6vw] overflow-hidden">
 
-  const TimelineSection = ({ year, title, image }) => (
-    <section className="es-sp-section relative min-h-[100svh] flex items-center px-[6vw] overflow-hidden">
+    {/* Background */}
+    <img
+      src={image}
+      className="absolute inset-0 w-full h-full object-cover opacity-40"
+      alt=""
+    />
 
-      {/* Background */}
-      <img
-        src={image}
-        className="absolute inset-0 w-full h-full object-cover opacity-40"
-        alt=""
-      />
+    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/75 to-black z-10" />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/85 to-black z-10" />
+    {/* Content */}
+    <div className="relative z-20 w-full max-w-[520px] mx-auto fade-up text-left">
 
-      {/* Content */}
-      <div className="relative z-20 w-full max-w-[520px] mx-auto fade-up">
-        <p className="text-[10px] tracking-[0.45em] text-white/50 mb-4">
-          {year}
-        </p>
+      <p className="text-[10px] tracking-[0.45em] text-white/50 mb-6">
+        {year}
+      </p>
 
-        <h2 className="text-[22px] tracking-[0.18em] font-light leading-[1.4]">
-          {title}
-        </h2>
-      </div>
-    </section>
-  );
+      <h2 className="text-[22px] tracking-[0.18em] font-light leading-[1.5] mb-8">
+        {title}
+      </h2>
+
+      <p className="text-[14px] leading-[1.9] text-white/70 font-light">
+        {description}
+      </p>
+
+    </div>
+  </section>
+);
+
 
   return (
     <div
@@ -92,65 +101,70 @@ export default function EinsteinRoomSP() {
 
         <img
           src="/images/einstein/hero1.png"
-          className="absolute inset-0 w-full h-full object-cover object-[25%_50%] opacity-60"
+          className="absolute inset-0 w-full h-full object-cover object-[25%_50%] opacity-65"
           alt=""
         />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/65 to-black z-10" />
-<div
-  className="absolute inset-0 opacity-[0.06] pointer-events-none"
-  style={{
-    background:
-      "radial-gradient(circle at 70% 40%, rgba(255,255,255,0.25) 0%, transparent 60%)",
-  }}
-/>
+        {/* ▼ ここが重要：完全ブラックやめた */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/60 to-black/85 z-10" />
 
+        <div
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle at 70% 40%, rgba(255,255,255,0.25) 0%, transparent 60%)",
+          }}
+        />
 
+        {/* タイトル */}
+        <div className="relative z-20 w-full text-right pr-[10vw] mt-[16vh] fade-up">
 
-     {/* タイトル（中央より少し下・右寄せ微調整） */}
-<div className="relative z-20 w-full text-right pr-[10vw] mt-[16vh] fade-up">
+          <h1
+            ref={heroTitleRef}
+            className="
+              text-[30px]
+              tracking-[0.30em]
+              font-light
+              leading-[1.35]
+              text-white/80
+            "
+          >
+            時空の設計者
+          </h1>
 
-<h1
-  ref={heroTitleRef}
-  className="
-    text-[30px]
-tracking-[0.30em]
+          <p
+            className="
+              mt-5
+              text-[9px]
+              tracking-[0.5em]
+              text-white/40
+              text-center
+              self-center
+            "
+          >
+            ALBERT EINSTEIN
+          </p>
 
-    font-light
-    leading-[1.35]
-  text-white/75
-
-
-  "
->
-  時空の設計者
-</h1>
-
-<p
-  className="
-    mt-5
-    text-[9px]
-    tracking-[0.5em]
-    text-white/35
-    text-center
-    self-center
-  "
->
-
-  ALBERT EINSTEIN
-</p>
-
-
-</div>
+        </div>
 
       </section>
 
-      {/* Timeline */}
-      <TimelineSection
-        year="1879"
-        title="コンパス — 世界は見えない力でできている"
-        image="/images/einstein/1879.png"
-      />
+<TimelineSection
+  year="1879"
+  title="コンパス"
+  description={`幼い彼の手の中で、
+針は静かに揺れていた。
+
+誰も触れていないのに、
+なぜ動くのか。
+
+見えない力が、
+世界を支配している。
+
+その瞬間、
+少年の中で宇宙が始まった。`}
+  image="/images/einstein/1879.png"
+/>
 
       <TimelineSection
         year="1896"

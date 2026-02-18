@@ -137,14 +137,22 @@ export default function HeroSP() {
      遷移
   ================================================== */
 
-  const handleEnter = (route) => {
-    gsap.to(containerRef.current, {
-      opacity: 0,
-      duration: 0.4,
-      ease: "power2.out",
-      onComplete: () => navigate(route),
-    });
-  };
+/* ==================================================
+   遷移
+================================================== */
+
+const handleEnter = (route) => {
+  gsap.to(containerRef.current, {
+    opacity: 0,
+    duration: 0.4,
+    ease: "power2.out",
+    onComplete: () => {
+      navigate(route);
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    },
+  });
+};
+
 
   /* ==================================================
      データ（サイズ指定）
