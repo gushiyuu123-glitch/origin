@@ -62,36 +62,47 @@ export default function EinsteinRoomSP() {
      Timeline Section（SP）
   ============================================================ */
   const TimelineSection = ({ year, title, description, image }) => (
-    <section className="es-sp-section relative min-h-[100svh] flex items-center px-[6vw] overflow-hidden">
+   <section className="es-sp-section relative min-h-[100svh] flex items-center px-[6vw] overflow-hidden">
 
-      {/* 背景 */}
-      <img
-        src={image}
-        className="absolute inset-0 w-full h-full object-cover opacity-40"
-        alt=""
-      />
+  {/* 背景（明度 +15%） */}
+  <img
+    src={image}
+    className="absolute inset-0 w-full h-full object-cover opacity-58"
+    alt=""
+  />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/75 to-black z-10" />
+  {/* 黒グラデ（黒量を 25〜30% 減らした上品仕様） */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/75 z-10" />
 
-      {/* Content */}
-      <div className="relative z-20 w-full max-w-[520px] mx-auto fade-up text-left">
+  {/* 光膜（陰影調整・透明感を追加） */}
+  <div
+    className="absolute inset-0 opacity-[0.08] pointer-events-none z-[11]"
+    style={{
+      background:
+        "radial-gradient(circle at 70% 38%, rgba(255,255,255,0.26) 0%, transparent 55%)",
+    }}
+  />
 
-        <p className="text-[10px] tracking-[0.45em] text-white/50 mb-6">
-          {year}
-        </p>
+  {/* Content */}
+  <div className="relative z-20 w-full max-w-[520px] mx-auto fade-up text-left">
 
-        <h2 className="text-[22px] tracking-[0.18em] font-light leading-[1.5] mb-8">
-          {title}
-        </h2>
+    <p className="text-[10px] tracking-[0.45em] text-white/55 mb-6">
+      {year}
+    </p>
 
-        {description && (
-          <p className="text-[14px] leading-[1.9] text-white/70 font-light whitespace-pre-line">
-            {description}
-          </p>
-        )}
+    <h2 className="text-[22px] tracking-[0.18em] font-light leading-[1.5] mb-8 text-white/85">
+      {title}
+    </h2>
 
-      </div>
-    </section>
+    {description && (
+      <p className="text-[14px] leading-[1.9] text-white/80 font-light whitespace-pre-line">
+        {description}
+      </p>
+    )}
+
+  </div>
+</section>
+
   );
 
   /* ============================================================
@@ -103,59 +114,55 @@ export default function EinsteinRoomSP() {
       className="relative w-full bg-black text-white overflow-hidden"
     >
 
-      {/* ================= HERO ================= */}
-      <section className="es-sp-section relative min-h-[100svh] flex items-center px-[6vw] overflow-hidden">
+   <section className="es-sp-section relative min-h-[100svh] flex items-center px-[6vw] overflow-hidden">
 
-        <img
-          src="/images/einstein/hero1.png"
-          className="absolute inset-0 w-full h-full object-cover object-[25%_50%] opacity-65"
-          alt=""
-        />
+  <img
+    src="/images/einstein/hero1.png"
+    className="absolute inset-0 w-full h-full object-cover object-[25%_50%] opacity-55"
+    alt=""
+  />
 
-        {/* 黒を抜いた上品なグラデーション */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/60 to-black/85 z-10" />
+  {/* ↓ 黒グラデ弱め版（明度を20%回復） */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80 z-10" />
 
-        {/* 光膜 */}
-        <div
-          className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle at 70% 40%, rgba(255,255,255,0.25) 0%, transparent 60%)",
-          }}
-        />
+  {/* ↓ 光膜を強くして陰影バランス調整 */}
+  <div
+    className="absolute inset-0 opacity-[0.10] pointer-events-none"
+    style={{
+      background:
+        "radial-gradient(circle at 70% 40%, rgba(255,255,255,0.32) 0%, transparent 60%)",
+    }}
+  />
 
-        {/* HERO TITLE */}
-        <div className="relative z-20 w-full text-right pr-[10vw] mt-[16vh] fade-up">
+  <div className="relative z-20 w-full text-right pr-[10vw] mt-[16vh] fade-up">
+    <h1
+      ref={heroTitleRef}
+      className="
+        text-[30px]
+        tracking-[0.30em]
+        font-light
+        leading-[1.35]
+        text-white/85
+      "
+    >
+      時空の設計者
+    </h1>
 
-          <h1
-            ref={heroTitleRef}
-            className="
-              text-[30px]
-              tracking-[0.30em]
-              font-light
-              leading-[1.35]
-              text-white/80
-            "
-          >
-            時空の設計者
-          </h1>
+    <p
+      className="
+        mt-5
+        text-[9px]
+        tracking-[0.5em]
+        text-white/45
+        text-center
+        self-center
+      "
+    >
+      ALBERT EINSTEIN
+    </p>
+  </div>
 
-          <p
-            className="
-              mt-5
-              text-[9px]
-              tracking-[0.5em]
-              text-white/40
-              text-center
-              self-center
-            "
-          >
-            ALBERT EINSTEIN
-          </p>
-
-        </div>
-
-      </section>
+</section>
 
       {/* ================= TIMELINE ================= */}
 <TimelineSection
@@ -177,7 +184,7 @@ export default function EinsteinRoomSP() {
 
 その直感が、
 後の宇宙を変える最初の灯りとなった。`}
-  image="/images/einstein/1879.png"
+  image="/images/einstein/187911.png"
 />
 <TimelineSection
   year="1896"
@@ -199,7 +206,7 @@ export default function EinsteinRoomSP() {
 彼はまだ特別ではない。
 ただ一つ、疑い続けることだけが、
 彼を別の場所へ導いていた。`}
-  image="/images/einstein/1896.png"
+  image="/images/einstein/1111.png"
 />
 <TimelineSection
   year="1902"
