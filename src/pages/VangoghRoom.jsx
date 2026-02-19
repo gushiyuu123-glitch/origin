@@ -8,113 +8,112 @@ gsap.registerPlugin(ScrollTrigger);
 export default function VangoghRoom() {
   const containerRef = useRef(null);
   const swirlRef = useRef(null);
+useEffect(() => {
+  const ctx = gsap.context(() => {
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+    const sections = gsap.utils.toArray(".vg-section");
 
-      const sections = gsap.utils.toArray(".vg-section");
-
-      sections.forEach((sec) => {
-        const target = sec.querySelector(".fade-up");
-        const bg = sec.querySelector(".vg-bg");
-
-        /* =============================
-           🎬 テキストフェード（blur無し・静か）
-        ============================= */
-        if (target) {
-          gsap.set(target, { opacity: 0, y: 36 });
-
-          gsap.to(target, {
-            opacity: 1,
-            y: 0,
-            duration: 1.8,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sec,
-              start: "top 82%",
-              once: true,
-            },
-          });
-        }
-
-        /* =============================
-           🎥 背景パララックス
-        ============================= */
-        if (bg) {
-          gsap.to(bg, {
-         y: -160,
-scale: 1.1,
-scrub: 1.6,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sec,
-              start: "top bottom",
-              end: "bottom top",
-            },
-          });
-        }
-
-        /* =============================
-           🌗 明暗呼吸（GPU軽量版）
-        ============================= */
-        gsap.fromTo(
-          sec,
-          { opacity: 0.94 },
-          {
-            opacity: 1,
-            scrollTrigger: {
-              trigger: sec,
-              start: "top center",
-              end: "bottom center",
-              scrub: true,
-            },
-          }
-        );
-      });
+    sections.forEach((sec) => {
+      const target = sec.querySelector(".fade-up");
+      const bg = sec.querySelector(".vg-bg");
 
       /* =============================
-         🌌 星月夜 渦生命化（精密化）
+         🎬 テキストフェード（静か）
       ============================= */
+      if (target) {
+        gsap.set(target, { opacity: 0, y: 32 });
+
+        gsap.to(target, {
+          opacity: 1,
+          y: 0,
+          duration: 1.6,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sec,
+            start: "top 85%",
+            once: true,
+          },
+        });
+      }
+
+      /* =============================
+         🎥 背景パララックス（静か版）
+      ============================= */
+      if (bg) {
+        gsap.to(bg, {
+          y: -60,               // ★ -160 → -60（侵食防止）
+          scale: 1.04,          // ★ 1.1 → 1.04（高級感を壊さず減速）
+          ease: "none",
+          scrollTrigger: {
+            trigger: sec,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.7,         // ★ 1.6 → 0.7（動きを半分以下に）
+          },
+        });
+      }
+
+      /* =============================
+         🌗 明暗呼吸（揺れ最小）
+      ============================= */
+      gsap.fromTo(
+        sec,
+        { opacity: 0.97 },       // ★ 0.94 → 0.97（揺れをほぼ感じない）
+        {
+          opacity: 1,
+          scrollTrigger: {
+            trigger: sec,
+            start: "top center",
+            end: "bottom center",
+            scrub: 0.5,         // ★ 全体の揺れを最小に
+          },
+        }
+      );
+    });
+
+    /* =============================
+       🌌 星月夜 渦生命（安定化）
+    ============================= */
     if (swirlRef.current) {
 
-  gsap.set(swirlRef.current, { opacity: 0.22, scale: 0.88 });
+      // 初期状態
+      gsap.set(swirlRef.current, { opacity: 0.22, scale: 0.9 });
 
-  // 回転（宇宙）
-  gsap.to(swirlRef.current, {
-    rotate: 360,
-    duration: 260,
-    repeat: -1,
-    ease: "none",
-  });
+      // 超低速回転（そのまま）
+      gsap.to(swirlRef.current, {
+        rotate: 360,
+        duration: 260,
+        repeat: -1,
+        ease: "none",
+      });
 
-  // 横呼吸（PC強化）
-  gsap.to(swirlRef.current, {
-    scaleX: 1.3,
-    duration: 120,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut",
-  });
+      // 横呼吸（世界観維持）
+      gsap.to(swirlRef.current, {
+        scaleX: 1.18,          // ★ 1.3 → 1.18（侵食防止）
+        duration: 120,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
 
-  // スクロール連動
-  gsap.to(swirlRef.current, {
-    opacity: 0.55,
-    scale: 1.18,
-    scrollTrigger: {
-      trigger: ".star-section",
-      start: "top center",
-      end: "bottom center",
-      scrub: 1.2,
-    },
-  });
+      // スクロール連動（最小限）
+      gsap.to(swirlRef.current, {
+        opacity: 0.42,         // ★ 0.55 → 0.42（眩しさを抑制）
+        scale: 1.08,           // ★ 1.18 → 1.08（侵食ゼロへ）
+        scrollTrigger: {
+          trigger: ".star-section",
+          start: "top center",
+          end: "bottom center",
+          scrub: 0.6,          // ★ 動きを滑らかに抑制
+        },
+      });
+    }
 
-}
+  }, containerRef);
 
+  return () => ctx.revert();
+}, []);
 
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <div
@@ -126,14 +125,14 @@ scrub: 1.6,
   className="
     vg-section
     relative
-    min-h-screen
+    min-h-[140vh]         /* ★ 広げる：入口の“巨大さ”を出す */
     flex
     items-center
     justify-center
     text-center
     px-6
-    pt-[16vh]
-    pb-[14vh]
+    pt-[20vh]            /* ★ 上余白も少し増量 */
+    pb-[18vh]
     overflow-hidden
   "
 >
@@ -162,28 +161,44 @@ scrub: 1.6,
       ORIGIN 第一章
     </p>
 
-    <p className="text-[11px] tracking-[0.55em] text-white/60 font-light mb-8">
-      色は、叫びだった
+    {/* ★ 色彩の狂人（強化） */}
+    <p
+      className="
+        text-[13px]              /* ★ 11px → 13px */
+        tracking-[0.45em]        /* ★ 少し狭くして読みやすく */
+        font-light
+        mb-8
+      "
+      style={{
+        color: "rgba(255,218,110,0.85)",  /* ★ ゴッホの黄金 */
+        textShadow: "0 0 12px rgba(255,218,110,0.35)" /* ★ 軽く光らせる */
+      }}
+    >
+      色彩の狂人
     </p>
 
     {/* MAIN NAME */}
-    <h1 className="
-      text-[clamp(48px,7vw,96px)]
-      tracking-[0.16em]
-      font-light
-      leading-[1.05]
-    ">
+    <h1
+      className="
+        text-[clamp(48px,7vw,96px)]
+        tracking-[0.16em]
+        font-light
+        leading-[1.05]
+      "
+    >
       Van&nbsp;Gogh
     </h1>
 
     {/* JAPANESE */}
-    <p className="
-      mt-4
-      text-[11px]
-      tracking-[0.6em]
-      text-white/35
-      font-light
-    ">
+    <p
+      className="
+        mt-4
+        text-[11px]
+        tracking-[0.6em]
+        text-white/35
+        font-light
+      "
+    >
       ヴィンセント・ヴァン・ゴッホ
     </p>
 
@@ -191,13 +206,15 @@ scrub: 1.6,
     <div className="mt-12 mb-10 w-[64px] h-px bg-white/20 mx-auto" />
 
     {/* Body */}
-    <p className="
-      leading-[2.1]
-      text-white/88
-      text-[16px]
-      md:text-[19px]
-      font-light
-    ">
+    <p
+      className="
+        leading-[2.1]
+        text-white/88
+        text-[16px]
+        md:text-[19px]
+        font-light
+      "
+    >
 
       彼は、何度も道を外れた。<br />
       画商。聖職志願者。教師。<br />

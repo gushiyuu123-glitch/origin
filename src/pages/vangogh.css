@@ -2,46 +2,112 @@
    Van Gogh — Stable Cinematic
 ============================ */
 
+/* 全体背景 */
 .vangogh-room {
   background: #111118;
 }
 
-/* セクション */
+
+/* =======================================
+   SECTION（侵食防止・シネマティック安定軸）
+======================================= */
 .vg-section {
   position: relative;
+  overflow: hidden;       /* ★ 侵食を止める中核 */
+  min-height: 120vh;      /* ★ 背景パララックスの上下可動域を吸収 */
   transition:
     transform 1.8s cubic-bezier(.22,.61,.36,1),
     opacity 1.2s ease;
 }
 
-/* 背景スケール */
+
+/* 星月夜は背景スケール & 渦で高さが足りなくなるため増量 */
+.star-section {
+  min-height: 150vh;      /* ★ conic-gradient と gsap.scale の侵食対策 */
+}
+
+
+/* =======================================
+   背景（安定スケール）
+======================================= */
 .vg-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transform: scale(1.015);
+  will-change: transform, opacity;
+
   transition:
     transform 10s cubic-bezier(.22,.61,.36,1),
     opacity 2s ease;
-  transform: scale(1.015);
-  will-change: transform;
 }
 
-/* ビネット（filter使わない） */
+/* 背景が飛び出さないよう念のため安全枠を確保 */
+.vg-bg-large {
+  min-height: 130%;
+}
+
+
+/* =======================================
+   VIGNETTE（filter 不使用版）
+======================================= */
 .vg-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+
   background:
     radial-gradient(
       circle at 50% 45%,
       rgba(0,0,0,0.15) 0%,
-      rgba(0,0,0,0.3) 60%,
-      rgba(0,0,0,0.7) 100%
+      rgba(0,0,0,0.30) 60%,
+      rgba(0,0,0,0.70) 100%
     );
 }
 
-/* 粒子（blend削除） */
+
+/* =======================================
+   粒子（シネマ粒子・負荷軽め）
+======================================= */
 .vg-section::after {
   content: "";
   position: absolute;
   inset: 0;
+
   pointer-events: none;
   opacity: 0.06;
+
   background-image:
     radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 3px 3px;
+}
+
+/* =======================================
+   テキスト安全域（文字の揺れやにじみを防ぐ）
+======================================= */
+.fade-up {
+  will-change: opacity, transform;
+}
+
+/* =======================================
+   スマホ最適化（SPでは高さを抑えつつ侵食は防止）
+======================================= */
+@media (max-width: 768px) {
+  .vg-section {
+    min-height: 110vh;      /* SP では少し短くても破綻しない */
+  }
+
+  .star-section {
+    min-height: 135vh;      /* SP の conic-gradient 表示対策 */
+  }
+}
+.vg-bg {
+  transform-origin: center;
+}
+
+.star-section .vg-bg {
+  transform-origin: 50% 40%;
 }
