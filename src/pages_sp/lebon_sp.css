@@ -1,0 +1,14 @@
+/* LeBonRoomSP — minimum setup */
+.lbsp-root {
+  background: #050506;
+  color: white;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.lbsp-title {
+  letter-spacing: 0.32em;
+}

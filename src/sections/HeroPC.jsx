@@ -204,6 +204,14 @@ export default function HeroPC() {
     // 半分サイズ
     { text: "JOBS", sub: "本質", route: "/jobs", style: "top-[75%] left-[28%]", image: "/silhouettes/jobs.png", imageSize: 750 },
     { text: "MUSK", sub: "革命", route: "/musk", style: "top-[28%] right-[24%]", image: "/silhouettes/musk.png", imageSize: 750 },
+    {
+  text: "LE BON",
+  sub: "心理",
+  route: "/lebon",
+  style: "top-[46%] right-[14%]",
+  image: "/silhouettes/lebon.png",
+  imageSize: 750,     // ← ルボンは半身の“抽象シルエット”が美しい
+},
   ];
 
   return (

@@ -10,14 +10,16 @@ export default function GlobalRoomNavSP() {
   const bookRef = useRef(null);
   const overlayRef = useRef(null);
 
-  const rooms = [
-    { name: "第一章  VAN GOGH", path: "/vangogh" },
-    { name: "第二章  LEONARDO", path: "/leonardo" },
-    { name: "第三章  EINSTEIN", path: "/einstein" },
-    { name: "第四章  JOBS", path: "/jobs" },
-    { name: "第五章  MUSK", path: "/musk" },
-  ];
+const rooms = [
+  { name: "第一章  VAN GOGH", path: "/vangogh" },
+  { name: "第二章  LEONARDO", path: "/leonardo" },
+  { name: "第三章  EINSTEIN", path: "/einstein" },
+  { name: "第四章  JOBS", path: "/jobs" },
+  { name: "第五章  MUSK", path: "/musk" },
 
+  // ★ 新章（心理）
+  { name: "第六章  LE BON（心理）", path: "/lebon" },
+];
   /* =============================
      Scroll Lock
   ============================== */
@@ -190,8 +192,8 @@ export default function GlobalRoomNavSP() {
     fontFamily: "serif",
     color: "#1b1b1b",
     textAlign: "center",
-    padding: "0 18px",         // ← 28 → 18（本の内側に収まる）
-    transform: "translateY(-6%)", // ← 少し上へ調整
+    padding: "0 10px",         // ← 28 → 18（本の内側に収まる）
+    transform: "translateY(-1%)", // ← 少し上へ調整
     lineHeight: "1.45",        // 章タイトルが読みやすい最適値
   }}
 >
@@ -224,7 +226,7 @@ export default function GlobalRoomNavSP() {
 <div
   onClick={() => window.open("https://gushikendesign.com", "_blank")}
   style={{
-    marginTop: "10px",             // ← 22 → 10 に圧縮
+    marginTop: "0px",             // ← 22 → 10 に圧縮
     opacity: 0.55,
     fontSize: "9.6px",             // ← 少し縮めて本の幅に収める
     letterSpacing: "0.10em",       // ← 広がりを抑えて水平幅も圧縮

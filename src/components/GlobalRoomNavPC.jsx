@@ -10,13 +10,16 @@ export default function GlobalRoomNavPC() {
   const bookRef = useRef(null);
   const overlayRef = useRef(null);
 const base = { name: "BASE  GUSHIKEN DESIGN", url: "https://gushikendesign.com" };
-  const rooms = [
-    { name: "第一章  VAN GOGH", path: "/vangogh" },
-    { name: "第二章  LEONARDO", path: "/leonardo" },
-    { name: "第三章  EINSTEIN", path: "/einstein" },
-    { name: "第四章  JOBS", path: "/jobs" },
-    { name: "第五章  MUSK", path: "/musk" },
-  ];
+const rooms = [
+  { name: "第一章  VAN GOGH", path: "/vangogh" },
+  { name: "第二章  LEONARDO", path: "/leonardo" },
+  { name: "第三章  EINSTEIN", path: "/einstein" },
+  { name: "第四章  JOBS", path: "/jobs" },
+  { name: "第五章  MUSK", path: "/musk" },
+
+  // ★ 新章追加
+  { name: "第六章  LE BON（心理）", path: "/lebon" },
+];
 
   /* =========================
      Scroll Lock
@@ -204,7 +207,7 @@ const base = { name: "BASE  GUSHIKEN DESIGN", url: "https://gushikendesign.com" 
                {/* BASE — GUSHIKEN DESIGN */}
   <div
     onClick={() => window.open(base.url, "_blank")}
-    className="cursor-pointer transition-all duration-400 mt-10"
+    className="cursor-pointer transition-all duration-400 mt-1"
     style={{
       opacity: 0.6,
       letterSpacing: "0.18em",

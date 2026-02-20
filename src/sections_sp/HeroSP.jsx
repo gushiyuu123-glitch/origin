@@ -157,7 +157,6 @@ const handleEnter = (route) => {
   /* ==================================================
      データ（サイズ指定）
   ================================================== */
-
 const names = [
   { text: "VAN GOGH", sub: "感性", route: "/vangogh", image: "/silhouettes/1.png", size: "220vw" },
   { text: "LEONARDO", sub: "構造", route: "/leonardo", image: "/silhouettes/2.png", size: "220vw" },
@@ -165,8 +164,10 @@ const names = [
 
   { text: "JOBS", sub: "本質", route: "/jobs", image: "/silhouettes/jobs.png", size: "110vw" },
   { text: "MUSK", sub: "革命", route: "/musk", image: "/silhouettes/musk.png", size: "110vw" },
-];
 
+  // ← ここに追加（最適位置にしてある）
+  { text: "LE BON", sub: "心理", route: "/lebon", image: "/silhouettes/lebon.png", size: "110vw" },
+];
 
   return (
     <section

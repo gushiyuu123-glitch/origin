@@ -1,0 +1,14 @@
+/* LeBonRoom — minimum setup */
+.lb-root {
+  background: #050506;
+  color: white;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.lb-title {
+  letter-spacing: 0.32em;
+}

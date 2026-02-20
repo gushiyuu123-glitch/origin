@@ -17,6 +17,13 @@ import EinsteinRoom from "./pages/EinsteinRoom";
 import EinsteinRoomSP from "./pages_sp/EinsteinRoomSP";
 
 
+import JobsRoom from "./pages/JobsRoom";
+import JobsRoomSP from "./pages_sp/JobsRoomSP";
+
+import LeBonRoom from "./pages/LeBonRoom";
+import LeBonRoomSP from "./pages_sp/LeBonRoomSP";
+
+
 import ComingSoon from "./pages/ComingSoon";
 import GlobalRoomNav from "./components/GlobalRoomNav";
 
@@ -33,8 +40,7 @@ const rooms = [
     path: "/vangogh",
     title: "VAN GOGH",
     concept: "感性",
-    description:
-      "感性が構造を超えたとき、人は何を描くのか。",
+    description: "感性が構造を超えたとき、人は何を描くのか。",
     ogp: "/og/vangogh.png",
     pc: VangoghRoom,
     sp: VangoghRoomSP,
@@ -50,33 +56,45 @@ const rooms = [
     sp: LeonardoRoomSP,
   },
   {
-   path: "/einstein",
-  title: "EINSTEIN",
-  concept: "直感",
-  description:
-    "直感は論理よりも速い。時空を再設計した思考の跳躍。",
-  ogp: "/og/einstein.png",
-  pc: EinsteinRoom,
+    path: "/einstein",
+    title: "EINSTEIN",
+    concept: "直感",
+    description:
+      "直感は論理よりも速い。時空を再設計した思考の跳躍。",
+    ogp: "/og/einstein.png",
+    pc: EinsteinRoom,
     sp: EinsteinRoomSP,
   },
   {
     path: "/jobs",
     title: "JOBS",
     concept: "本質",
-    description:
-      "本質だけを残すという思想。",
+    description: "本質だけを残すという思想。",
     ogp: "/og/jobs.png",
+    pc: JobsRoom,
+    sp: JobsRoomSP,
   },
+
+  /* ★ ここが LeBonRoom ★ */
+{
+  path: "/lebon",
+  title: "LE BON",
+  concept: "群衆心理",
+  description:
+    "群衆は個を飲み込み、個は群衆を恐れない。人間の闇の構造。",
+  ogp: "/og/lebon.png",
+  pc: LeBonRoom,     // ← これあとで作る
+  sp: LeBonRoomSP,   // ← これあとで作る
+},
+
   {
     path: "/musk",
     title: "MUSK",
     concept: "革命",
-    description:
-      "未来を前借りする人間。",
+    description: "未来を前借りする人間。",
     ogp: "/og/musk.png",
   },
 ];
-
 
 export default function App() {
   const location = useLocation();
