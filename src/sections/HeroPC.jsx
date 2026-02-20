@@ -207,10 +207,38 @@ export default function HeroPC() {
   ];
 
   return (
+    
     <section
       ref={containerRef}
       className="relative w-screen h-screen bg-[#030303] text-white overflow-hidden"
     >
+      {/* JSON-LD（ORIGIN 本拠地 SEO） */}
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "ORIGIN｜創造の源",
+          "url": "https://origin-gray.vercel.app",
+          "description":
+            "ゴッホ・レオナルド・アインシュタイン・ジョブズ・マスク――領域を越えた天才たちの“核”を体験として再構築するデジタル思想ミュージアム。",
+        },
+        {
+          "@type": "WebPage",
+          "name": "ORIGIN｜創造の源",
+          "url": "https://origin-gray.vercel.app",
+          "description":
+            "感性・構造・直感・本質・革命――五つの思想軸で“創造の正体”を探索する体験型デジタル空間。",
+          "primaryImageOfPage":
+            "https://origin-gray.vercel.app/ogp/origin-top.jpg",
+        }
+      ]
+    }),
+  }}
+></script>
         {/* 神域光膜 */}
       <div
         className="absolute inset-0 pointer-events-none"

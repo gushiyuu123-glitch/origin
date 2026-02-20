@@ -172,11 +172,30 @@ const TimelineSection = ({ year, title, text, image }) => (
 );
 
   return (
+    
     <div
       ref={containerRef}
       className="relative w-full bg-black text-white overflow-hidden"
     >
-
+{/* JSON-LD（SEO） */}
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "ORIGIN 第三章｜時空の設計者 — アルベルト・アインシュタイン",
+      "description":
+        "アルベルト・アインシュタインの“疑う才能”と“直感の構造”を体験として再構築するデジタル展示。コンパスの衝撃、特許庁の思索、1905年の奇跡の年、一般相対性理論までを、空間として読む。",
+      "image": "https://origin-gray.vercel.app/ogp/einstein.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "GUSHIKEN DESIGN"
+      },
+      "url": "https://origin-gray.vercel.app/einstein"
+    }),
+  }}
+></script>
       {/* ================= HERO ================= */}
       <section
         ref={heroRef}

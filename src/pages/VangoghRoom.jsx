@@ -120,6 +120,25 @@ useEffect(() => {
       ref={containerRef}
       className="vangogh-room relative w-full bg-[#0f1016] text-white overflow-hidden"
     >
+      {/* JSON-LD（SEO） */}
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "ORIGIN 第一章｜色彩の狂人 — ヴィンセント・ヴァン・ゴッホ",
+      "description":
+        "ヴィンセント・ヴァン・ゴッホの“色彩の衝動”を構造的に読み解くデジタル展示空間。幼少期、アルル、星月夜、精神の揺らぎまでを体験的に表現。",
+      "image": "https://origin-gray.vercel.app/ogp/vangogh.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "GUSHIKEN DESIGN"
+      },
+      "url": "https://origin-gray.vercel.app/vangogh"
+    }),
+  }}
+></script>
 {/* ================= HERO ================= */}
 <section
   className="

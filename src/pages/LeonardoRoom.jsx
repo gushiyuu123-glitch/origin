@@ -134,15 +134,35 @@ export default function LeonardoRoom() {
   };
 
   return (
+
     <div
       ref={containerRef}
       className="relative w-full bg-[#0c0b08] text-[#e6dfd2] overflow-hidden tracking-[0.02em]"
+      
       style={{
         fontFeatureSettings: '"liga" 1',
         WebkitFontSmoothing: "antialiased",
       }}
     >
-
+    {/* JSON-LD（SEO） */}
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "ORIGIN 第二章｜レオナルド・ダ・ヴィンチ — 構造の解体者",
+          "description":
+            "レオナルド・ダ・ヴィンチの観察・解剖・構造設計を体験的に読み解くデジタル博物館コンテンツ。",
+          "image": "https://origin-gray.vercel.app/ogp/leonardo.jpg",
+          "author": {
+            "@type": "Person",
+            "name": "GUSHIKEN DESIGN"
+          },
+          "url": "https://origin-gray.vercel.app/leonardo"
+        }),
+      }}
+    ></script>
       {/* GLOBAL FILM */}
       <div
         className="pointer-events-none fixed inset-0 z-[2]"
