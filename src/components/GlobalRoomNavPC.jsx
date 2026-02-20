@@ -9,7 +9,7 @@ export default function GlobalRoomNavPC() {
   const location = useLocation();
   const bookRef = useRef(null);
   const overlayRef = useRef(null);
-
+const base = { name: "BASE  GUSHIKEN DESIGN", url: "https://gushikendesign.com" };
   const rooms = [
     { name: "第一章  VAN GOGH", path: "/vangogh" },
     { name: "第二章  LEONARDO", path: "/leonardo" },
@@ -201,6 +201,28 @@ export default function GlobalRoomNavPC() {
                   </div>
                 );
               })}
+               {/* BASE — GUSHIKEN DESIGN */}
+  <div
+    onClick={() => window.open(base.url, "_blank")}
+    className="cursor-pointer transition-all duration-400 mt-10"
+    style={{
+      opacity: 0.6,
+      letterSpacing: "0.18em",
+      transform: "rotate(0deg)",
+      textShadow:
+        "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.08)",
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.opacity = "1";
+      e.currentTarget.style.letterSpacing = "0.24em";
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.opacity = "0.6";
+      e.currentTarget.style.letterSpacing = "0.18em";
+    }}
+  >
+    BASE　GUSHIKEN DESIGN
+  </div>
             </div>
           </div>
         </div>

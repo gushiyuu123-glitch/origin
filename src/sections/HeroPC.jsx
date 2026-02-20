@@ -311,6 +311,30 @@ export default function HeroPC() {
           </span>
         </div>
       ))}
+      {/* BASE LINK — Hero右下 */}
+<div
+  onClick={() => window.open("https://gushikendesign.com", "_blank")}
+  className="fixed bottom-8 right-10 z-[5000] cursor-pointer select-none"
+  style={{
+    fontSize: "11px",
+    letterSpacing: "0.28em",
+    opacity: 0.45,
+    color: "rgba(255,255,255,0.85)",
+    transition: "opacity 0.4s ease, letter-spacing 0.4s ease",
+    textShadow:
+      "0 1px 2px rgba(0,0,0,0.35), 0 0 6px rgba(255,255,255,0.08)",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.opacity = "0.8";
+    e.currentTarget.style.letterSpacing = "0.32em";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.opacity = "0.45";
+    e.currentTarget.style.letterSpacing = "0.28em";
+  }}
+>
+  BASE｜GUSHIKEN DESIGN
+</div>
     </section>
   );
 }

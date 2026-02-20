@@ -176,7 +176,7 @@ export default function GlobalRoomNavSP() {
               }}
             />
 
-       {/* 章テキスト */}
+{/* 章テキスト */}
 <div
   style={{
     position: "absolute",
@@ -185,44 +185,61 @@ export default function GlobalRoomNavSP() {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: "13px",                // 少しだけ詰める
-    fontSize: "11px",           // ← 14 → 13 に微調整
+    gap: "10.5px",               // ← 13px → 11px（本に合わせて詰める）
+    fontSize: "9.5px",         // ← 11px → 小型化
     fontFamily: "serif",
     color: "#1b1b1b",
     textAlign: "center",
-    padding: "0 28px",
-    transform: "translateY(-4%)",  // ← ほんの少し上へ
+    padding: "0 18px",         // ← 28 → 18（本の内側に収まる）
+    transform: "translateY(-6%)", // ← 少し上へ調整
+    lineHeight: "1.45",        // 章タイトルが読みやすい最適値
   }}
 >
-
-              {rooms.map((room, i) => {
-                const active = location.pathname === room.path;
-
-                return (
-                  <div
-                    key={room.path}
-                    onClick={() => go(room.path)}
-                    style={{
-                      cursor: "pointer",
-                      letterSpacing: "0.16em",
-                      opacity: active ? 1 : 0.75,
-                      transform: `rotate(${i % 2 === 0 ? "-0.25deg" : "0.25deg"})`,
-                      textShadow:
-                        "0 1px 0 rgba(255,255,255,0.25), 0 2px 4px rgba(0,0,0,0.08)",
-                      transition: "all 0.3s ease",
-                    }}
-                    onTouchStart={(e) =>
-                      (e.currentTarget.style.opacity = "0.6")
-                    }
-                    onTouchEnd={(e) =>
-                      (e.currentTarget.style.opacity =
-                        active ? "1" : "0.75")
-                    }
-                  >
-                    {room.name}
-                  </div>
-                );
-              })}
+            {/* 章リスト */}
+  {rooms.map((room, i) => {
+    const active = location.pathname === room.path;
+ return (
+      <div
+        key={room.path}
+        onClick={() => go(room.path)}
+        style={{
+          cursor: "pointer",
+          letterSpacing: "0.16em",
+          opacity: active ? 1 : 0.75,
+          transform: `rotate(${i % 2 === 0 ? "-0.25deg" : "0.25deg"})`,
+          textShadow:
+            "0 1px 0 rgba(255,255,255,0.25), 0 2px 4px rgba(0,0,0,0.08)",
+          transition: "opacity 0.35s ease",
+        }}
+        onTouchStart={(e) => (e.currentTarget.style.opacity = "0.55")}
+        onTouchEnd={(e) =>
+          (e.currentTarget.style.opacity = active ? "1" : "0.75")
+        }
+      >
+        {room.name}
+      </div>
+    );
+  })}
+               {/* ---- BASE LINK ---- */}
+<div
+  onClick={() => window.open("https://gushikendesign.com", "_blank")}
+  style={{
+    marginTop: "10px",             // ← 22 → 10 に圧縮
+    opacity: 0.55,
+    fontSize: "9.6px",             // ← 少し縮めて本の幅に収める
+    letterSpacing: "0.10em",       // ← 広がりを抑えて水平幅も圧縮
+    lineHeight: "1.2",             // ← 高さを最も圧縮する調整
+    transform: "rotate(0deg)",
+    cursor: "pointer",
+    textShadow:
+      "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.06)",
+    transition: "opacity 0.35s ease, letter-spacing 0.35s ease",
+  }}
+  onTouchStart={(e) => (e.currentTarget.style.opacity = "0.75")}
+  onTouchEnd={(e) => (e.currentTarget.style.opacity = "0.55")}
+>
+  BASE　GUSHIKEN DESIGN
+</div>
             </div>
           </div>
         </div>
