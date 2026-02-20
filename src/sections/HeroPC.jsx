@@ -209,7 +209,7 @@ export default function HeroPC() {
   sub: "心理",
   route: "/lebon",
   style: "top-[46%] right-[14%]",
-  image: "/silhouettes/lebon.png",
+  image: "/silhouettes/lebon1.png",
   imageSize: 750,     // ← ルボンは半身の“抽象シルエット”が美しい
 },
   ];

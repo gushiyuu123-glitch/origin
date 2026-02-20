@@ -166,7 +166,7 @@ const names = [
   { text: "MUSK", sub: "革命", route: "/musk", image: "/silhouettes/musk.png", size: "110vw" },
 
   // ← ここに追加（最適位置にしてある）
-  { text: "LE BON", sub: "心理", route: "/lebon", image: "/silhouettes/lebon.png", size: "110vw" },
+  { text: "LE BON", sub: "心理", route: "/lebon", image: "/silhouettes/lebon1.png", size: "110vw" },
 ];
 
   return (
