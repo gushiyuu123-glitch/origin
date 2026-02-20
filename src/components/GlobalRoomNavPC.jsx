@@ -9,41 +9,28 @@ export default function GlobalRoomNavPC() {
   const location = useLocation();
   const bookRef = useRef(null);
   const overlayRef = useRef(null);
-const base = { name: "BASE  GUSHIKEN DESIGN", url: "https://gushikendesign.com" };
-const rooms = [
-  { name: "第一章  VAN GOGH", path: "/vangogh" },
-  { name: "第二章  LEONARDO", path: "/leonardo" },
-  { name: "第三章  EINSTEIN", path: "/einstein" },
-  { name: "第四章  JOBS", path: "/jobs" },
-  { name: "第五章  MUSK", path: "/musk" },
 
-  // ★ 新章追加
-  { name: "第六章  LE BON（心理）", path: "/lebon" },
-];
+  const base = { name: "BASE  GUSHIKEN DESIGN", url: "https://gushikendesign.com" };
 
-  /* =========================
-     Scroll Lock
-  ========================== */
+  const rooms = [
+    { name: "第一章  VAN GOGH", path: "/vangogh" },
+    { name: "第二章  LEONARDO", path: "/leonardo" },
+    { name: "第三章  EINSTEIN", path: "/einstein" },
+    { name: "第四章  JOBS", path: "/jobs" },
+    { name: "第五章  MUSK", path: "/musk" },
+    { name: "第六章  LE BON（心理）", path: "/lebon" },
+    { name: "第七章  DORSEY", path: "/dorsey" },
+  ];
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => (document.body.style.overflow = "");
   }, [open]);
 
-  /* =========================
-     OPEN
-  ========================== */
   const handleOpen = () => {
     setOpen(true);
-
     requestAnimationFrame(() => {
-      if (!bookRef.current || !overlayRef.current) return;
-
-      gsap.fromTo(
-        overlayRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 }
-      );
-
+      gsap.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 });
       gsap.fromTo(
         bookRef.current,
         { scale: 0.94, opacity: 0 },
@@ -52,22 +39,8 @@ const rooms = [
     });
   };
 
-  /* =========================
-     CLOSE
-  ========================== */
   const handleClose = () => {
-    if (!bookRef.current || !overlayRef.current) {
-      setOpen(false);
-      return;
-    }
-
-    gsap.to(bookRef.current, {
-      opacity: 0,
-      scale: 0.97,
-      duration: 0.4,
-      ease: "power2.out",
-    });
-
+    gsap.to(bookRef.current, { opacity: 0, scale: 0.97, duration: 0.4, ease: "power2.out" });
     gsap.to(overlayRef.current, {
       opacity: 0,
       duration: 0.4,
@@ -144,14 +117,12 @@ const rooms = [
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.opacity = "1";
-              e.currentTarget.style.border =
-                "1px solid rgba(255,255,255,0.5)";
+              e.currentTarget.style.border = "1px solid rgba(255,255,255,0.5)";
               e.currentTarget.style.transform = "scale(1.05)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.opacity = "0.7";
-              e.currentTarget.style.border =
-                "1px solid rgba(255,255,255,0.28)";
+              e.currentTarget.style.border = "1px solid rgba(255,255,255,0.28)";
               e.currentTarget.style.transform = "scale(1)";
             }}
           >
@@ -163,70 +134,102 @@ const rooms = [
             className="relative"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src="/images/open-book.png"
-              className="w-[1000px] max-w-[94vw]"
-            />
+            <img src="/images/open-book.png" className="w-[1000px] max-w-[94vw]" />
 
-            {/* 本の文字 */}
+            {/* ===== 2カラム本レイアウト ===== */}
             <div
-              className="absolute inset-0 flex flex-col items-center justify-center gap-8 text-[17px] font-light"
-              style={{
-                fontFamily: "serif",
-                color: "#1b1b1b",
-              }}
+              className="absolute inset-0 flex items-center justify-center text-[17px] font-light"
+              style={{ fontFamily: "serif", color: "#1b1b1b" }}
             >
-              {rooms.map((room, i) => {
-                const active = location.pathname === room.path;
+              <div className="flex gap-28">
+                {/* 左カラム */}
+                <div className="flex flex-col items-center gap-6">
+                  {rooms.slice(0, Math.ceil(rooms.length / 2)).map((room) => {
+                    const active = location.pathname === room.path;
+                    return (
+                      <div
+                        key={room.path}
+                        onClick={() => go(room.path)}
+                        className="cursor-pointer transition-all duration-400"
+                        style={{
+                          opacity: active ? 1 : 0.7,
+                          letterSpacing: "0.18em",
+                          textShadow:
+                            "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.08)",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.opacity = "1";
+                          e.currentTarget.style.letterSpacing = "0.22em";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.opacity = active ? "1" : "0.7";
+                          e.currentTarget.style.letterSpacing = "0.18em";
+                        }}
+                      >
+                        {room.name}
+                      </div>
+                    );
+                  })}
+                </div>
 
-                return (
-                  <div
-                    key={room.path}
-                    onClick={() => go(room.path)}
-                    className="cursor-pointer transition-all duration-400"
-                    style={{
-                      opacity: active ? 1 : 0.7,
-                      letterSpacing: "0.18em",
-                      transform: `rotate(${i % 2 === 0 ? "-0.2deg" : "0.2deg"})`,
-                      textShadow:
-                        "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.08)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.opacity = "1";
-                      e.currentTarget.style.letterSpacing = "0.22em";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.opacity = active ? "1" : "0.7";
-                      e.currentTarget.style.letterSpacing = "0.18em";
-                    }}
-                  >
-                    {room.name}
-                  </div>
-                );
-              })}
-               {/* BASE — GUSHIKEN DESIGN */}
-  <div
-    onClick={() => window.open(base.url, "_blank")}
-    className="cursor-pointer transition-all duration-400 mt-1"
-    style={{
-      opacity: 0.6,
-      letterSpacing: "0.18em",
-      transform: "rotate(0deg)",
-      textShadow:
-        "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.08)",
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.opacity = "1";
-      e.currentTarget.style.letterSpacing = "0.24em";
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.opacity = "0.6";
-      e.currentTarget.style.letterSpacing = "0.18em";
-    }}
-  >
-    BASE　GUSHIKEN DESIGN
-  </div>
+                {/* 右カラム */}
+                <div className="flex flex-col items-center gap-6">
+                  {rooms.slice(Math.ceil(rooms.length / 2)).map((room) => {
+                    const active = location.pathname === room.path;
+                    return (
+                      <div
+                        key={room.path}
+                        onClick={() => go(room.path)}
+                        className="cursor-pointer transition-all duration-400"
+                        style={{
+                          opacity: active ? 1 : 0.7,
+                          letterSpacing: "0.18em",
+                          textShadow:
+                            "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.08)",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.opacity = "1";
+                          e.currentTarget.style.letterSpacing = "0.22em";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.opacity = active ? "1" : "0.7";
+                          e.currentTarget.style.letterSpacing = "0.18em";
+                        }}
+                      >
+                        {room.name}
+                      </div>
+                    );
+                  })}
+
+                {/* BASE – GUSHIKEN DESIGN */}
+<div
+  onClick={() => window.open(base.url, "_blank")}
+  className="cursor-pointer transition-all duration-400"
+  style={{
+    position: "absolute",
+    bottom: "110px",      // ← 本の中央下に配置
+    left: "50%",
+    transform: "translateX(-50%)",
+    opacity: 0.6,
+    letterSpacing: "0.18em",
+    textShadow:
+      "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.08)",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.opacity = "1";
+    e.currentTarget.style.letterSpacing = "0.24em";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.opacity = "0.6";
+    e.currentTarget.style.letterSpacing = "0.18em";
+  }}
+>
+  BASE　GUSHIKEN DESIGN
+</div>
+                </div>
+              </div>
             </div>
+            {/* ===== END 2カラム ===== */}
           </div>
         </div>
       )}

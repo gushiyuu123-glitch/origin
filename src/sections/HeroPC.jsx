@@ -196,24 +196,79 @@ export default function HeroPC() {
   /* =========================
      データ（サイズ指定）
   ========================== */
-  const names = [
-    { text: "VAN GOGH", sub: "感性", route: "/vangogh", style: "top-[18%] left-[12%]", image: "/silhouettes/vangogh.png", imageSize: 1400 },
-    { text: "LEONARDO", sub: "構造", route: "/leonardo", style: "top-[62%] right-[8%]", image: "/silhouettes/leonardo.png", imageSize: 1400 },
-    { text: "EINSTEIN", sub: "直感", route: "/einstein", style: "top-[13%] left-[48%]", image: "/silhouettes/einstein.png", imageSize: 1400 },
+const names = [
+  /* ================
+      巨匠（フルサイズ）
+  ================= */
+  {
+    text: "VAN GOGH",
+    sub: "感性",
+    route: "/vangogh",
+    style: "top-[18%] left-[12%]",
+    image: "/silhouettes/vangogh.png",
+    imageSize: 1400,
+  },
+  {
+    text: "LEONARDO",
+    sub: "構造",
+    route: "/leonardo",
+    style: "top-[62%] right-[8%]",
+    image: "/silhouettes/leonardo.png",
+    imageSize: 1400,
+  },
+  {
+    text: "EINSTEIN",
+    sub: "直感",
+    route: "/einstein",
+    style: "top-[13%] left-[48%]",
+    image: "/silhouettes/einstein.png",
+    imageSize: 1400,
+  },
 
-    // 半分サイズ
-    { text: "JOBS", sub: "本質", route: "/jobs", style: "top-[75%] left-[28%]", image: "/silhouettes/jobs.png", imageSize: 750 },
-    { text: "MUSK", sub: "革命", route: "/musk", style: "top-[28%] right-[24%]", image: "/silhouettes/musk.png", imageSize: 750 },
-    {
-  text: "LE BON",
-  sub: "心理",
-  route: "/lebon",
-  style: "top-[46%] right-[14%]",
-  image: "/silhouettes/lebon1.png",
-  imageSize: 750,     // ← ルボンは半身の“抽象シルエット”が美しい
-},
-  ];
+  /* ================
+      現代（半サイズ）
+  ================= */
+  {
+    text: "JOBS",
+    sub: "本質",
+    route: "/jobs",
+    style: "top-[75%] left-[28%]",
+    image: "/silhouettes/jobs.png",
+    imageSize: 750,
+  },
+  {
+    text: "MUSK",
+    sub: "革命",
+    route: "/musk",
+    style: "top-[28%] right-[24%]",
+    image: "/silhouettes/musk.png",
+    imageSize: 750,
+  },
 
+  /* ================
+      LE BON（心理）
+  ================= */
+  {
+    text: "LE BON",
+    sub: "心理",
+    route: "/lebon",
+    style: "top-[46%] right-[14%]",
+    image: "/silhouettes/lebon1.png",
+    imageSize: 750,
+  },
+
+  /* ================
+      DORSEY（情報）★追加
+  ================= */
+  {
+    text: "DORSEY",
+    sub: "情報",
+    route: "/dorsey",
+    style: "top-[60%] left-[15%]",   // ← “情報の交点”として完璧
+    image: "/silhouettes/dorsey.png",
+    imageSize: 750,                 // ← Jobs/Musk と同じ階層
+  },
+];
   return (
     
     <section

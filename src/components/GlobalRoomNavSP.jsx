@@ -10,33 +10,29 @@ export default function GlobalRoomNavSP() {
   const bookRef = useRef(null);
   const overlayRef = useRef(null);
 
-const rooms = [
-  { name: "第一章  VAN GOGH", path: "/vangogh" },
-  { name: "第二章  LEONARDO", path: "/leonardo" },
-  { name: "第三章  EINSTEIN", path: "/einstein" },
-  { name: "第四章  JOBS", path: "/jobs" },
-  { name: "第五章  MUSK", path: "/musk" },
+  const baseUrl = "https://gushikendesign.com";
 
-  // ★ 新章（心理）
-  { name: "第六章  LE BON（心理）", path: "/lebon" },
-];
-  /* =============================
-     Scroll Lock
-  ============================== */
+  const rooms = [
+    { name: "第一章  VAN GOGH", path: "/vangogh" },
+    { name: "第二章  LEONARDO", path: "/leonardo" },
+    { name: "第三章  EINSTEIN", path: "/einstein" },
+    { name: "第四章  JOBS", path: "/jobs" },
+    { name: "第五章  MUSK", path: "/musk" },
+    { name: "第六章  LE BON（心理）", path: "/lebon" },
+    { name: "第七章  DORSEY", path: "/dorsey" },
+  ];
+
+  /* Scroll Lock */
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => (document.body.style.overflow = "");
   }, [open]);
 
-  /* =============================
-     OPEN
-  ============================== */
+  /* OPEN */
   const handleOpen = () => {
     setOpen(true);
 
     requestAnimationFrame(() => {
-      if (!bookRef.current || !overlayRef.current) return;
-
       gsap.fromTo(
         overlayRef.current,
         { opacity: 0 },
@@ -46,24 +42,17 @@ const rooms = [
       gsap.fromTo(
         bookRef.current,
         { scale: 0.92, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }
+        { scale: 1, opacity: 1, duration: 0.55, ease: "power3.out" }
       );
     });
   };
 
-  /* =============================
-     CLOSE
-  ============================== */
+  /* CLOSE */
   const handleClose = () => {
-    if (!bookRef.current || !overlayRef.current) {
-      setOpen(false);
-      return;
-    }
-
     gsap.to(bookRef.current, {
       opacity: 0,
       scale: 0.96,
-      duration: 0.3,
+      duration: 0.32,
       ease: "power2.out",
     });
 
@@ -82,7 +71,7 @@ const rooms = [
 
   return (
     <>
-      {/* ORIGIN LOGO */}
+      {/* ORIGIN Logo */}
       <div
         onClick={() => {
           navigate("/");
@@ -102,7 +91,6 @@ const rooms = [
           style={{
             width: "88px",
             opacity: 0.85,
-            display: "block",
           }}
         />
       </div>
@@ -125,13 +113,12 @@ const rooms = [
             style={{
               width: "54px",
               opacity: 0.85,
-              display: "block",
             }}
           />
         </div>
       )}
 
-      {/* OPEN BOOK */}
+      {/* OPENED */}
       {open && (
         <div
           ref={overlayRef}
@@ -139,7 +126,7 @@ const rooms = [
             position: "fixed",
             inset: 0,
             zIndex: 9999,
-            background: "rgba(0,0,0,0.85)",
+            background: "rgba(0,0,0,0.87)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -155,93 +142,93 @@ const rooms = [
               fontSize: "12px",
               letterSpacing: "0.25em",
               color: "white",
-              opacity: 0.65,
+              opacity: 0.68,
               cursor: "pointer",
             }}
           >
             本を閉じる
           </div>
 
-          <div
-            ref={bookRef}
-            style={{
-              position: "relative",
-            }}
-          >
+          <div ref={bookRef} style={{ position: "relative" }}>
+            {/* BOOK */}
             <img
               src="/images/open-book.png"
               alt="open book"
               style={{
                 width: "100vw",
                 maxWidth: "540px",
-                display: "block",
               }}
             />
 
-{/* 章テキスト */}
-<div
-  style={{
-    position: "absolute",
-    inset: 0,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "10.5px",               // ← 13px → 11px（本に合わせて詰める）
-    fontSize: "9.5px",         // ← 11px → 小型化
-    fontFamily: "serif",
-    color: "#1b1b1b",
-    textAlign: "center",
-    padding: "0 10px",         // ← 28 → 18（本の内側に収まる）
-    transform: "translateY(-1%)", // ← 少し上へ調整
-    lineHeight: "1.45",        // 章タイトルが読みやすい最適値
-  }}
->
-            {/* 章リスト */}
-  {rooms.map((room, i) => {
-    const active = location.pathname === room.path;
- return (
-      <div
-        key={room.path}
-        onClick={() => go(room.path)}
-        style={{
-          cursor: "pointer",
-          letterSpacing: "0.16em",
-          opacity: active ? 1 : 0.75,
-          transform: `rotate(${i % 2 === 0 ? "-0.25deg" : "0.25deg"})`,
-          textShadow:
-            "0 1px 0 rgba(255,255,255,0.25), 0 2px 4px rgba(0,0,0,0.08)",
-          transition: "opacity 0.35s ease",
-        }}
-        onTouchStart={(e) => (e.currentTarget.style.opacity = "0.55")}
-        onTouchEnd={(e) =>
-          (e.currentTarget.style.opacity = active ? "1" : "0.75")
-        }
-      >
-        {room.name}
-      </div>
-    );
-  })}
-               {/* ---- BASE LINK ---- */}
-<div
-  onClick={() => window.open("https://gushikendesign.com", "_blank")}
-  style={{
-    marginTop: "0px",             // ← 22 → 10 に圧縮
-    opacity: 0.55,
-    fontSize: "9.6px",             // ← 少し縮めて本の幅に収める
-    letterSpacing: "0.10em",       // ← 広がりを抑えて水平幅も圧縮
-    lineHeight: "1.2",             // ← 高さを最も圧縮する調整
-    transform: "rotate(0deg)",
-    cursor: "pointer",
-    textShadow:
-      "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.06)",
-    transition: "opacity 0.35s ease, letter-spacing 0.35s ease",
-  }}
-  onTouchStart={(e) => (e.currentTarget.style.opacity = "0.75")}
-  onTouchEnd={(e) => (e.currentTarget.style.opacity = "0.55")}
->
-  BASE　GUSHIKEN DESIGN
-</div>
+            {/* CHAPTER LIST */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "9.5px",
+                fontSize: "9.5px",
+                fontFamily: "serif",
+                color: "#1b1b1b",
+                padding: "0 18px",
+                transform: "translateY(-1%)",
+                textAlign: "center",
+                lineHeight: "1.45",
+              }}
+            >
+              {rooms.map((room, i) => {
+                const active = location.pathname === room.path;
+
+                return (
+                  <div
+                    key={room.path}
+                    onClick={() => go(room.path)}
+                    style={{
+                      cursor: "pointer",
+                      letterSpacing: "0.15em",
+                      opacity: active ? 1 : 0.75,
+                      transform: `rotate(${i % 2 === 0 ? "-0.2deg" : "0.2deg"})`,
+                      textShadow:
+                        "0 1px 0 rgba(255,255,255,0.25), 0 2px 3px rgba(0,0,0,0.06)",
+                      transition: "opacity 0.28s ease",
+                    }}
+                    onTouchStart={(e) =>
+                      (e.currentTarget.style.opacity = "0.55")
+                    }
+                    onTouchEnd={(e) =>
+                      (e.currentTarget.style.opacity = active ? "1" : "0.75")
+                    }
+                  >
+                    {room.name}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* BASE LINK — 外側（本の下） */}
+            <div
+              onClick={() => window.open(baseUrl, "_blank")}
+              style={{
+                position: "absolute",
+                top: "100%",
+                left: "50%",
+                transform: "translate(-50%, 18px)",
+                opacity: 0.55,
+                fontSize: "9.6px",
+                letterSpacing: "0.12em",
+                fontFamily: "serif",
+                cursor: "pointer",
+                textShadow:
+                  "0 1px 0 rgba(255,255,255,0.22), 0 2px 3px rgba(0,0,0,0.06)",
+                transition: "opacity 0.35s ease, letter-spacing 0.35s ease",
+              }}
+              onTouchStart={(e) => (e.currentTarget.style.opacity = "0.75")}
+              onTouchEnd={(e) => (e.currentTarget.style.opacity = "0.55")}
+            >
+              BASE　GUSHIKEN DESIGN
             </div>
           </div>
         </div>

@@ -23,6 +23,9 @@ import JobsRoomSP from "./pages_sp/JobsRoomSP";
 import LeBonRoom from "./pages/LeBonRoom";
 import LeBonRoomSP from "./pages_sp/LeBonRoomSP";
 
+import DorseyRoom from "./pages/DorseyRoom";
+import DorseyRoomSP from "./pages_sp/DorseyRoomSP";
+
 
 import ComingSoon from "./pages/ComingSoon";
 import GlobalRoomNav from "./components/GlobalRoomNav";
@@ -94,6 +97,16 @@ const rooms = [
     description: "未来を前借りする人間。",
     ogp: "/og/musk.png",
   },
+  {
+  path: "/dorsey",
+  title: "DORSEY",
+  concept: "情報",
+  description:
+    "140字の制約で世界の思考速度を変えた男。情報の構造を再発明した。",
+  ogp: "/og/dorsey.png",
+  pc: DorseyRoom,
+  sp: DorseyRoomSP,
+},
 ];
 
 export default function App() {
