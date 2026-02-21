@@ -11,17 +11,15 @@ export default function GlobalRoomNavPC() {
   const overlayRef = useRef(null);
 
   const base = { name: "BASE  GUSHIKEN DESIGN", url: "https://gushikendesign.com" };
-
-  const rooms = [
-    { name: "第一章  VAN GOGH", path: "/vangogh" },
-    { name: "第二章  LEONARDO", path: "/leonardo" },
-    { name: "第三章  EINSTEIN", path: "/einstein" },
-    { name: "第四章  JOBS", path: "/jobs" },
-    { name: "第五章  MUSK", path: "/musk" },
-    { name: "第六章  LE BON（心理）", path: "/lebon" },
-    { name: "第七章  DORSEY", path: "/dorsey" },
-  ];
-
+const rooms = [
+  { name: "第一章  VAN GOGH（感性／ゴッホ）", path: "/vangogh" },
+  { name: "第二章  LEONARDO（構造／レオナルド）", path: "/leonardo" },
+  { name: "第三章  EINSTEIN（直感／アインシュタイン）", path: "/einstein" },
+  { name: "第四章  JOBS（本質／ジョブズ）", path: "/jobs" },
+  { name: "第五章  MUSK（革命／マスク）", path: "/musk" },
+  { name: "第六章  LE BON（心理／ル・ボン）", path: "/lebon" },
+  { name: "第七章  DORSEY（思考／ドーシー）", path: "/dorsey" },
+];
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => (document.body.style.overflow = "");
