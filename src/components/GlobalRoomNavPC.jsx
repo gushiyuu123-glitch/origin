@@ -18,7 +18,7 @@ const rooms = [
   { name: "第四章  JOBS（本質／ジョブズ）", path: "/jobs" },
   { name: "第五章  MUSK（革命／マスク）", path: "/musk" },
   { name: "第六章  LE BON（心理／ル・ボン）", path: "/lebon" },
-  { name: "第七章  DORSEY（思考／ドーシー）", path: "/dorsey" },
+  { name: "第七章  DORSEY（情報／ドーシー）", path: "/dorsey" },
 ];
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";

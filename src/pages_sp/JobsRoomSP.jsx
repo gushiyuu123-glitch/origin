@@ -513,87 +513,58 @@ return (
             “世界の雑味を消す” という本能の延長だった。
           </p>
         </section>
+{/* =====================================================
+    CHAPTER 04 — ガレージ革命（見開き）
+===================================================== */}
+<section id="ch04sp" className="fade-sec relative">
 
-        {/* =====================================================
-            CHAPTER 04 — ガレージ革命（見開き）
-        ===================================================== */}
-        <section id="ch04sp" className="fade-sec relative">
+  {/* =======================
+      ① ガレージ画像だけ
+  ======================= */}
+  <div className="relative rounded-[18px] overflow-hidden mb-10">
+    <img
+      src="/images/jobs/garage_revo.png"
+      className="w-full max-h-[420px] object-cover"
+      alt=""
+    />
+  </div>
 
-          <div className="relative rounded-[18px] overflow-hidden mb-6">
+  {/* =======================
+      ② 画像の外に文字を独立
+  ======================= */}
+  <div className="max-w-[680px] mx-auto px-4 text-center">
 
-            <img
-              src="/images/jobs/garage_revo.png"
-              className="w-full max-h-[420px] object-cover"
-              alt=""
-            />
+    <p className="text-[11px] tracking-[0.28em] opacity-60 mb-4">
+      SPECIAL FEATURE — CHAPTER 04
+    </p>
 
-            <div className="absolute inset-0 bg-black/22" />
+    <h2 className="mag-title mb-6 leading-[1.42]">
+      ガレージの革命<br />
+      世界観が形になる瞬間
+    </h2>
 
-            <div
-              className="
-                absolute inset-0 bg-gradient-to-b
-                from-black/92 via-black/70 to-black/30
-                backdrop-blur-[1.0px]
-              "
-            />
+    <p className="text-[15px] leading-[1.92] font-light opacity-[0.92] mb-4">
+      粗野な基板の奥にだけ、ほのかな光のような  
+      「触れられる未来の原型」が見えていた。
+    </p>
 
-            <div
-              className="
-                absolute inset-0 opacity-[0.11]
-                bg-[radial-gradient(circle_at_68%_40%,rgba(212,175,55,0.28),transparent_60%)]
-                mix-blend-screen
-              "
-            />
+    <p className="text-[15px] leading-[1.92] font-light opacity-[0.9] mb-7">
+      技術の文脈に、美学の語彙を持ち込める者。  
+      その“翻訳者”は、当時まだ世界にいなかった。
+    </p>
 
-            {/* TEXT OVERLAY */}
-            <div className="absolute inset-0 flex items-center justify-center px-4 text-white">
+    <p className="text-[17px] opacity-85 tracking-[0.02em] my-8">
+      「未来は、誰もが触れられたときに初めて革命になる。」
+    </p>
 
-              <div className="max-w-[600px] text-center drop-shadow-[0_6px_18px_rgba(0,0,0,0.55)]">
+    <p className="text-[15px] leading-[1.92] font-light opacity-[0.96] mb-8">
+      ガレージで始まったのは、企業の誕生ではない。  
+      世界を“どう見せるか”。  
+      その問いへの最初の解答だった。
+    </p>
 
-                <p className="text-[11px] tracking-[0.28em] opacity-70 mb-3">
-                  SPECIAL FEATURE — CHAPTER 04
-                </p>
-
-                <h2
-                  className="mag-title text-white mb-6 leading-[1.42]"
-                >
-                  ガレージの革命<br />
-                  世界観が形になる瞬間
-                </h2>
-
-                <p className="text-[15px] leading-[1.9] font-light opacity-[0.96] mb-4">
-                  粗野な基板の奥にだけ、ほのかな光のような  
-                  「触れられる未来の原型」が見えていた。
-                </p>
-
-                <p className="text-[15px] leading-[1.9] font-light opacity-[0.94] mb-6">
-                  技術の文脈に、美学の語彙を持ち込める者。  
-                  その“翻訳者”は、当時まだ世界にいなかった。
-                </p>
-
-                <p
-                  className="
-                    text-[17px] opacity-85 tracking-[0.02em]
-                    my-8
-                  "
-                >
-                  「未来は、誰もが触れられたときに初めて革命になる。」
-                </p>
-
-                <p className="text-[15px] leading-[1.9] font-light opacity-[0.98]">
-                  ガレージで始まったのは、企業の誕生ではない。  
-                  世界を“どう見せるか”。  
-                  その問いへの最初の解答だった。
-                </p>
-
-              </div>
-            </div>
-          </div>
-
-          <p className="text-center text-[10px] tracking-[0.3em] opacity-55">
-            04 — THE FIRST REVOLUTION
-          </p>
-        </section>
+  </div>
+</section>
                 {/* =====================================================
             CHAPTER 05 — VISION（見える前に視えていた）
         ===================================================== */}
