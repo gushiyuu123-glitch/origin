@@ -715,37 +715,78 @@ return (
             世界を静かに、しかし確かに動かした “視点” の話だ。
           </p>
         </section>
+{/* =====================================================
+    CLOSING BLOCK（光の余韻とジョブズ名言）
+===================================================== */}
+<section className="fade-sec mb-[140px]">
 
-        {/* =====================================================
-            CLOSING VISUAL（光の余韻）
-        ===================================================== */}
-        <section className="fade-sec relative rounded-[20px] overflow-hidden h-[46vh]">
+  {/* ---------- CLOSING VISUAL ---------- */}
+  <div className="relative rounded-[20px] overflow-hidden h-[46vh] mb-14">
+    <img
+      src="/images/jobs/closing_abstract.png"
+      className="absolute inset-0 w-full h-full object-cover opacity-[0.9]"
+      alt=""
+    />
 
-          <img
-            src="/images/jobs/closing_abstract.png"
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.88]"
-            alt=""
-          />
+    <div
+      className="
+        absolute inset-0 backdrop-blur-[0.6px]
+        bg-gradient-to-b from-white/65 via-white/32 to-white/8
+      "
+    />
 
-          <div
-            className="
-              absolute inset-0 backdrop-blur-[0.6px]
-              bg-gradient-to-b from-white/65 via-white/32 to-white/6
-            "
-          />
+    <div className="relative z-20 h-full flex items-center justify-center px-6 text-center">
+      <h2
+        className="
+          text-[22px] leading-[1.62]
+          tracking-[0.18em] font-light text-black/80
+        "
+      >
+        未来は、つくる者<br></br>だけが見える。
+      </h2>
+    </div>
+  </div>
 
-          <div className="relative z-20 h-full flex items-center justify-center px-6 text-center">
-            <h2
-              className="
-                text-[22px] leading-[1.6]
-                tracking-[0.18em] font-light text-black/80
-              "
-            >
-              世界を動かすのは、<br />
-              いつだって “視点” だ。
-            </h2>
-          </div>
-        </section>
+  {/* ---------- JOBS QUOTES ---------- */}
+  <div className="max-w-[720px] mx-auto px-6 text-center">
+
+    <p className="text-[11px] tracking-[0.28em] opacity-50 mb-10">
+      STEVE JOBS — SELECTED QUOTES
+    </p>
+
+    {/* 名言 1 */}
+    <div className="mb-10">
+      <p className="text-[15px] leading-[1.9] font-light opacity-[0.88]">
+        「Simplicity is the ultimate sophistication.」
+      </p>
+      <p className="text-[12px] opacity-55 mt-2 tracking-[0.08em]">
+        ー シンプルさは究極の洗練である
+      </p>
+    </div>
+
+    {/* 名言 2 */}
+    <div className="mb-10">
+      <p className="text-[15px] leading-[1.9] font-light opacity-[0.88]">
+        「Design is not just what it looks like. Design is how it works.」
+      </p>
+      <p className="text-[12px] opacity-55 mt-2 tracking-[0.08em]">
+        ー デザインは見た目ではなく、<br></br>どう機能するかだ
+      </p>
+    </div>
+
+    {/* 名言 3 */}
+    <div>
+      <p className="text-[15px] leading-[1.9] font-light opacity-[0.88]">
+        「The people who are crazy enough to think they can change the world
+        are the ones who do.」
+      </p>
+      <p className="text-[12px] opacity-55 mt-2 tracking-[0.08em]">
+        ー 世界を変えられると本気で<br></br>信じる人だけが、世界を変える
+      </p>
+    </div>
+
+  </div>
+</section>
 
       </div> 
 
