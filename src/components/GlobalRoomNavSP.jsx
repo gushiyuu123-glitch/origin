@@ -209,27 +209,28 @@ export default function GlobalRoomNavSP() {
             </div>
 
             {/* BASE LINK — 外側（本の下） */}
-            <div
-              onClick={() => window.open(baseUrl, "_blank")}
-              style={{
-                position: "absolute",
-                top: "100%",
-                left: "50%",
-                transform: "translate(-50%, 18px)",
-                opacity: 0.55,
-                fontSize: "9.6px",
-                letterSpacing: "0.12em",
-                fontFamily: "serif",
-                cursor: "pointer",
-                textShadow:
-                  "0 1px 0 rgba(255,255,255,0.22), 0 2px 3px rgba(0,0,0,0.06)",
-                transition: "opacity 0.35s ease, letter-spacing 0.35s ease",
-              }}
-              onTouchStart={(e) => (e.currentTarget.style.opacity = "0.75")}
-              onTouchEnd={(e) => (e.currentTarget.style.opacity = "0.55")}
-            >
-              BASE　GUSHIKEN DESIGN
-            </div>
+ <div
+  onClick={() => window.open(baseUrl, "_blank")}
+  style={{
+    position: "absolute",
+    top: "100%",
+    left: "50%",
+    transform: "translate(-50%, 18px)",
+    opacity: 0.75,
+    fontSize: "9.6px",
+    letterSpacing: "0.12em",
+    fontFamily: "serif",
+    cursor: "pointer",
+   color: "rgba(255,255,255,0.92)",
+textShadow:
+  "0 1px 0 rgba(255,255,255,0.55), 0 2px 6px rgba(255,255,255,0.12)",
+    transition: "opacity 0.35s ease, letter-spacing 0.35s ease",
+  }}
+  onTouchStart={(e) => (e.currentTarget.style.opacity = "1")}
+  onTouchEnd={(e) => (e.currentTarget.style.opacity = "0.75")}
+>
+  BASE　GUSHIKEN DESIGN
+</div>
           </div>
         </div>
       )}
