@@ -1,14 +1,91 @@
-/* LeBonRoomSP — minimum setup */
+/* ==================================================
+   LeBonRoomSP — Final Optimal Setup
+   完全版：静 / 緊張 / 高速フェード / SP黄金比
+================================================== */
+
+/* ROOT -------------------------------------------- */
 .lbsp-root {
   background: #050506;
-  color: white;
+  color: #ffffff;
+  font-family: "Noto Sans JP", sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  letter-spacing: 0.010em; /* ← SP最適値 */
+  overflow-x: hidden;
 }
 
+/* FADE-UP ------------------------------------------ */
 .fade-up {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(22px);
+  filter: blur(0.2px); /* ← SPはこの濃さが黄金比 */
+
+  will-change: opacity, transform, filter;
+
+  transition:
+    opacity 0.72s cubic-bezier(0.22, 0.10, 0.25, 1),
+    transform 0.72s cubic-bezier(0.22, 0.10, 0.25, 1),
+    filter 0.72s cubic-bezier(0.22, 0.10, 0.25, 1);
 }
 
+.fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* TITLES -------------------------------------------- */
 .lbsp-title {
-  letter-spacing: 0.32em;
+  font-weight: 300;
+  letter-spacing: 0.26em; /* ← SP黄金比 */
+  opacity: 0.92;
+  line-height: 1.72;
+}
+
+/* h2 */
+.lbsp-h2 {
+  font-size: 20px;
+  line-height: 1.75;
+  letter-spacing: 0.18em;
+  margin-bottom: 22px;
+  font-weight: 300;
+  opacity: 0.90;
+}
+
+/* BODY ---------------------------------------------- */
+.lbsp-body {
+  font-size: 14px;
+  line-height: 1.92;
+  opacity: 0.87; /* ← 読みやすさと緊張が両立 */
+  margin-bottom: 20px;
+}
+
+/* IMAGE ---------------------------------------------- */
+.lbsp-img {
+  width: 100%;
+  border-radius: 6px;
+  opacity: 0.9;
+}/* =========================================
+   ENDING — SP Vertical Reveal
+========================================= */
+
+.ending-reveal-sp {
+  opacity: 0;
+  transform: translateY(28px);
+  clip-path: inset(0 0 36% 0);
+  filter: blur(0.25px);
+
+  will-change: opacity, transform, clip-path, filter;
+  transition:
+    opacity 1.22s cubic-bezier(0.22, 0.1, 0.25, 1),
+    transform 1.22s cubic-bezier(0.22, 0.1, 0.25, 1),
+    clip-path 1.22s cubic-bezier(0.22, 0.1, 0.25, 1),
+    filter 1.22s cubic-bezier(0.22, 0.1, 0.25, 1);
+}
+
+.ending-reveal-sp.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  clip-path: inset(0 0 0 0);
+  filter: blur(0);
 }

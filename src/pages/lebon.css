@@ -1,14 +1,181 @@
-/* LeBonRoom — minimum setup */
+/* ==================================================
+   LeBonRoom — Final Luxury Setup (ULTIMATE)
+   Aesthetic: 静 / 緊張 / 金膜0.18 / 高密度タイポ
+================================================== */
+
+/* ROOT -------------------------------------------------- */
 .lb-root {
   background: #050506;
-  color: white;
+  color: #ffffff;
+  font-family: "Noto Sans JP", sans-serif;
+  letter-spacing: 0.015em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
+/* FADE-UP ---------------------------------------------- */
 .fade-up {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(26px);
+  filter: blur(0.18px); /* ← 黄金値 */
+  will-change: opacity, transform, filter;
+  transition:
+    opacity 0.78s cubic-bezier(0.22, 0.10, 0.25, 1),
+    transform 0.78s cubic-bezier(0.22, 0.10, 0.25, 1),
+    filter 0.78s cubic-bezier(0.22, 0.10, 0.25, 1);
 }
 
+.fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* TYPO -------------------------------------------------- */
 .lb-title {
   letter-spacing: 0.32em;
+  font-weight: 300;
+  opacity: 0.92;
+}
+
+.lb-h2 {
+  font-size: 26px;
+  line-height: 1.78;
+  letter-spacing: 0.17em;
+  margin-bottom: 32px;
+  font-weight: 300;
+  opacity: 0.92;
+}
+
+.lb-lead {
+  font-size: 16px;
+  line-height: 2;
+  opacity: 0.90;
+  margin-bottom: 28px;
+}
+
+.lb-body {
+  font-size: 15px;
+  line-height: 1.92; /* ← 最適ライン */
+  opacity: 0.83;
+  margin-bottom: 24px;
+}
+
+/* LIST -------------------------------------------------- */
+.lb-list {
+  margin-left: 1.1em;
+  opacity: 0.88;
+}
+.lb-list li {
+  margin-bottom: 10px;
+  line-height: 1.88;
+  font-size: 14px;
+}
+
+/* IMAGE -------------------------------------------------- */
+.lb-img {
+  width: 100%;
+  border-radius: 6px;
+  opacity: 0.93;
+  mix-blend-mode: lighten; /* ← 光が自然ににじむ */
+}
+
+/* GRID -------------------------------------------------- */
+.lb-grid {
+  display: grid;
+  gap: 28px;
+}
+@media (min-width: 768px) {
+  .lb-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* CARDS -------------------------------------------------- */
+.lb-card {
+  background: rgba(255, 255, 255, 0.035);
+  padding: 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px); /* ← 過度に滲ませない */
+}
+
+.lb-card h3 {
+  font-size: 15px;
+  letter-spacing: 0.16em;
+  margin-bottom: 14px;
+  opacity: 0.92;
+}
+
+.lb-card p {
+  font-size: 14px;
+  line-height: 1.9;
+  opacity: 0.78;
+}
+
+/* DARK SECTION ----------------------------------------- */
+.lb-dark {
+  background: rgba(255, 255, 255, 0.015);
+  position: relative;
+}
+.lb-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(255, 255, 255, 0.06),
+    transparent 60%
+  );
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+/* HERO -------------------------------------------------- */
+.lb-hero {
+  position: relative;
+  padding-top: 140px;
+  padding-bottom: 100px;
+}
+
+.lb-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 48% 32%,
+    rgba(212, 175, 55, 0.18),
+    transparent 58%
+  );
+  opacity: 0.22;
+}
+
+/* SECTION ---------------------------------------------- */
+.lb-section {
+  position: relative;
+  z-index: 2;
+}/* =========================================
+   ENDING — Vertical Reveal Animation
+========================================= */
+
+.ending-reveal {
+  opacity: 0;
+  transform: translateY(38px);
+  clip-path: inset(0 0 32% 0); /* ← 下側を覆う黒ベール */
+  filter: blur(0.3px);
+
+  will-change: opacity, transform, clip-path, filter;
+  transition:
+    opacity 1.3s cubic-bezier(0.22, 0.1, 0.25, 1),
+    transform 1.3s cubic-bezier(0.22, 0.1, 0.25, 1),
+    clip-path 1.3s cubic-bezier(0.22, 0.1, 0.25, 1),
+    filter 1.3s cubic-bezier(0.22, 0.1, 0.25, 1);
+}
+
+.ending-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  clip-path: inset(0 0 0 0); /* ← ベールが完全に開く */
+  filter: blur(0);
 }
