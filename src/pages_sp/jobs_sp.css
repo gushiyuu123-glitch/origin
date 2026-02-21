@@ -1,33 +1,176 @@
-/* =========================================
-   JOBS ROOM — SP（静けさ × 余白）
-========================================= */
-
-.jobs-room-sp {
-  width: 100%;
-  background: #0b0b0b;
-  color: #f5f5f5;
-  overflow-x: hidden;
-  padding-bottom: 80px; /* 全体の呼吸 */
+/* ============================================================
+   00) RESET（SP版 JobsRoom 安全領域）
+============================================================ */
+.mag-title,
+.mag-code,
+.mag-img,
+.editorial-fade,
+.mag-break-film,
+.mag-quote-on-bg,
+.mag-break-bg::before {
+  position: relative;
 }
 
-/* ===============================
-   HERO
-=============================== */
+/* ============================================================
+   01) 固定：巨大タイポ（Background Editorial Layer）
+============================================================ */
+.editorial-bg-txt {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
 
+/* ============================================================
+   02) Dior 銀膜（SP 強度 80% に調整）
+============================================================ */
+.mag-break-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 42%,
+    rgba(255,255,255,0.45) 0%,
+    rgba(255,255,255,0.18) 34%,
+    rgba(255,255,255,0.05) 72%
+  );
+  backdrop-filter: blur(1.8px);
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+.mag-break-film {
+  background: radial-gradient(
+    circle at 50% 42%,
+    rgba(255,255,255,0.45) 0%,
+    rgba(255,255,255,0.18) 34%,
+    rgba(255,255,255,0.05) 72%
+  );
+  backdrop-filter: blur(1.8px);
+  opacity: 0.78;
+}
+
+/* ============================================================
+   03) 雑誌ゴールデンライン（SPは細く・短く）
+============================================================ */
+.mag-code::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(210,180,120,0.70),
+    rgba(210,180,120,0.16)
+  );
+}
+
+.mag-title::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 42px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(210,180,120,0.55),
+    rgba(210,180,120,0.08)
+  );
+}
+
+/* ============================================================
+   04) 誌面質感（SPは hover無効化）
+============================================================ */
+.mag-img {
+  transform: scale(1.015);
+  transform-origin: center;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+  opacity: 0.97;
+  filter: contrast(1.03) brightness(1.02);
+  transition: transform 0.8s ease, filter 0.8s ease;
+}
+
+.mag-img:hover {
+  transform: scale(1.015);
+  filter: brightness(1.03) contrast(1.03);
+}
+
+/* ============================================================
+   05) Meaning Section（左右反転：SPでは解除）
+============================================================ */
+.mag-section.is-meaning .mag-grid {
+  grid-template-columns: 1fr;
+}
+
+.mag-section.is-meaning .mag-grid > * {
+  order: unset;
+}
+
+/* ============================================================
+   06) Background Quote（背景上のコピー）
+============================================================ */
+.mag-quote-on-bg {
+  font-size: 22px;
+  line-height: 1.72;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: #111;
+  opacity: 0.92;
+  text-shadow: 0 0 14px rgba(255,255,255,0.8);
+}
+
+/* ============================================================
+   07) Editorial Fade（名言の出現演出）
+============================================================ */
+.editorial-fade {
+  opacity: 0;
+  transform: translateY(22px);
+  animation: editorialFade 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.editorial-fade.delay-2 {
+  animation-delay: 0.08s;
+}
+
+@keyframes editorialFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   08) BASE — JobsRoomSP 本体（背景・文字色）
+============================================================ */
+.jobs-room-sp {
+  width: 100%;
+  background: #111; /* ← 黒すぎ問題の完全解決 */
+  color: #f5f5f5;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+/* ============================================================
+   09) HERO（SP）
+============================================================ */
 .jobs-room-sp .jobs-hero-sp {
   padding: 96px 24px 80px;
   text-align: center;
   position: relative;
 }
 
-/* 超薄い光膜（SPは控えめ） */
 .jobs-room-sp .jobs-hero-sp::before {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
     circle at 50% 38%,
-    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255,255,255,0.06) 0%,
     transparent 60%
   );
   opacity: 0.14;
@@ -41,24 +184,22 @@
   opacity: 0.92;
 }
 
-/* ===============================
-   CONTENT BLOCKS
-=============================== */
-
+/* ============================================================
+   10) CONTENT SECTION
+============================================================ */
 .jobs-room-sp section {
   padding: 80px 24px;
   position: relative;
   margin-bottom: 40px;
 }
 
-/* 光膜（sectionごとに極薄） */
 .jobs-room-sp section::before {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
     circle at 50% 45%,
-    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255,255,255,0.05) 0%,
     transparent 65%
   );
   opacity: 0.10;
@@ -74,34 +215,31 @@
   color: #ffffff;
 }
 
-/* ===============================
-   TEXT
-=============================== */
-
+/* ============================================================
+   11) TEXT
+============================================================ */
 .jobs-room-sp p {
   font-size: 15px;
   line-height: 1.85;
   opacity: 0.88;
   margin-bottom: 22px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255,255,255,0.85);
 }
 
-/* ===============================
-   IMAGES
-=============================== */
-
+/* ============================================================
+   12) IMAGES
+============================================================ */
 .jobs-room-sp .sec-img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 40px;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
-/* ===============================
-   ANIMATIONS（fade-up）
-=============================== */
-
+/* ============================================================
+   13) fade-up（SP 速度調整）
+============================================================ */
 .fade-up {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(28px);
 }

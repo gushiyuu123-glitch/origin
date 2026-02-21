@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./jobs.css"; // ← 黄金ライン・銀膜だけ残す
+import "./jobs.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,36 +11,46 @@ export default function JobsRoom() {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
 
+  /* =====================================================
+     ① HERO 呼吸（ctxHero）
+  ===================================================== */
   useEffect(() => {
     const ctx = gsap.context(() => {
-      /* HERO 呼吸 */
-      if (heroRef.current && titleRef.current) {
-        gsap.to(heroRef.current, {
-          scale: 1.004,
-          duration: 8,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
+      if (!heroRef.current || !titleRef.current) return;
 
-        gsap.to(titleRef.current, {
-          letterSpacing: "0.30em",
-          duration: 7,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      }
+      gsap.to(heroRef.current, {
+        scale: 1.004,
+        duration: 8,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
 
-      /* Fade-in */
+      gsap.to(titleRef.current, {
+        letterSpacing: "0.30em",
+        duration: 7,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  /* =====================================================
+     ② fade-sec（ctxFade）
+  ===================================================== */
+  useEffect(() => {
+    const ctx = gsap.context(() => {
       gsap.utils.toArray(".fade-sec").forEach((sec) => {
         gsap.fromTo(
           sec,
-          { opacity: 0, y: 40 },
+          { opacity: 0, y: 32 },
           {
             opacity: 1,
             y: 0,
-            duration: 1.5,
+            duration: 1.6,
             ease: "power3.out",
             scrollTrigger: {
               trigger: sec,
@@ -55,512 +65,881 @@ export default function JobsRoom() {
     return () => ctx.revert();
   }, []);
 
-  return (
+  /* =====================================================
+     ③ Big Typo（初期表示＋浮遊）
+  ===================================================== */
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const bigTypo = document.getElementById("bigTypo");
+      const wrapper = document.getElementById("bigTypoWrapper");
+      if (!bigTypo || !wrapper) return;
+
+      // 初期フェード
+      gsap.fromTo(
+        wrapper,
+        { y: 120, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.8,
+          ease: "power3.out",
+          delay: 0.2,
+        }
+      );
+
+      // 浮遊パララックス
+      gsap.to(wrapper, {
+        y: "-12vh",
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.3,
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  /* =====================================================
+     ④ Big Typo — 章切替（段階フェード / 位置 clamp 化）
+  ===================================================== */
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const bigTypo = document.getElementById("bigTypo");
+      const wrapper = document.getElementById("bigTypoWrapper");
+      if (!bigTypo || !wrapper) return;
+
+      const mapping = [
+        { id: "ch01", word: "BORDER" },
+        { id: "ch02", word: "MEANING" },
+        { id: "ch03", word: "SPARK" },
+        { id: "ch04", word: "GARAGE" },
+        { id: "ch05", word: "VISION" },
+        { id: "ch06", word: "ESSENCE" },
+        { id: "ch07", word: "THINK" },
+      ];
+
+      // 上品な編集感で位置を clamp(px, vw, vh)
+      const offsets = {
+        ch01: { x: "-48%", y: "clamp(30px, 12vh, 160px)" },
+        ch02: { x: "-52%", y: "clamp(42px, 15vh, 180px)" },
+        ch03: { x: "-50%", y: "clamp(28px, 10vh, 150px)" },
+        ch04: { x: "-49%", y: "clamp(34px, 14vh, 170px)" },
+        ch05: { x: "-46%", y: "clamp(48px, 18vh, 190px)" },
+        ch06: { x: "-54%", y: "clamp(24px, 10vh, 150px)" },
+        ch07: { x: "-50%", y: "clamp(40px, 16vh, 180px)" },
+      };
+
+      mapping.forEach(({ id, word }) => {
+        const target = document.getElementById(id);
+        if (!target) return;
+
+        ScrollTrigger.create({
+          trigger: target,
+          start: "top 72%",
+
+          onEnter: () => {
+            const pos = offsets[id];
+
+            // ——— 段階フェード ———
+            gsap.to(bigTypo, {
+              opacity: 0,
+              duration: 0.35,
+              ease: "power2.out",
+            });
+
+            setTimeout(() => {
+              bigTypo.textContent = word;
+
+              gsap.fromTo(
+                bigTypo,
+                { opacity: 0 },
+                {
+                  opacity: 0.28,
+                  duration: 0.8,
+                  ease: "power3.out",
+                }
+              );
+            }, 360);
+
+            // ——— wrapper の位置変更 ———
+            gsap.to(wrapper, {
+              x: pos.x,
+              y: pos.y,
+              duration: 1.2,
+              ease: "power2.out",
+            });
+          },
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+    return (
     <div
       ref={containerRef}
-      className="bg-[#f3f3f3] text-[#111] overflow-x-hidden"
-    >
-{/* ================= HERO WRAPPER ================= */}
-<div className="relative min-h-screen w-full overflow-hidden">
-
-  {/* ================= FRONT TITLE BLOCK ================= */}
-  <div
-    className="
-      absolute top-[24vh] left-1/2 -translate-x-1/2
-      z-[9999]
-      text-center
-      pointer-events-none
-    "
-  >
-    {/* サブコピー */}
-    <p
-      className="
-        text-[13px]
-        tracking-[0.34em]
-        opacity-70
-        mb-3
-        font-light
-      "
-    >
-      STEVE JOBS
-    </p>
-
-    {/* メインタイトル */}
-    <h1
-      ref={titleRef}
-      className="
-        text-[48px]
-        tracking-[0.18em]
-        font-light
-        text-black/85
-        drop-shadow-[0_2px_14px_rgba(255,255,255,0.75)]
-      "
-    >
-      世界は“視点”でつくられる。
-    </h1>
-  </div>
-
-  {/* ================= BACKGROUND BLOCK ================= */}
-  <section
-    ref={heroRef}
-    className="
-      relative min-h-screen w-full
-      px-8
-      flex items-center justify-center text-center
-    "
-  >
-
-    {/* 銀膜（最背面） */}
-    <div
-      className="absolute inset-0 pointer-events-none opacity-[0.04]"
-      style={{
-        background:
-          "radial-gradient(circle at 50% 28%, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.06) 35%, transparent 70%)",
-      }}
-    />
-
-    {/* 背景画像 */}
-    <img
-      src="/images/jobs/hero1.png"
-      className="
-        absolute inset-0 w-full h-full 
-        object-cover object-center 
-        opacity-[0.84]
-      "
-      style={{ filter: "contrast(1.08) brightness(1.06)" }}
-      alt=""
-    />
-
-    {/* 白銀深度（光膜） */}
-    <div
-      className="absolute inset-0 pointer-events-none"
-      style={{
-        background:
-          "radial-gradient(circle at 50% 65%, rgba(255,255,255,0.22) 0%, rgba(245,245,245,1) 78%)",
-      }}
-    />
-  </section>
-</div>
-
-      {/* ================= CONTENT WRAPPER ================= */}
-      <div className="w-full pt-[200px] px-[42px]">
-{/* ========= 01：境界線 ========= */}
-<section className="fade-sec mb-[320px] pt-[180px] pb-[60px]">
-  <div className="
-    grid 
-    max-w-[1320px] mx-auto 
-    grid-cols-[1.35fr_1fr]   /* ← 画像を大きく */
-    gap-[100px] 
-    items-start
-  ">
-
-{/* ===================== 画像 ===================== */}
-<div className="space-y-6 relative top-[6px]">
-
-  {/* 大文字キャプション（誌面導入） */}
-  <p className="absolute -top-10 left-0 text-[13px] tracking-[0.42em] opacity-40">
-    CHAPTER 01 — BORDERLINE
-  </p>
-
-  <img
-    src="/images/jobs/born1.png"
-    className="
-      w-[96%]                /* 横を広げて誌面バランスUP */
-      max-w-[620px]          /* PCで最も美しく見える幅 */
-      max-h-[560px]          /* 背を低くして潰れ防止 */
-      mx-auto
-      rounded-[14px]
-      shadow-[0_14px_38px_rgba(0,0,0,0.07)]
-      scale-[1.01]           /* 過剰な拡大をやめて自然に */
-      origin-center
-      object-cover            /* ← 切り抜き構図が最も美しい */
-    "
-    alt=""
-    style={{
-      objectFit: "cover",
-      objectPosition: "center top",  // 上側の絵を優先表示
-    }}
-  />
-
-  <p className="text-center text-[11px] tracking-[0.3em] opacity-55">
-    01 — BORDERLINE
-  </p>
-</div>
-
-    {/* ===================== テキスト ===================== */}
-    <div className="max-w-[620px] text-[15.8px] leading-[2.1] font-light opacity-[0.92]">
-
-      {/* 英語セクションタイトル（誌面強） */}
-      <h3 className="text-[15px] tracking-[0.28em] opacity-50 mb-[26px]">
-        THE STORY BEGINS AT THE EDGE
-      </h3>
-
-      {/* 日本語タイトル */}
-      <h2 className="mag-title mb-[38px]">
-        境界線から始まった物語
-      </h2>
-
-      {/* 本文（改行で呼吸） */}
-      <p>
-        スティーブ・ジョブズの物語は、栄光からは程遠い“境界線”で幕を開けた。<br />
-        生まれてすぐに実の両親と別れ、 <br /> 
-        「自分はどこに属するのか」という問いだけが残された。
-      </p>
-
-      <p className="mt-[28px]">
-        その後の人生でも、彼は常に境界の手前に立ち続けた。<br />
-        学校にも馴染めず、既存の価値観には反発し、どこにも完全にはフィットしない。<br />
-        だが——その“居場所のなさ”こそが、感性を研ぎ澄ませていく。
-      </p>
-
-      {/* 引きの強いセンテンス（中央寄せ） */}
-      <p className="mag-pull  my-[40px] text-[18px] tracking-[0.02em] text-center">
-        「小さなノイズが、なぜか気になる」
-      </p>
-
-      <p>
-        1mm のズレ、空気の濁り、手触り。<br />
-        多くの人が見落とす“雑味”に、彼だけが強烈に反応した。
-      </p>
-
-      <p className="mt-[26px]">
-        後に“Apple が世界を変える“<br />美と機能の統合”は、  
-        この違和感センサーが原点となる。
-      </p>
-    </div>
-  </div>
-</section>
-{/* ========= Air Break（控えめ × 雑誌 × フェード演出） ========= */}
-<section
-  className="
-    fade-sec relative w-full h-[56vh] 
-    rounded-[12px] overflow-hidden mb-[240px]
-    flex items-center justify-center text-center
-  "
->
-  {/* 背景画像 */}
-  <img
-    src="/images/jobs/break-light.png"
-    alt=""
-    className="absolute inset-0 w-full h-full object-cover object-center scale-[1.015]"
-  />
-
-  {/* Dior光膜 */}
-  <div
-    className="
-      absolute inset-0 pointer-events-none
-      backdrop-blur-[2px]
-      opacity-[0.82]
-      bg-[radial-gradient(circle_at_50%_42%,rgba(255,255,255,0.48)_0%,rgba(255,255,255,0.18)_35%,rgba(255,255,255,0.06)_80%)]
-    "
-  />
-
-  {/* ===== 英文（メインコピー） ===== */}
-  <div className="relative z-20 text-center px-6 editorial-fade">
-    <h2
-      className="
-        text-[28px] md:text-[32px]
-        font-light
-        leading-[1.6]
-        tracking-[0.12em]
-        text-[#111]/85
-        drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]
-      "
-    >
-      Simplicity is an act of courage,<br />
-      not the absence of complexity.
-    </h2>
-
-  {/* ===== 日本語（和訳） ===== */}
-<p
-  className="
-    mt-[28px]                /* ← 距離をしっかり開ける */
-    text-[16px]             /* ← ほんの少しだけ大きく */
-    leading-[1.85]
-    tracking-[0.03em]
-    text-black/60 font-light
-    drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]
-  "
->
-  シンプルとは、ただ“削る”だけではない。不必要を捨てる勇気そのものだ。
-</p>
-  </div>
-</section>
-{/* ========= 02：意味の嗅覚 ========= */}
-<section className="fade-sec mb-[300px] pt-[180px] pb-[60px]">
-  <div className="max-w-[1320px] mx-auto">
-
-    {/* SUBTITLE */}
-    <p className="text-[12px] tracking-[0.24em] opacity-50 mb-10">
-      SPECIAL FEATURE
-    </p>
-
-    <div
-      className="
-        grid
-        grid-cols-[1fr_1.35fr]   /* ← 画像比率アップ */
-        gap-[100px]             /* ← 間隔広げて“高級誌”バランス */
-        items-start
-      "
+      className="bg-[#f3f3f3] text-[#111] overflow-x-hidden relative"
     >
 
-      {/* TEXT */}
-      <div className="max-w-[620px] text-[15.8px] leading-[2.08] font-light opacity-[0.92]">
-
-        <p className="mag-code mb-3">02 — MEANING SENSE</p>
-
-        <h2 className="mag-title mb-12">意味の嗅覚</h2>
-
-        <p>
-          子どものころからジョブズは、<br />
-          “理由のないもの” に強い拒絶反応を示す少年だった。<br />
-          形だけの宿題、形式だけの校則。<br />
-          誰も疑わない「当たり前」が、彼の中には常にザラつきを残した。<br /><br />
-        </p>
-
-        <p>
-          一方で、「これは本物だ」と感じた瞬間には、<br />
-          世界が一気に色を変えるほど没入する。<br />
-          その極端さは欠点ではなく、のちに “審美眼” へと変わっていく資質だった。
-        </p>
-
-        <p
-          className="my-[32px] text-[17px] opacity-80 tracking-[0.03em] text-center"
-        >
-          「これは何のために存在しているのか？」
-        </p>
-
-        <p>
-          その問いは、思考の癖ではなく “標準設定” になっていった。<br />
-          大学へ進んだあとも、彼の嗅覚は迷わず境界線を越える。
-        </p>
-
-        <p>
-          自分を薄めるだけの学びには一切の価値を見いだせず、<br />
-          入学してすぐに大学を離れるという異例の決断を下す。<br /><br />
-        </p>
-
-        <p>
-          ただし、撤退ではない。<br /><br />
-          彼は「理由のある美」を探しに、カリグラフィーの授業へ足を運び続けた。<br />
-          そこで出会った繊細な文字の曲線が、<br />
-          のちの <span className="font-medium">Mac 文化の源泉</span> となる。
-        </p>
-      </div>
-
-      {/* IMAGE */}
-      <div className="space-y-4 relative top-[120px]">
-        <img
-          src="/images/jobs/reed1.png"
+      {/* =====================================================
+          FIXED BIG TYPO（展示タイポ）
+      ===================================================== */}
+      <div className="fixed inset-0 pointer-events-none z-[9999]">
+        <div
+          id="bigTypoWrapper"
           className="
-            w-full 
-            rounded-[12px] 
-            mag-img 
-            scale-[1.08]          /* ← 画像の迫力UP */
-            origin-center
+            absolute left-1/2 -translate-x-1/2
+            top-[12vh]
+            will-change-transform
           "
-          alt=""
-        />
-        <p className="text-center text-[11px] tracking-[0.3em] opacity-55">
-          02 — MEANING SENSE
-        </p>
+        >
+          <div
+            id="bigTypo"
+            className="
+              text-[20vw] font-light tracking-[0.08em]
+              mix-blend-soft-light text-black/35
+              opacity-[0.20]
+              leading-none select-none
+              will-change-transform
+            "
+          >
+            BORDER
+          </div>
+        </div>
       </div>
 
-    </div>
-  </div>
-</section>
-{/* ========= 03：起業前夜 — 火がつく瞬間 ========= */}
-<section className="fade-sec mb-[320px] pt-[180px] pb-[60px]">
-  <div className="max-w-[1320px] mx-auto">
+      {/* =====================================================
+          HERO BLOCK（光膜 × 静けさ）
+      ===================================================== */}
+      <div className="relative min-h-screen w-full overflow-hidden z-[5]">
 
-    {/* SUBTITLE */}
-    <p className="text-[12px] tracking-[0.24em] opacity-50 mb-10">
-      SPECIAL FEATURE
-    </p>
+        {/* HERO TITLE */}
+        <div
+          className="
+            absolute top-[23vh] left-1/2 -translate-x-1/2
+            z-[30] text-center pointer-events-none
+          "
+        >
+          <p className="text-[13px] tracking-[0.38em] opacity-60 mb-4 font-light">
+            STEVE JOBS
+          </p>
 
-    <div
-      className="
-        grid
-        grid-cols-[1fr_0.9fr]   /* 縦画像を活かす比率 */
-        gap-[90px]
-        items-start
-      "
-    >
+          <h1
+            ref={titleRef}
+            className="
+              text-[56px]
+              tracking-[0.28em]
+              font-light
+              text-black/80
+              drop-shadow-[0_2px_18px_rgba(255,255,255,0.85)]
+            "
+          >
+            世界は“視点”でつくられる。
+          </h1>
+        </div>
 
-      {/* TEXT AREA */}
-      <div className="max-w-[620px] text-[15.8px] leading-[2.12] font-light opacity-[0.92]">
+        {/* BACKGROUND */}
+        <section
+          ref={heroRef}
+          className="relative min-h-screen w-full px-8 flex items-center justify-center z-[5]"
+        >
+          {/* 銀膜 */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-[0.06]"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 38%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.1) 40%, transparent 75%)",
+            }}
+          />
 
-        <p className="mag-code mb-3">03 — BEFORE THE FIRST SPARK</p>
+          {/* 背景画像 */}
+          <img
+            src="/images/jobs/hero1.png"
+            className="
+              absolute inset-0 w-full h-full object-cover object-center
+              opacity-[0.88]
+            "
+            style={{ filter: "contrast(1.12) brightness(1.08)" }}
+            alt=""
+          />
 
-        <h2 className="mag-title mb-12">起業前夜 — 火がつく瞬間</h2>
-
-        <p>
-          大学を離れたあと、ジョブズはすぐに何かを始めたわけではない。<br />
-          むしろしばらくは “漂う時間” が続いた。  
-          所属を失い、肩書きもなく、ただ直感だけを頼りに世界を歩く日々。
-        </p>
-
-        <p className="mt-[26px]">
-          禅に傾倒し、精神性を磨き、テクノロジーの未来を直観で捉えはじめる。<br />
-          その時間が、後の Apple の “静けさと緊張感” の原型をつくった。
-        </p>
-
-        <p className="my-[36px] text-[17px] opacity-80 tracking-[0.03em] text-center">
-          「自分が信じる“美しい世界”は、自分で作るしかない。」
-        </p>
-
-        <p>
-          その思想が芽を出したのは、  
-          旧友ウォズニアックとの再会だった。<br />
-          ホームブリュー・コンピュータ・クラブで見た原始的なマシン。<br />
-          そこには“未来の匂い”があった。
-        </p>
-
-        <p className="mt-[26px]">
-          ジョブズは悟る。  
-          テクノロジーはまだ“使う人の世界”をデザインできていない。<br />
-          誰もが触れる“入口”すら整っていない。  
-        </p>
-
-        <p className="mt-[26px]">
-          美と合理の間にある “未開の領域” を形にできる人間がいない——  
-          ならば自分がやるしかない。
-        </p>
-
-        <p className="mt-[32px] font-medium opacity-90">
-          こうして、ガレージでの Apple が始まる。  
-          起業は野心ではなく、“世界の雑味を消す” という本能の延長だった。
-        </p>
-
+          {/* 光膜 */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 60%, rgba(255,255,255,0.22) 0%, rgba(245,245,245,1) 80%)",
+            }}
+          />
+        </section>
       </div>
 
-      {/* IMAGE AREA */}
-{/* IMAGE AREA */}
-<div className="space-y-4 relative top-[8px]">
-  <img
-    src="/images/jobs/vertical_fontstudy.png"
-    className="
-      w-[92%]                /* ← これが効く（幅を優雅に絞る） */
-      mx-auto                /* ← センター寄せ */
-      rounded-[14px]
-      mag-img
-      scale-[1.02]           /* ← 拡大しすぎず“誌面感”だけ残す */
-      origin-center
-      shadow-[0_16px_36px_rgba(0,0,0,0.08)]
-    "
-    alt=""
-  />
-  <p className="text-center text-[11px] tracking-[0.3em] opacity-55">
-    03 — THE SHAPE BEFORE FORM
-  </p>
-</div>
+      {/* =====================================================
+          CONTENT WRAPPER
+      ===================================================== */}
+      <div className="w-full pt-[200px] px-[42px]">
 
-    </div>
-  </div>
-</section>
-{/* ========= 04：ガレージ革命 — 見開き（Optimized Ver.） ========= */}
-<section className="fade-sec mb-[380px] pt-[200px]">
+        {/* ============================================
+            01 — 境界線
+        ============================================ */}
+        <section
+          id="ch01"
+          className="fade-sec mb-[360px] pt-[200px] pb-[80px] z-[6] relative"
+        >
+          <div
+            className="
+              grid
+              max-w-[1320px] mx-auto
+              grid-cols-[1.28fr_1fr]
+              gap-[120px]
+              items-start
+            "
+          >
+            {/* IMAGE */}
+            <div className="space-y-8 relative top-[12px]">
+              <p className="absolute -top-14 left-0 text-[13px] tracking-[0.42em] opacity-40">
+                CHAPTER 01 — BORDERLINE
+              </p>
 
-  {/* VISUAL BLOCK */}
-  <div className="relative w-full">
-{/* 背景画像（大きめ） */}
-<img
-  src="/images/jobs/garage_revo.png"
-  className="
-    w-full
-    max-h-[680px]
-    object-cover
-    rounded-[20px]
-    shadow-[0_28px_60px_rgba(0,0,0,0.20)]
-  "
-  alt=""
-/>
+              <img
+                src="/images/jobs/born1.png"
+                className="
+                  w-[95%]
+                  max-w-[620px]
+                  max-h-[560px]
+                  mx-auto
+                  rounded-[16px]
+                  shadow-[0_16px_42px_rgba(0,0,0,0.06)]
+                  scale-[1.015]
+                  origin-center
+                  object-cover
+                "
+                alt=""
+              />
 
-{/* 上から溶ける“にじみ黒”グラデ */}
-<div
-  className="
-    absolute inset-0 rounded-[20px]
-    bg-gradient-to-b
-    from-black/90 via-black/70 to-black/20
-    backdrop-blur-[1.4px]
-  "
-/>
+              <p className="text-center text-[11px] tracking-[0.3em] opacity-55">
+                01 — BORDERLINE
+              </p>
+            </div>
 
+            {/* TEXT */}
+            <div className="max-w-[620px] text-[16px] leading-[2.18] font-light opacity-[0.9]">
 
-{/* 金の滲み膜（控えめ） */}
-<div
-  className="
-    absolute inset-0 rounded-[20px]
-    pointer-events-none
-    opacity-[0.08]
-    bg-gradient-to-r
-    from-[rgba(212,175,55,0.18)] to-transparent
-    mix-blend-screen
-  "
-/>
-    {/* TEXT OVERLAY */}
-    <div
-      className="
-        absolute inset-0
-        flex items-center justify-center
-        px-[56px]
-        text-white
-      "
-    >
-      <div
-        className="
-          max-w-[640px]
-          text-center
-          drop-shadow-[0_6px_22px_rgba(0,0,0,0.55)]
-        "
-      >
+              <h3 className="text-[15px] tracking-[0.28em] opacity-50 mb-[32px]">
+                THE STORY BEGINS AT THE EDGE
+              </h3>
 
-        {/* Subtitle */}
-        <p className="text-[12px] tracking-[0.26em] opacity-70 mb-3">
-          SPECIAL FEATURE — CHAPTER 04
-        </p>
+              <h2 className="mag-title mb-[46px]">境界線から始まった物語</h2>
 
-        {/* Title */}
-        <h2 className="mag-title text-white mb-10 leading-[1.42]">
-          ガレージの革命<br/>世界観が形になる瞬間
-        </h2>
+              <p className="mb-[30px]">
+                スティーブ・ジョブズの物語は、栄光からは程遠い“境界線”で幕を開けた。<br />
+                生まれてすぐに実の両親と別れ、<br />
+                「自分はどこに属するのか」という問いだけが残された。
+              </p>
 
-        {/* Paragraphs */}
-        <p className="text-[16px] leading-[2.2] font-light opacity-[0.96]">
-          ウォズニアックとの再会は、ジョブズにとって  
-          “未来の入口”だった。<br/>
-          原始的な基板の中に、彼だけが  
-          「触れられる未来の原型」を見ていた。
-        </p>
+              <p className="mb-[34px]">
+                その後の人生でも、彼は常に境界の手前に立ち続けた。<br />
+                学校にも馴染めず、既存の価値観には反発し、どこにも完全にはフィットしない。<br />
+                だが——その“居場所のなさ”こそが、感性を研ぎ澄ませていく。
+              </p>
 
-        <p className="mt-[28px] text-[16px] leading-[2.2] font-light opacity-[0.94]">
-          技術と美学の境界をつなぐ“翻訳者”。<br/>
-          その役割は、当時の世界にはまだ存在していなかった。
-        </p>
+              <p className="mag-pull mb-[34px] mt-[52px] text-[20px] tracking-[0.02em] text-center">
+                「小さなノイズが、なぜか気になる」
+              </p>
 
-        <p className="my-[42px] text-[17px] opacity-85 tracking-[0.03em]">
-          「未来は、全員が触れられて初めて革命になる。」
-        </p>
+              <p className="mb-[32px]">
+                1mm のズレ、空気の濁り、手触り。<br />
+                多くの人が見落とす“雑味”に、彼だけが強烈に反応した。
+              </p>
 
-        <p className="text-[16px] leading-[2.22] font-light opacity-[0.98]">
-          ガレージで始まったのは企業の誕生ではない。<br/>
-          世界を“どう見せるか”。  
-          その問いに対する、最初の答えだった。
-        </p>
+              <p>
+                後に “Apple が世界を変える”<br />
+                <span className="font-medium">美と機能の統合</span> は、  
+                この違和感センサーが原点となる。
+              </p>
+            </div>
+          </div>
+        </section>
 
-      </div>
-    </div>
-  </div>
+        {/* ============================================
+            02 — 意味の嗅覚
+        ============================================ */}
+        <section
+          id="ch02"
+          className="fade-sec pt-[120px] pb-[60px] mb-[180px] z-[6] relative"
+        >
+          <div className="max-w-[1320px] mx-auto">
+            <p className="text-[12px] tracking-[0.24em] opacity-50 mb-12">
+              SPECIAL FEATURE
+            </p>
 
-  {/* Caption */}
-  <div className="mt-6 text-center">
-    <p className="text-[11px] tracking-[0.3em] opacity-55">
-      04 — THE FIRST REVOLUTION
-    </p>
-  </div>
+            <div
+              className="
+                grid
+                grid-cols-[1fr_1.28fr]
+                gap-[120px]
+                items-start
+              "
+            >
+              {/* TEXT */}
+              <div className="max-w-[620px] text-[16px] leading-[2.18] font-light opacity-[0.9]">
 
-</section>
-      </div>
+                <p className="mag-code mb-4">02 — MEANING SENSE</p>
+
+                <h2 className="mag-title mb-[46px]">意味の嗅覚</h2>
+
+                <p className="mb-[34px]">
+                  子どものころのジョブズは、<br />
+                  “形だけ” のものに、どうしても馴染めなかった。<br />
+                  宿題も校則も、理由のないものはすべて空気が濁って見えた。
+                </p>
+
+                <p className="mb-[38px]">
+                  一方で、ほんの一瞬でも「これは本物だ」と感じると、<br />
+                  その世界にまるごと呑まれてしまう。<br />
+                  色、質感、線。  
+                  彼の中ではそれらが“意味のある配置”で並び替わっていく。
+                </p>
+
+                <p
+                  className="
+                    my-[52px] text-[18px]
+                    opacity-85 tracking-[0.03em]
+                    text-center
+                  "
+                >
+                  「これは何のために存在しているのか？」
+                </p>
+
+                <p className="mb-[36px]">
+                  この問いは、思考ではなく“標準設定”となった。<br />
+                  大学へ進んでも、それは揺らがない。  
+                  無意味な情報を積み上げる授業には、彼の感覚は一切反応しなかった。
+                </p>
+
+                <p className="mb-[40px]">
+                  だからこそ、入学してまもなく大学を離れた。<br />
+                  それは逃避ではなく、  
+                  彼にとっては “意味のないものを削る” という、ごく自然な選択だった。
+                </p>
+
+                <p>
+                  ただし、空白の時間ではなかった。<br />
+                  カリグラフィーの授業で見た曲線の美しさは、  
+                  彼の内部に静かに沈殿し、  
+                  のちの <span className="font-medium">Mac 文化の基礎</span> となる“美の基準”を形づくった。
+                </p>
+              </div>
+
+              {/* IMAGE */}
+              <div className="space-y-4 relative top-[100px]">
+                <img
+                  src="/images/jobs/reed1.png"
+                  className="
+                    w-full rounded-[14px] scale-[1.06]
+                    shadow-[0_18px_48px_rgba(0,0,0,0.10)]
+                  "
+                  alt=""
+                />
+                <p className="text-center text-[11px] tracking-[0.3em] opacity-55">
+                  02 — MEANING SENSE
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================
+            03 — 起業前夜
+        ============================================ */}
+        <section
+          id="ch03"
+          className="fade-sec mb-[340px] pt-[200px] pb-[80px] z-[6] relative"
+        >
+          <div className="max-w-[1320px] mx-auto">
+            <p className="text-[12px] tracking-[0.24em] opacity-50 mb-[40px]">
+              SPECIAL FEATURE
+            </p>
+
+            <div
+              className="
+                grid
+                grid-cols-[1fr_0.9fr]
+                gap-[110px]
+                items-start
+              "
+            >
+              {/* TEXT */}
+              <div className="max-w-[620px] text-[16px] leading-[2.18] font-light opacity-[0.9]">
+
+                <p className="mag-code mb-4">
+                  03 — BEFORE THE FIRST SPARK
+                </p>
+
+                <h2 className="mag-title mb-[46px]">起業前夜 — 火がつく瞬間</h2>
+
+                <p className="mb-[34px]">
+                  大学を離れたあと、ジョブズはしばらく “どこにも属さない時間” を彷徨った。<br />
+                  朝の光の角度さえ、心の揺らぎと連動して見えるような日々。<br />
+                  肩書きも役割もない世界で、  
+                  彼は初めて「自分のまなざしだけ」を頼りに歩くことになる。
+                </p>
+
+                <p className="mb-[38px]">
+                  禅に傾倒したのも偶然ではない。  
+                  世界の“表面”ではなく、  
+                  その奥にある静かな秩序に触れようとした。<br />
+                  その体験は、のちの Apple の“静けさと緊張感”の原型になる。
+                </p>
+
+                <p
+                  className="
+                    my-[52px] text-[18px]
+                    opacity-85 tracking-[0.03em]
+                    text-center
+                  "
+                >
+                  「自分が信じる世界は、誰かが作ってくれるものではない。」
+                </p>
+
+                <p className="mb-[36px]">
+                  その種に火をつけたのが、旧友との再会だった。<br />
+                  小さな集会で見た、未完成で粗野なマシン。  
+                  だがその奥には、誰も拾っていない“未来の匂い”が確かにあった。
+                </p>
+
+                <p className="mb-[36px]">
+                  ジョブズは悟る。  
+                  テクノロジーはまだ“使う人の世界”をデザインしていない。<br />
+                  触れる前の“入口”さえ存在していない。
+                </p>
+
+                <p className="mb-[40px]">
+                  美と合理の間にある “未開の領域” を形にできる人間がいない——  
+                  ならば、自分がやるしかない。
+                </p>
+
+                <p className="font-medium opacity-90">
+                  こうしてガレージの小さな空間から Apple が始まる。<br />
+                  起業は野心ではなく、“世界の雑味を消す” という本能の延長だった。
+                </p>
+              </div>
+
+              {/* IMAGE */}
+              <div className="space-y-4 relative top-[12px]">
+                <img
+                  src="/images/jobs/vertical_fontstudy.png"
+                  className="
+                    w-[88%] mx-auto rounded-[14px]
+                    shadow-[0_18px_48px_rgrgba(0,0,0,0.10)]
+                  "
+                  alt=""
+                />
+                <p className="text-center text-[11px] tracking-[0.3em] opacity-55">
+                  03 — THE SHAPE BEFORE FORM
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+                {/* ============================================
+            04 — ガレージ革命（見開き）
+        ============================================ */}
+        <section
+          id="ch04"
+          className="fade-sec mb-[240px] pt-[140px] relative z-[6]"
+        >
+          <div className="relative w-full">
+
+            {/* 背景画像 */}
+            <img
+              src="/images/jobs/garage_revo.png"
+              className="
+                w-full max-h-[720px] object-cover rounded-[22px]
+                shadow-[0_32px_70px_rgba(0,0,0,0.24)]
+              "
+              alt=""
+            />
+
+            {/* 暗めオーバーレイ */}
+            <div
+              className="
+                absolute inset-0 rounded-[22px]
+                bg-black/20 pointer-events-none
+              "
+            />
+
+            {/* 黒グラデ（展示空間） */}
+            <div
+              className="
+                absolute inset-0 rounded-[22px]
+                bg-gradient-to-b
+                from-black/88 via-black/68 to-black/26
+                backdrop-blur-[1.6px]
+              "
+            />
+
+            {/* 金ハイライト膜 */}
+            <div
+              className="
+                absolute inset-0 rounded-[22px]
+                opacity-[0.095]
+                bg-[radial-gradient(circle_at_68%_40%,rgba(212,175,55,0.23),transparent_58%)]
+                mix-blend-screen pointer-events-none
+              "
+            />
+
+            {/* TEXT OVERLAY */}
+            <div
+              className="
+                absolute inset-0 flex items-center justify-center
+                px-[60px] text-white
+              "
+            >
+              <div className="max-w-[700px] text-center drop-shadow-[0_8px_26px_rgba(0,0,0,0.55)]">
+
+                <p className="text-[12px] tracking-[0.28em] opacity-70 mb-4">
+                  SPECIAL FEATURE — CHAPTER 04
+                </p>
+
+                <h2
+                  className="
+                    mag-title text-white mb-12 leading-[1.42]
+                    tracking-[0.03em]
+                  "
+                >
+                  ガレージの革命<br />
+                  世界観が形になる瞬間
+                </h2>
+
+                <p className="text-[16px] leading-[2.22] font-light opacity-[0.96]">
+                  旧友との小さな再会は、ジョブズにとって  
+                  “未来へ繋がる入口”だった。<br />
+                  粗野な基板の奥にだけ、ほのかな光のような  
+                  「触れられる未来の原型」が見えていた。
+                </p>
+
+                <p className="mt-[32px] text-[16px] leading-[2.22] font-light opacity-[0.94]">
+                  技術の文脈に、美学の語彙を持ち込める者。<br />
+                  当時の世界には、それを“翻訳”できる存在がまだいなかった。
+                </p>
+
+                <p
+                  className="
+                    my-[50px] text-[18px]
+                    opacity-85 tracking-[0.03em]
+                  "
+                >
+                  「未来は、誰もが触れられたときに初めて革命になる。」
+                </p>
+
+                <p className="text-[16px] leading-[2.26] font-light opacity-[0.98]">
+                  ガレージで始まったのは、企業の誕生ではない。<br />
+                  世界を“どう見せるか”。  
+                  その問いへの、静かで確かな最初の解答だった。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Caption */}
+          <div className="mt-7 text-center">
+            <p className="text-[11px] tracking-[0.3em] opacity-55">
+              04 — THE FIRST REVOLUTION
+            </p>
+          </div>
+        </section>
+
+        {/* ============================================
+            05 — Vision（臨界点）
+        ============================================ */}
+        <section
+          id="ch05"
+          className="fade-sec mb-[360px] pt-[220px] pb-[80px] relative z-[6]"
+        >
+          <div className="max-w-[1320px] mx-auto">
+
+            <p className="text-[12px] tracking-[0.26em] opacity-50 mb-12">
+              SPECIAL FEATURE
+            </p>
+
+            <div
+              className="
+                grid
+                grid-cols-[1.08fr_1fr]
+                gap-[120px]
+                items-start
+              "
+            >
+              {/* IMAGE */}
+              <div className="relative top-[14px] space-y-5">
+                <img
+                  src="/images/jobs/vision1.png"
+                  className="
+                    w-full rounded-[14px] scale-[1.035]
+                    shadow-[0_22px_52px_rgba(0,0,0,0.14)]
+                  "
+                  alt=""
+                />
+                <p className="text-center text-[11px] tracking-[0.3em] opacity-55">
+                  05 — VISION THRESHOLD
+                </p>
+              </div>
+
+              {/* TEXT */}
+              <div className="max-w-[620px] text-[16px] leading-[2.18] font-light opacity-[0.9]">
+
+                <p className="mag-code mb-4">05 — VISION THRESHOLD</p>
+
+                <h2 className="mag-title mb-[42px]">未来が“視える”臨界点</h2>
+
+                <p className="mb-[34px]">
+                  Apple が軌道に乗りはじめた頃、  
+                  ジョブズにはすでに “完成した未来の像” が見えていた。  
+                  それは市場予測でも、技術ロードマップでもない。  
+                  世界がどう「認識」されるべきかという、もっと深い層だった。
+                </p>
+
+                <p className="mb-[40px]">
+                  彼が注目したのは機能ではなく、  
+                  <span className="font-medium">
+                    「人間が世界をどう見て、どう感じるか」
+                  </span>
+                  という、“認知のデザイン” だった。
+                </p>
+
+                <p
+                  className="
+                    my-[52px] text-[18px]
+                    opacity-85 tracking-[0.03em] text-center
+                  "
+                >
+                  「人の視点そのものをデザインできる。」
+                </p>
+
+                <p className="mb-[36px]">
+                  その確信を得た瞬間、ジョブズは  
+                  “経営者” から “世界観の編集者” へと変わった。  
+                  製品という点ではなく、  
+                  “世界の見え方” という面全体を組み替えていくクリエイターへ。
+                </p>
+
+                <p>
+                  人が世界を見る速度、触れたときの感触、  
+                  美しさをどう知覚するか。  
+                  それらを統合して、見えない設計図として再構築していった。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================
+            06 — Essence（本質の哲学）
+        ============================================ */}
+        <section
+          id="ch06"
+          className="fade-sec mb-[200px] pt-[140px] relative z-[6]"
+        >
+          <div className="relative w-full">
+            {/* VISUAL */}
+            <img
+              src="/images/jobs/essence1.png"
+              className="
+                w-full max-h-[700px] object-cover rounded-[22px]
+                shadow-[0_32px_70px_rgba(0,0,0,0.22)]
+              "
+              alt=""
+            />
+
+            {/* 黒グラデ */}
+            <div
+              className="
+                absolute inset-0 rounded-[22px]
+                bg-gradient-to-t
+                from-black/90 via-black/60 to-black/10
+                backdrop-blur-[1.5px]
+              "
+            />
+
+            {/* Light 膜 */}
+            <div
+              className="
+                absolute inset-0 rounded-[22px]
+                pointer-events-none
+                opacity-[0.08]
+                bg-[radial-gradient(circle_at_50%_68%,rgba(255,255,255,0.28),transparent_60%)]
+                mix-blend-screen
+              "
+            />
+
+            {/* TEXT */}
+            <div
+              className="
+                absolute inset-0 flex items-center justify-center
+                px-[60px] text-white
+              "
+            >
+              <div className="max-w-[680px] text-center drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]">
+
+                <p className="text-[12px] tracking-[0.26em] opacity-70 mb-4">
+                  SPECIAL FEATURE — CHAPTER 06
+                </p>
+
+                <h2
+                  className="
+                    mag-title text-white mb-[46px]
+                    leading-[1.42] tracking-[0.02em]
+                  "
+                >
+                  本質を削り、未来を残す
+                </h2>
+
+                <p className="text-[16px] leading-[2.26] font-light opacity-[0.95] mb-[32px]">
+                  ジョブズにとって “デザイン” とは、  
+                  見た目を飾る行為ではない。  
+                  世界の雑味を取り除き、  
+                  本質の輪郭を
+                  <span className="font-medium">“露わにする作業”</span>
+                  に近かった。
+                </p>
+
+                <p className="text-[16px] leading-[2.26] font-light opacity-[0.9] mb-[42px]">
+                  無駄が多い世界では、誤解が生まれる。  
+                  美しい世界とは、誤解が最小化された世界である。  
+                  だから彼は、削ることに異常なまでの執念を燃やした。
+                </p>
+
+                <p
+                  className="
+                    my-[52px] text-[18px]
+                    opacity-85 tracking-[0.03em]
+                  "
+                >
+                  「削ることは、未来を残すことだ。」
+                </p>
+
+                <p className="text-[16px] leading-[2.26] font-light opacity-[0.97]">
+                  iMac、iPod、iPhone ——  
+                  Apple の製品には共通した構造がある。  
+                  それは “本質だけが残る” という潔さ。  
+                  余白、曲線、光の扱い、そのすべてが  
+                  「人が触れた瞬間の世界の見え方」まで  
+                  精密にデザインされていた。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Caption */}
+          <div className="mt-6 text-center">
+            <p className="text-[11px] tracking-[0.3em] opacity-55">
+              06 — ESSENCE OF FORM
+            </p>
+          </div>
+        </section>
+
+        {/* ============================================
+            07 — Think Different の根
+        ============================================ */}
+        <section
+          id="ch07"
+          className="fade-sec mb-[300px] pt-[140px] pb-[140px] relative z-[6]"
+        >
+          <div className="max-w-[900px] mx-auto text-center">
+
+            <p className="text-[12px] tracking-[0.28em] opacity-60 mb-8">
+              FINAL CHAPTER — 07
+            </p>
+
+            <h2 className="mag-title mb-[46px] tracking-[0.02em]">
+              Think Different の根
+            </h2>
+
+            <p className="text-[16px] leading-[2.18] font-light opacity-[0.9] mb-[32px]">
+              成功を追ったのではなく、<br />
+              “世界の見え方” に誠実であろうとした者だけが、  <br />
+              静かに未来の形を変えていく。
+            </p>
+
+            <p className="text-[16px] leading-[2.18] font-light opacity-[0.88] mb-[42px]">
+              世界が複雑になるほど、<br />
+              本質を探し続ける人間の言葉は、  <br />
+              いっそう静かに、しかし確実に重みを増す。
+            </p>
+
+            <p
+              className="
+                my-[52px] text-[20px]
+                opacity-85 tracking-[0.03em]
+                leading-[1.75]
+              "
+            >
+              “The people who are crazy enough to think they can change the world<br />
+              are the ones who do.”
+            </p>
+
+            <p className="text-[16px] leading-[2.18] font-light opacity-[0.92]">
+              世界を変えるのは野心ではない。<br />
+              “見えてしまった未来” を裏切らず、  
+              その方向へ静かに歩き続ける人間だ。
+            </p>
+          </div>
+        </section>
+
+        {/* ============================================
+            CLOSING VISUAL（思想の余韻）
+        ============================================ */}
+        <section
+          className="
+            fade-sec relative w-full h-[74vh]
+            rounded-[18px] overflow-hidden
+            mb-[300px] flex items-center justify-center
+            z-[6]
+          "
+        >
+          {/* 抽象背景 */}
+          <img
+            src="/images/jobs/closing_abstract.png"
+            alt=""
+            className="
+              absolute inset-0 w-full h-full object-cover
+              scale-[1.035] opacity-[0.9]
+            "
+          />
+
+          {/* 光膜（Dior × Apple） */}
+          <div
+            className="
+              absolute inset-0 pointer-events-none backdrop-blur-[2px]
+              opacity-[0.75]
+            "
+            style={{
+              background:
+                "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.18) 36%, rgba(255,255,255,0.06) 80%)",
+            }}
+          />
+
+          <div className="relative z-20 px-6 text-center">
+            <h3
+              className="
+                text-[28px] md:text-[34px]
+                font-light tracking-[0.13em]
+                text-black/75
+                drop-shadow-[0_0_14px_rgba(255,255,255,0.7)]
+                leading-[1.65]
+              "
+            >
+              未来は、見える者の手で再設計される。
+            </h3>
+          </div>
+        </section>
+
+      </div> 
     </div>
   );
 }

@@ -1,6 +1,32 @@
-/* =========================================
-   必須演出：Dior 銀膜
-========================================= */
+/* ============================================================
+   00) RESET（JobsRoom 内部専用の安全領域）
+============================================================ */
+.mag-title,
+.mag-code,
+.mag-img,
+.editorial-fade,
+.mag-break-film,
+.mag-quote-on-bg,
+.mag-break-bg::before {
+  position: relative;
+}
+
+
+/* ============================================================
+   01) 固定：巨大タイポ（Editorial Background Layer）
+============================================================ */
+.editorial-bg-txt {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   02) Dior 銀膜（背景に敷く膜の質感）
+============================================================ */
 .mag-break-bg::before {
   content: "";
   position: absolute;
@@ -16,14 +42,26 @@
   pointer-events: none;
 }
 
-/* =========================================
-   必須演出：Magazine 黄金ライン
-========================================= */
+.mag-break-film {
+  background: radial-gradient(
+    circle at 50% 42%,
+    rgba(255,255,255,0.60) 0%,
+    rgba(255,255,255,0.22) 35%,
+    rgba(255,255,255,0.08) 80%
+  );
+  backdrop-filter: blur(2.4px);
+  opacity: 0.88;
+}
+
+
+/* ============================================================
+   03) 雑誌の黄金ライン（Magazine Golden Line）
+============================================================ */
 .mag-code::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -6px;
   width: 44px;
   height: 1px;
   background: linear-gradient(
@@ -36,7 +74,7 @@
 .mag-title::before {
   content: "";
   position: absolute;
-  top: 0;
+  top: -14px;
   left: 0;
   width: 58px;
   height: 1px;
@@ -47,21 +85,29 @@
   );
 }
 
-/* =========================================
-   必須演出：誌面感（画像微スケール）
-========================================= */
+
+/* ============================================================
+   04) 誌面質感（画像）
+============================================================ */
 .mag-img {
   transform: scale(1.02);
   transform-origin: center;
-  box-shadow: 0 16px 38px rgba(0,0,0,0.07);
   border-radius: 12px;
+  box-shadow: 0 16px 38px rgba(0,0,0,0.07);
   opacity: 0.98;
   filter: contrast(1.03) brightness(1.02);
+  transition: transform 0.8s ease, filter 0.8s ease;
 }
 
-/* =========================================
-   必須演出：左右反転レイアウト
-========================================= */
+.mag-img:hover {
+  transform: scale(1.045);
+  filter: brightness(1.06) contrast(1.06);
+}
+
+
+/* ============================================================
+   05) Meaning Section（左右反転レイアウト）
+============================================================ */
 .mag-section.is-meaning .mag-grid {
   grid-template-columns: 1fr 1.22fr;
 }
@@ -72,19 +118,12 @@
 
 .mag-section.is-meaning .mag-grid > *:last-child {
   order: 1;
-}/* ========= Dior 銀膜フィルム（演出専用） ========= */
-.mag-break-film {
-  background: radial-gradient(
-    circle at 50% 42%,
-    rgba(255,255,255,0.60) 0%,
-    rgba(255,255,255,0.22) 35%,
-    rgba(255,255,255,0.08) 80%
-  );
-  backdrop-filter: blur(2.4px);
-  opacity: 0.88;
 }
 
-/* ========= 背景上のコピー ========= */
+
+/* ============================================================
+   06) Background Quote（背景上のコピー）
+============================================================ */
 .mag-quote-on-bg {
   font-size: 30px;
   line-height: 1.74;
@@ -95,6 +134,11 @@
   max-width: 900px;
   text-shadow: 0 0 18px rgba(255,255,255,0.9);
 }
+
+
+/* ============================================================
+   07) Editorial Fade（名言の現れ演出）
+============================================================ */
 .editorial-fade {
   opacity: 0;
   transform: translateY(24px);
