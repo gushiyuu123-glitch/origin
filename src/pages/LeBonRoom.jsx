@@ -233,7 +233,7 @@ md:ml-[6vw]
 {/* ---------- 02-4：三要因 ---------- */}
 <section className="lb-section px-6 md:px-12 py-28 md:py-36">
   <div className="fade-up max-w-[820px] mx-auto">
-    <img src="/images/lebon/factors.png" className="lb-img mb-14 opacity-[0.9]" alt="" />
+    <img src="/images/lebon/factors2.png" className="lb-img mb-14 opacity-[0.9]" alt="" />
 
     <h2 className="lb-h2 mb-10">群衆が理性を失う三つの要因</h2>
 

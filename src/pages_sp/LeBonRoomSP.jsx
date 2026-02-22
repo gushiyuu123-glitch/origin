@@ -209,7 +209,7 @@ export default function LeBonRoomSP() {
       {/* ＝＝＝＝＝＝＝ 02-4 三要因 ＝＝＝＝＝＝＝ */}
       <section className="lb-section px-5 py-20">
         <div className="fade-up max-w-[680px] mx-auto">
-          <img src="/images/lebon/factors.png" className="lb-img mb-10" alt="" />
+          <img src="/images/lebon/factors2.png" className="lb-img mb-10" alt="" />
 
           <h2 className="lb-h2 text-[22px] mb-8">群衆が理性を失う<br></br>三つの要因</h2>
 
