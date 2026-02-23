@@ -16,9 +16,11 @@ import LeonardoRoomSP from "./pages_sp/LeonardoRoomSP";
 import EinsteinRoom from "./pages/EinsteinRoom";
 import EinsteinRoomSP from "./pages_sp/EinsteinRoomSP";
 
-
 import JobsRoom from "./pages/JobsRoom";
 import JobsRoomSP from "./pages_sp/JobsRoomSP";
+
+import MuskRoom from "./pages/MuskRoom";
+import MuskRoomSP from "./pages_sp/MuskRoomSP";
 
 import LeBonRoom from "./pages/LeBonRoom";
 import LeBonRoomSP from "./pages_sp/LeBonRoomSP";
@@ -77,8 +79,16 @@ const rooms = [
     pc: JobsRoom,
     sp: JobsRoomSP,
   },
+{
+  path: "/musk",
+  title: "MUSK",
+  concept: "革命",
+  description: "未来を前借りする人間。",
+  ogp: "/og/musk.png",
+  pc: MuskRoom,
+  sp: MuskRoomSP,
+},
 
-  /* ★ ここが LeBonRoom ★ */
 {
   path: "/lebon",
   title: "LE BON",
@@ -90,13 +100,7 @@ const rooms = [
   sp: LeBonRoomSP,   // ← これあとで作る
 },
 
-  {
-    path: "/musk",
-    title: "MUSK",
-    concept: "革命",
-    description: "未来を前借りする人間。",
-    ogp: "/og/musk.png",
-  },
+
   {
   path: "/dorsey",
   title: "DORSEY",
