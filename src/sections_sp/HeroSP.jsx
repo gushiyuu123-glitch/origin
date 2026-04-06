@@ -1,6 +1,3 @@
-// ===========================================
-//  HeroSP.jsx（SP版：上品・軽量・強度最大化）
-// ===========================================
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
@@ -149,33 +146,73 @@ export default function HeroSP() {
      データ（SP専用・縮小版）
   ========================== */
   const names = [
-    { text: "VAN GOGH（ゴッホ）", sub: "感性", route: "/vangogh", image: "/silhouettes/1.png", size: "220vw" },
-    { text: "LEONARDO（レオナルド）", sub: "構造", route: "/leonardo", image: "/silhouettes/2.png", size: "220vw" },
-    { text: "EINSTEIN（アインシュタイン）", sub: "直感", route: "/einstein", image: "/silhouettes/3.png", size: "220vw" },
-
-    { text: "JOBS（ジョブズ）", sub: "本質", route: "/jobs", image: "/silhouettes/jobs.png", size: "110vw" },
-    { text: "MUSK（マスク）", sub: "革命", route: "/musk", image: "/silhouettes/musk.png", size: "110vw" },
-    { text: "LE BON（ル・ボン）", sub: "心理", route: "/lebon", image: "/silhouettes/lebon1.png", size: "110vw" },
-
-    { text: "DORSEY（ドーシー）", sub: "情報", route: "/dorsey", image: "/silhouettes/dorsey.png", size: "110vw" },
+    {
+      text: "VAN GOGH（ゴッホ）",
+      sub: "感性",
+      route: "/vangogh",
+      image: "/silhouettes/1.png",
+      size: "220vw",
+    },
+    {
+      text: "LEONARDO（レオナルド）",
+      sub: "構造",
+      route: "/leonardo",
+      image: "/silhouettes/2.png",
+      size: "220vw",
+    },
+    {
+      text: "EINSTEIN（アインシュタイン）",
+      sub: "直感",
+      route: "/einstein",
+      image: "/silhouettes/3.png",
+      size: "220vw",
+    },
+    {
+      text: "JOBS（ジョブズ）",
+      sub: "本質",
+      route: "/jobs",
+      image: "/silhouettes/jobs.png",
+      size: "110vw",
+    },
+    {
+      text: "MUSK（マスク）",
+      sub: "革命",
+      route: "/musk",
+      image: "/silhouettes/musk.png",
+      size: "110vw",
+    },
+    {
+      text: "LE BON（ル・ボン）",
+      sub: "心理",
+      route: "/lebon",
+      image: "/silhouettes/lebon1.png",
+      size: "110vw",
+    },
+    {
+      text: "DORSEY（ドーシー）",
+      sub: "情報",
+      route: "/dorsey",
+      image: "/silhouettes/dorsey.png",
+      size: "110vw",
+    },
   ];
 
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen bg-[#060606] text-white overflow-hidden flex flex-col items-center justify-center px-[8vw]"
+      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#060606] px-[8vw] text-white"
     >
       {/* 背景 */}
       <img
         src="/origin-bg.png"
         alt=""
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
+        className="absolute inset-0 h-full w-full object-cover opacity-70"
         style={{ filter: "brightness(0.82) contrast(1.09)" }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black/85" />
 
       {/* シルエット */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <img
           ref={silhouetteRef}
           src=""
@@ -184,7 +221,8 @@ export default function HeroSP() {
           style={{
             width: "220vw",
             filter: "blur(3px) brightness(1.1)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 50%, transparent 92%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 50%, transparent 92%)",
             maskImage: "linear-gradient(to bottom, black 50%, transparent 92%)",
           }}
         />
@@ -195,14 +233,18 @@ export default function HeroSP() {
         ref={axisRef}
         className="absolute left-1/2 top-0 h-full w-[1px]"
         style={{
-          background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.45), transparent)",
+          background:
+            "linear-gradient(to bottom, transparent, rgba(255,255,255,0.45), transparent)",
           opacity: 0.78,
         }}
       />
 
       {/* タイトル */}
-      <div className="relative z-10 text-center mt-10 mb-14">
-        <h1 ref={titleRef} className="text-[38px] tracking-[0.32em] font-light mb-6">
+      <div className="relative z-10 mb-14 mt-10 text-center">
+        <h1
+          ref={titleRef}
+          className="mb-6 text-[38px] font-light tracking-[0.32em]"
+        >
           {"創造の源".split("").map((char, i) => (
             <span key={i} className="char inline-block">
               {char}
@@ -210,22 +252,28 @@ export default function HeroSP() {
           ))}
         </h1>
 
-        <div className="relative flex justify-center items-center mt-4">
+        <div className="relative mt-4 flex items-center justify-center">
           <div
             ref={glowRef}
-            className="absolute w-[180px] h-[180px] rounded-full"
+            className="absolute h-[180px] w-[180px] rounded-full"
             style={{
-              background: "radial-gradient(circle, rgba(255,215,170,0.05) 0%, rgba(0,0,0,0) 60%)",
+              background:
+                "radial-gradient(circle, rgba(255,215,170,0.05) 0%, rgba(0,0,0,0) 60%)",
               filter: "blur(42px)",
               opacity: 0.55,
             }}
           />
-          <img ref={logoRef} src="/images/origin-logo.png" alt="ORIGIN" className="relative w-[125px]" />
+          <img
+            ref={logoRef}
+            src="/images/origin-logo.png"
+            alt="ORIGIN"
+            className="relative w-[125px]"
+          />
         </div>
       </div>
 
       {/* 人物（上品タップ） */}
-      <div className="relative z-10 flex flex-col gap-11 w-full max-w-[310px]">
+      <div className="relative z-10 flex w-full max-w-[310px] flex-col gap-11">
         {names.map((item, i) => (
           <div
             key={i}
@@ -233,11 +281,11 @@ export default function HeroSP() {
             onTouchEnd={hideSilhouette}
             onClick={() => handleEnter(item.route)}
             className="
-              sp-item flex flex-col items-center cursor-pointer 
-              active:scale-[0.985] transition-transform duration-300
+              sp-item flex cursor-pointer flex-col items-center
+              transition-transform duration-300 active:scale-[0.985]
             "
           >
-            <span className="text-[13px] tracking-[0.42em] font-light opacity-95">
+            <span className="text-[13px] font-light tracking-[0.42em] opacity-95">
               {item.text}
             </span>
 
@@ -245,19 +293,62 @@ export default function HeroSP() {
               {item.sub}
             </span>
 
-            <div className="mt-4 w-[58px] h-px bg-white/30" />
+            <div className="mt-4 h-px w-[58px] bg-white/30" />
           </div>
         ))}
       </div>
 
+      {/* SECRET LINK — SP版 */}
+      <div className="relative z-10 mt-14 flex w-full justify-center">
+        <a
+          href="https://singularity-lab-chi.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="SINGULARITY LAB"
+          className="group flex items-center gap-3 px-2 py-2"
+        >
+          <span
+            className="block h-px w-[44px] transition-all duration-500 group-active:w-[56px]"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(120,170,255,0), rgba(150,190,255,0.78), rgba(255,255,255,0.18))",
+              opacity: 0.78,
+              boxShadow: "0 0 10px rgba(120,170,255,0.16)",
+            }}
+          />
+
+          <div
+            style={{
+              color: "rgba(255,255,255,0.9)",
+              textShadow:
+                "0 1px 2px rgba(0,0,0,0.35), 0 0 10px rgba(120,170,255,0.12)",
+            }}
+          >
+            <p
+              className="text-[8px] uppercase tracking-[0.4em]"
+              style={{ opacity: 0.5 }}
+            >
+              Beyond Origin
+            </p>
+
+            <p
+              className="mt-[6px] text-[12px] tracking-[0.2em]"
+              style={{ opacity: 0.86 }}
+            >
+              未来への扉を開く
+            </p>
+          </div>
+        </a>
+      </div>
+
       {/* BASE LINK */}
-      <div className="relative z-10 mt-16 mb-8 flex justify-center">
+      <div className="relative z-10 mb-8 mt-7 flex justify-center">
         <a
           href="https://gushikendesign.com/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GUSHIKEN DESIGN"
-          className="text-[9px] tracking-[0.35em] opacity-30 active:opacity-55 transition duration-500"
+          className="text-[9px] tracking-[0.35em] opacity-30 transition duration-500 active:opacity-55"
         >
           GUSHIKEN DESIGN
         </a>
