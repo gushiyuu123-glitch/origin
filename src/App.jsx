@@ -1,4 +1,3 @@
-// src/App.jsx
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -28,11 +27,8 @@ import LeBonRoomSP from "./pages_sp/LeBonRoomSP";
 import DorseyRoom from "./pages/DorseyRoom";
 import DorseyRoomSP from "./pages_sp/DorseyRoomSP";
 
-
 import ComingSoon from "./pages/ComingSoon";
 import GlobalRoomNav from "./components/GlobalRoomNav";
-
-
 
 /* ================= SITE CONFIG ================= */
 
@@ -79,38 +75,35 @@ const rooms = [
     pc: JobsRoom,
     sp: JobsRoomSP,
   },
-{
-  path: "/musk",
-  title: "MUSK",
-  concept: "革命",
-  description: "未来を前借りする人間。",
-  ogp: "/og/musk.png",
-  pc: MuskRoom,
-  sp: MuskRoomSP,
-},
-
-{
-  path: "/lebon",
-  title: "LE BON",
-  concept: "群衆心理",
-  description:
-    "群衆は個を飲み込み、個は群衆を恐れない。人間の闇の構造。",
-  ogp: "/og/lebon.png",
-  pc: LeBonRoom,     // ← これあとで作る
-  sp: LeBonRoomSP,   // ← これあとで作る
-},
-
-
   {
-  path: "/dorsey",
-  title: "DORSEY",
-  concept: "情報",
-  description:
-    "140字の制約で世界の思考速度を変えた男。情報の構造を再発明した。",
-  ogp: "/og/dorsey.png",
-  pc: DorseyRoom,
-  sp: DorseyRoomSP,
-},
+    path: "/musk",
+    title: "MUSK",
+    concept: "革命",
+    description: "未来を前借りする人間。",
+    ogp: "/og/musk.png",
+    pc: MuskRoom,
+    sp: MuskRoomSP,
+  },
+  {
+    path: "/lebon",
+    title: "LE BON",
+    concept: "群衆心理",
+    description:
+      "群衆は個を飲み込み、個は群衆を恐れない。人間の闇の構造。",
+    ogp: "/og/lebon.png",
+    pc: LeBonRoom,
+    sp: LeBonRoomSP,
+  },
+  {
+    path: "/dorsey",
+    title: "DORSEY",
+    concept: "情報",
+    description:
+      "140字の制約で世界の思考速度を変えた男。情報の構造を再発明した。",
+    ogp: "/og/dorsey.png",
+    pc: DorseyRoom,
+    sp: DorseyRoomSP,
+  },
 ];
 
 export default function App() {
@@ -130,12 +123,20 @@ export default function App() {
     return () => media.removeEventListener("change", update);
   }, []);
 
+  /* ================= SCROLL TOP ON ROUTE CHANGE ================= */
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, [location.pathname]);
+
   /* ================= META CONTROL ================= */
 
   useEffect(() => {
-    const currentRoom = rooms.find(
-      (r) => r.path === location.pathname
-    );
+    const currentRoom = rooms.find((r) => r.path === location.pathname);
 
     const title = currentRoom
       ? `${currentRoom.title} — ORIGIN`
@@ -173,23 +174,19 @@ export default function App() {
       tag.setAttribute("content", content);
     };
 
-    /* ===== BASIC ===== */
     setMetaName("description", description);
 
-    /* ===== OGP ===== */
     setMetaProp("og:type", "website");
     setMetaProp("og:title", title);
     setMetaProp("og:description", description);
     setMetaProp("og:image", image);
     setMetaProp("og:url", url);
 
-    /* ===== Twitter ===== */
     setMetaName("twitter:card", "summary_large_image");
     setMetaName("twitter:title", title);
     setMetaName("twitter:description", description);
     setMetaName("twitter:image", image);
 
-    /* ===== canonical ===== */
     let canonical = document.querySelector("link[rel='canonical']");
     if (!canonical) {
       canonical = document.createElement("link");
@@ -197,7 +194,6 @@ export default function App() {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute("href", url);
-
   }, [location.pathname]);
 
   /* ================= NAV CONTROL ================= */
@@ -210,14 +206,8 @@ export default function App() {
       {showGlobalNav && <GlobalRoomNav />}
 
       <Routes>
+        <Route path="/" element={isSP ? <HeroSP /> : <HeroPC />} />
 
-        {/* ================= TOP ================= */}
-        <Route
-          path="/"
-          element={isSP ? <HeroSP /> : <HeroPC />}
-        />
-
-        {/* ================= ROOMS ================= */}
         {rooms.map((room) => {
           const PCComponent = room.pc;
           const SPComponent = room.sp;
@@ -227,21 +217,19 @@ export default function App() {
               key={room.path}
               path={room.path}
               element={
-                PCComponent && SPComponent
-                  ? isSP
-                    ? <SPComponent />
-                    : <PCComponent />
-                  : (
-                    <ComingSoon
-                      title={room.title}
-                      concept={room.concept}
-                    />
+                PCComponent && SPComponent ? (
+                  isSP ? (
+                    <SPComponent />
+                  ) : (
+                    <PCComponent />
                   )
+                ) : (
+                  <ComingSoon title={room.title} concept={room.concept} />
+                )
               }
             />
           );
         })}
-
       </Routes>
     </>
   );
