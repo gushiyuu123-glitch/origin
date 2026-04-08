@@ -1,5 +1,5 @@
 /* ==================================================
-   LeBonRoom — Final Luxury Setup (ULTIMATE)
+   LeBonRoom — Final Luxury Setup (ULTIMATE REFINED)
    Aesthetic: 静 / 緊張 / 金膜0.18 / 高密度タイポ
 ================================================== */
 
@@ -10,6 +10,7 @@
   font-family: "Noto Sans JP", sans-serif;
   letter-spacing: 0.015em;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
@@ -17,7 +18,7 @@
 .fade-up {
   opacity: 0;
   transform: translateY(26px);
-  filter: blur(0.18px); /* ← 黄金値 */
+  filter: blur(0.18px);
   will-change: opacity, transform, filter;
   transition:
     opacity 0.78s cubic-bezier(0.22, 0.10, 0.25, 1),
@@ -40,44 +41,53 @@
 
 .lb-h2 {
   font-size: 26px;
-  line-height: 1.78;
-  letter-spacing: 0.17em;
-  margin-bottom: 32px;
+  line-height: 1.74;
+  letter-spacing: 0.13em;
+  margin-bottom: 28px;
   font-weight: 300;
-  opacity: 0.92;
+  opacity: 0.93;
 }
 
 .lb-lead {
   font-size: 16px;
   line-height: 2;
-  opacity: 0.90;
-  margin-bottom: 28px;
+  opacity: 0.9;
+  margin-bottom: 26px;
 }
 
 .lb-body {
   font-size: 15px;
-  line-height: 1.92; /* ← 最適ライン */
+  line-height: 1.96;
   opacity: 0.83;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
+}
+
+.lb-body strong,
+.lb-lead strong {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.94);
 }
 
 /* LIST -------------------------------------------------- */
 .lb-list {
   margin-left: 1.1em;
+  padding-left: 0.15em;
   opacity: 0.88;
 }
+
 .lb-list li {
   margin-bottom: 10px;
-  line-height: 1.88;
+  line-height: 1.9;
   font-size: 14px;
 }
 
-/* IMAGE -------------------------------------------------- */
+/* IMAGE ------------------------------------------------- */
 .lb-img {
+  display: block;
   width: 100%;
-  border-radius: 6px;
+  border-radius: 8px;
   opacity: 0.93;
-  mix-blend-mode: lighten; /* ← 光が自然ににじむ */
+  mix-blend-mode: lighten;
 }
 
 /* GRID -------------------------------------------------- */
@@ -85,31 +95,34 @@
   display: grid;
   gap: 28px;
 }
+
 @media (min-width: 768px) {
   .lb-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* CARDS -------------------------------------------------- */
+/* CARDS ------------------------------------------------- */
 .lb-card {
   background: rgba(255, 255, 255, 0.035);
   padding: 28px;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(6px); /* ← 過度に滲ませない */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .lb-card h3 {
   font-size: 15px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   margin-bottom: 14px;
   opacity: 0.92;
+  font-weight: 400;
 }
 
 .lb-card p {
   font-size: 14px;
-  line-height: 1.9;
+  line-height: 1.92;
   opacity: 0.78;
 }
 
@@ -118,6 +131,7 @@
   background: rgba(255, 255, 255, 0.015);
   position: relative;
 }
+
 .lb-dark::before {
   content: "";
   position: absolute;
@@ -155,14 +169,13 @@
 .lb-section {
   position: relative;
   z-index: 2;
-}/* =========================================
-   ENDING — Vertical Reveal Animation
-========================================= */
+}
 
+/* ENDING ------------------------------------------------ */
 .ending-reveal {
   opacity: 0;
   transform: translateY(38px);
-  clip-path: inset(0 0 32% 0); /* ← 下側を覆う黒ベール */
+  clip-path: inset(0 0 32% 0);
   filter: blur(0.3px);
 
   will-change: opacity, transform, clip-path, filter;
@@ -176,6 +189,6 @@
 .ending-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
-  clip-path: inset(0 0 0 0); /* ← ベールが完全に開く */
+  clip-path: inset(0 0 0 0);
   filter: blur(0);
 }

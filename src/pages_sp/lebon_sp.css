@@ -1,31 +1,28 @@
 /* ==================================================
-   LeBonRoomSP — Final Optimal Setup
-   完全版：静 / 緊張 / 高速フェード / SP黄金比
+   LeBonRoomSP — Final Luxury Setup
+   Aesthetic: 静 / 緊張 / 余白 / SP可読性最適化
 ================================================== */
 
-/* ROOT -------------------------------------------- */
-.lbsp-root {
+/* ROOT -------------------------------------------------- */
+.lb-root {
   background: #050506;
   color: #ffffff;
   font-family: "Noto Sans JP", sans-serif;
+  letter-spacing: 0.012em;
   -webkit-font-smoothing: antialiased;
-
-  letter-spacing: 0.010em; /* ← SP最適値 */
   overflow-x: hidden;
 }
 
-/* FADE-UP ------------------------------------------ */
+/* FADE-UP ---------------------------------------------- */
 .fade-up {
   opacity: 0;
   transform: translateY(22px);
-  filter: blur(0.2px); /* ← SPはこの濃さが黄金比 */
-
+  filter: blur(0.18px);
   will-change: opacity, transform, filter;
-
   transition:
-    opacity 0.72s cubic-bezier(0.22, 0.10, 0.25, 1),
-    transform 0.72s cubic-bezier(0.22, 0.10, 0.25, 1),
-    filter 0.72s cubic-bezier(0.22, 0.10, 0.25, 1);
+    opacity 0.78s cubic-bezier(0.22, 0.10, 0.25, 1),
+    transform 0.78s cubic-bezier(0.22, 0.10, 0.25, 1),
+    filter 0.78s cubic-bezier(0.22, 0.10, 0.25, 1);
 }
 
 .fade-up.is-visible {
@@ -34,41 +31,134 @@
   filter: blur(0);
 }
 
-/* TITLES -------------------------------------------- */
-.lbsp-title {
+/* TYPO -------------------------------------------------- */
+.lb-title {
+  letter-spacing: 0.24em;
   font-weight: 300;
-  letter-spacing: 0.26em; /* ← SP黄金比 */
-  opacity: 0.92;
-  line-height: 1.72;
+  opacity: 0.9;
 }
 
-/* h2 */
-.lbsp-h2 {
-  font-size: 20px;
-  line-height: 1.75;
-  letter-spacing: 0.18em;
+.lb-h2 {
+  font-size: 22px;
+  line-height: 1.58;
+  letter-spacing: 0.09em;
   margin-bottom: 22px;
   font-weight: 300;
-  opacity: 0.90;
+  opacity: 0.94;
 }
 
-/* BODY ---------------------------------------------- */
-.lbsp-body {
-  font-size: 14px;
-  line-height: 1.92;
-  opacity: 0.87; /* ← 読みやすさと緊張が両立 */
-  margin-bottom: 20px;
-}
-
-/* IMAGE ---------------------------------------------- */
-.lbsp-img {
-  width: 100%;
-  border-radius: 6px;
+.lb-lead {
+  font-size: 15px;
+  line-height: 1.95;
   opacity: 0.9;
-}/* =========================================
-   ENDING — SP Vertical Reveal
-========================================= */
+  margin-bottom: 22px;
+}
 
+.lb-body {
+  font-size: 14px;
+  line-height: 1.95;
+  opacity: 0.8;
+  margin-bottom: 18px;
+}
+
+/* LIST -------------------------------------------------- */
+.lb-list {
+  margin-left: 1.05em;
+  opacity: 0.88;
+  padding-left: 0.1em;
+}
+
+.lb-list li {
+  margin-bottom: 10px;
+  line-height: 1.9;
+  font-size: 13px;
+}
+
+/* IMAGE ------------------------------------------------- */
+.lb-img {
+  width: 100%;
+  border-radius: 8px;
+  opacity: 0.94;
+  mix-blend-mode: lighten;
+  display: block;
+}
+
+/* GRID -------------------------------------------------- */
+.lb-grid {
+  display: grid;
+  gap: 18px;
+}
+
+/* CARDS ------------------------------------------------- */
+.lb-card {
+  background: rgba(255, 255, 255, 0.038);
+  padding: 20px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.lb-card h3 {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  opacity: 0.92;
+  font-weight: 400;
+}
+
+.lb-card p {
+  font-size: 13px;
+  line-height: 1.85;
+  opacity: 0.78;
+}
+
+/* DARK SECTION ----------------------------------------- */
+.lb-dark {
+  background: rgba(255, 255, 255, 0.014);
+  position: relative;
+}
+
+.lb-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 36%,
+    rgba(255, 255, 255, 0.05),
+    transparent 62%
+  );
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+/* HERO -------------------------------------------------- */
+.lb-hero {
+  position: relative;
+  padding-top: 110px;
+  padding-bottom: 82px;
+}
+
+.lb-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(212, 175, 55, 0.12),
+    transparent 64%
+  );
+  opacity: 0.2;
+}
+
+/* SECTION ---------------------------------------------- */
+.lb-section {
+  position: relative;
+  z-index: 2;
+}
+
+/* ENDING ------------------------------------------------ */
 .ending-reveal-sp {
   opacity: 0;
   transform: translateY(28px);
@@ -88,4 +178,26 @@
   transform: translateY(0);
   clip-path: inset(0 0 0 0);
   filter: blur(0);
+}
+
+/* SMALL POLISH ----------------------------------------- */
+@media (max-width: 380px) {
+  .lb-h2 {
+    font-size: 20px;
+    line-height: 1.56;
+    letter-spacing: 0.07em;
+  }
+
+  .lb-lead {
+    font-size: 14px;
+  }
+
+  .lb-body {
+    font-size: 13.5px;
+    line-height: 1.92;
+  }
+
+  .lb-card {
+    padding: 18px 14px;
+  }
 }
